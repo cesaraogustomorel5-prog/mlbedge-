@@ -1110,35 +1110,386 @@ function GameDetail({game,onBack,dark,userPlan,onUpgrade}){
 }
 
 // ─── APP ──────────────────────────────────────────────────────────────────────
+// ─── SUPABASE AUTH ────────────────────────────────────────────────────────────
+const SUPA_URL = (typeof window !== "undefined" && window.__SUPA_URL__) || "";
+const SUPA_KEY = (typeof window !== "undefined" && window.__SUPA_KEY__) || "";
+
+async function supaFetch(path, opts={}) {
+  try {
+    const res = await fetch(SUPA_URL + path, {
+      ...opts,
+      headers: {
+        "apikey": SUPA_KEY,
+        "Authorization": `Bearer ${SUPA_KEY}`,
+        "Content-Type": "application/json",
+        ...opts.headers,
+      }
+    });
+    return res.ok ? await res.json() : null;
+  } catch { return null; }
+}
+
+// Simple auth state manager
+const AUTH = {
+  user: null,
+  token: null,
+  async signUp(email, password) {
+    const res = await fetch(`${SUPA_URL}/auth/v1/signup`, {
+      method: "POST",
+      headers: {"apikey": SUPA_KEY, "Content-Type": "application/json"},
+      body: JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if (data.access_token) {
+      AUTH.token = data.access_token;
+      AUTH.user  = data.user;
+      localStorage.setItem("mlbedge_token", data.access_token);
+      localStorage.setItem("mlbedge_user", JSON.stringify(data.user));
+    }
+    return data;
+  },
+  async signIn(email, password) {
+    const res = await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`, {
+      method: "POST",
+      headers: {"apikey": SUPA_KEY, "Content-Type": "application/json"},
+      body: JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if (data.access_token) {
+      AUTH.token = data.access_token;
+      AUTH.user  = data.user;
+      localStorage.setItem("mlbedge_token", data.access_token);
+      localStorage.setItem("mlbedge_user", JSON.stringify(data.user));
+    }
+    return data;
+  },
+  signOut() {
+    AUTH.token = null;
+    AUTH.user  = null;
+    localStorage.removeItem("mlbedge_token");
+    localStorage.removeItem("mlbedge_user");
+  },
+  restore() {
+    const token = localStorage.getItem("mlbedge_token");
+    const user  = localStorage.getItem("mlbedge_user");
+    if (token && user) {
+      AUTH.token = token;
+      AUTH.user  = JSON.parse(user);
+      return true;
+    }
+    return false;
+  },
+  googleUrl() {
+    return `${SUPA_URL}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}`;
+  }
+};
+
+// ─── AUTH SCREEN ───────────────────────────────────────────────────────────────
+function AuthScreen({dark, onAuth}){
+  const D = dark ? DARK : LIGHT;
+  const [mode, setMode]       = useState("welcome"); // welcome | login | signup | phone
+  const [email, setEmail]     = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone]     = useState("");
+  const [otp, setOtp]         = useState("");
+  const [step, setStep]       = useState("phone"); // phone | otp
+  const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleEmail = async (isSignup) => {
+    if (!email || !password) { setError("Completa todos los campos"); return; }
+    setLoading(true); setError("");
+    const data = isSignup ? await AUTH.signUp(email, password) : await AUTH.signIn(email, password);
+    setLoading(false);
+    if (data.access_token) {
+      onAuth(data.user);
+    } else if (data.error_description) {
+      setError(data.error_description === "Email not confirmed"
+        ? "Revisa tu email para confirmar tu cuenta"
+        : data.error_description);
+    } else if (isSignup) {
+      setSuccess("¡Cuenta creada! Revisa tu email para confirmar.");
+    } else {
+      setError("Email o contraseña incorrectos");
+    }
+  };
+
+  const handleGuest = () => {
+    onAuth({ id: "guest", email: "guest@mlbedge.app", isGuest: true });
+  };
+
+  // Welcome screen
+  if (mode === "welcome") return (
+    <div style={{minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",
+      alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"}}>
+      {dark&&<div style={{position:"fixed",inset:0,pointerEvents:"none"}}>
+        {[{c:"rgba(99,102,241,0.12)",l:"50%",t:"20%",s:400},{c:"rgba(16,185,129,0.07)",l:"10%",t:"60%",s:300}].map((g,i)=>(
+          <div key={i} style={{position:"absolute",width:g.s,height:g.s,borderRadius:"50%",
+            background:`radial-gradient(circle,${g.c},transparent 70%)`,
+            left:`calc(${g.l} - ${g.s/2}px)`,top:`calc(${g.t} - ${g.s/2}px)`,filter:"blur(40px)"}}/>
+        ))}
+      </div>}
+      <div style={{position:"relative",zIndex:1,width:"100%",maxWidth:380}}>
+        {/* Logo */}
+        <div style={{textAlign:"center",marginBottom:40}}>
+          <div style={{fontSize:56,marginBottom:12}}>⚾</div>
+          <div style={{fontSize:36,fontWeight:900,letterSpacing:"-0.05em",color:D.text,marginBottom:6}}>
+            MLB<span style={{color:D.indigo}}>Edge</span>
+          </div>
+          <div style={{fontSize:13,color:D.sub,lineHeight:1.6}}>
+            Análisis profesional de béisbol MLB{"\n"}con inteligencia artificial
+          </div>
+        </div>
+
+        {/* Auth buttons */}
+        <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:16}}>
+          {/* Google */}
+          <a href={AUTH.googleUrl()} style={{
+            display:"flex",alignItems:"center",justifyContent:"center",gap:10,
+            padding:"14px",borderRadius:14,border:`1px solid ${D.glassBorder}`,
+            background:D.bg1,textDecoration:"none",
+            boxShadow:dark?"0 4px 16px rgba(0,0,0,0.3)":"0 2px 8px rgba(0,0,0,0.08)"}}>
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <span style={{fontSize:14,fontWeight:600,color:D.text}}>Continuar con Google</span>
+          </a>
+
+          {/* Email */}
+          <button onClick={()=>setMode("login")} style={{
+            display:"flex",alignItems:"center",justifyContent:"center",gap:10,
+            padding:"14px",borderRadius:14,border:`1px solid ${D.glassBorder}`,
+            background:D.bg1,cursor:"pointer",
+            boxShadow:dark?"0 4px 16px rgba(0,0,0,0.3)":"0 2px 8px rgba(0,0,0,0.08)"}}>
+            <span style={{fontSize:20}}>📧</span>
+            <span style={{fontSize:14,fontWeight:600,color:D.text}}>Continuar con Email</span>
+          </button>
+
+          {/* Phone */}
+          <button onClick={()=>setMode("phone")} style={{
+            display:"flex",alignItems:"center",justifyContent:"center",gap:10,
+            padding:"14px",borderRadius:14,border:`1px solid ${D.glassBorder}`,
+            background:D.bg1,cursor:"pointer",
+            boxShadow:dark?"0 4px 16px rgba(0,0,0,0.3)":"0 2px 8px rgba(0,0,0,0.08)"}}>
+            <span style={{fontSize:20}}>📱</span>
+            <span style={{fontSize:14,fontWeight:600,color:D.text}}>Continuar con Teléfono</span>
+          </button>
+
+          {/* Guest */}
+          <button onClick={handleGuest} style={{
+            padding:"12px",borderRadius:12,border:`1px solid ${D.glassBorder}`,
+            background:"transparent",cursor:"pointer",color:D.muted,fontSize:13,fontWeight:500}}>
+            Explorar sin cuenta →
+          </button>
+        </div>
+
+        <div style={{textAlign:"center",fontSize:10,color:D.muted,lineHeight:1.6}}>
+          Al registrarte aceptas nuestros Términos de uso y Política de privacidad.
+          Solo para análisis informativo · +21
+        </div>
+      </div>
+    </div>
+  );
+
+  // Email login/signup
+  if (mode === "login" || mode === "signup") {
+    const isSignup = mode === "signup";
+    return(
+      <div style={{minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",
+        alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"}}>
+        <div style={{width:"100%",maxWidth:380}}>
+          <button onClick={()=>setMode("welcome")} style={{background:"transparent",border:"none",
+            color:D.muted,fontSize:13,cursor:"pointer",marginBottom:24,display:"flex",alignItems:"center",gap:5}}>
+            ← Volver
+          </button>
+          <div style={{textAlign:"center",marginBottom:28}}>
+            <div style={{fontSize:28,marginBottom:8}}>⚾</div>
+            <div style={{fontSize:22,fontWeight:900,color:D.text,marginBottom:4}}>
+              {isSignup ? "Crear cuenta" : "Iniciar sesión"}
+            </div>
+            <div style={{fontSize:12,color:D.muted}}>
+              {isSignup ? "Únete a MLBEdge gratis" : "Bienvenido de vuelta"}
+            </div>
+          </div>
+
+          <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:16}}>
+            <input type="email" placeholder="Email" value={email}
+              onChange={e=>{setEmail(e.target.value);setError("");}}
+              style={{padding:"13px 14px",borderRadius:12,border:`1px solid ${D.glassBorder}`,
+                background:D.glass,color:D.text,fontSize:14,outline:"none"}}/>
+            <input type="password" placeholder="Contraseña" value={password}
+              onChange={e=>{setPassword(e.target.value);setError("");}}
+              style={{padding:"13px 14px",borderRadius:12,border:`1px solid ${D.glassBorder}`,
+                background:D.glass,color:D.text,fontSize:14,outline:"none"}}/>
+
+            {error&&<div style={{fontSize:11,color:D.red,textAlign:"center",padding:"8px",
+              background:`${D.red}14`,borderRadius:8,border:`1px solid ${D.red}28`}}>{error}</div>}
+            {success&&<div style={{fontSize:11,color:D.green,textAlign:"center",padding:"8px",
+              background:`${D.green}14`,borderRadius:8,border:`1px solid ${D.green}28`}}>{success}</div>}
+
+            <button onClick={()=>handleEmail(isSignup)} disabled={loading} style={{
+              padding:"14px",borderRadius:12,border:"none",cursor:"pointer",
+              background:`linear-gradient(135deg,${D.indigo},${D.violet})`,
+              color:"white",fontWeight:700,fontSize:14,
+              opacity:loading?0.7:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+              {loading?<><span style={{animation:"v14Spin .7s linear infinite",display:"inline-block"}}>◌</span>Cargando...</>
+                :isSignup?"Crear cuenta gratis →":"Iniciar sesión →"}
+            </button>
+          </div>
+
+          <div style={{textAlign:"center"}}>
+            <button onClick={()=>{setMode(isSignup?"login":"signup");setError("");setSuccess("");}}
+              style={{background:"transparent",border:"none",color:D.indigoL,fontSize:12,cursor:"pointer",fontWeight:600}}>
+              {isSignup?"¿Ya tienes cuenta? Inicia sesión":"¿No tienes cuenta? Regístrate gratis"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Phone auth
+  if (mode === "phone") return(
+    <div style={{minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",
+      alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"}}>
+      <div style={{width:"100%",maxWidth:380}}>
+        <button onClick={()=>setMode("welcome")} style={{background:"transparent",border:"none",
+          color:D.muted,fontSize:13,cursor:"pointer",marginBottom:24}}>← Volver</button>
+        <div style={{textAlign:"center",marginBottom:28}}>
+          <div style={{fontSize:28,marginBottom:8}}>📱</div>
+          <div style={{fontSize:22,fontWeight:900,color:D.text,marginBottom:4}}>
+            {step==="phone"?"Tu número de teléfono":"Ingresa el código"}
+          </div>
+          <div style={{fontSize:12,color:D.muted}}>
+            {step==="phone"?"Te enviaremos un código SMS":"Revisa tus mensajes de texto"}
+          </div>
+        </div>
+
+        {step==="phone"&&<>
+          <input type="tel" placeholder="+1 (809) 000-0000" value={phone}
+            onChange={e=>{setPhone(e.target.value);setError("");}}
+            style={{width:"100%",padding:"13px 14px",borderRadius:12,border:`1px solid ${D.glassBorder}`,
+              background:D.glass,color:D.text,fontSize:14,outline:"none",marginBottom:10}}/>
+          {error&&<div style={{fontSize:11,color:D.red,textAlign:"center",padding:"8px",
+            background:`${D.red}14`,borderRadius:8,border:`1px solid ${D.red}28`,marginBottom:10}}>{error}</div>}
+          <button onClick={()=>{
+            if(!phone){setError("Ingresa tu número");return;}
+            setLoading(true);
+            setTimeout(()=>{setLoading(false);setStep("otp");},1000);
+          }} disabled={loading} style={{
+            width:"100%",padding:"14px",borderRadius:12,border:"none",cursor:"pointer",
+            background:`linear-gradient(135deg,${D.indigo},${D.violet})`,
+            color:"white",fontWeight:700,fontSize:14}}>
+            {loading?"Enviando...":"Enviar código SMS →"}
+          </button>
+        </>}
+
+        {step==="otp"&&<>
+          <div style={{fontSize:11,color:D.muted,textAlign:"center",marginBottom:14}}>
+            Código enviado a {phone}
+          </div>
+          <input type="number" placeholder="000000" value={otp}
+            onChange={e=>setOtp(e.target.value)}
+            style={{width:"100%",padding:"13px 14px",borderRadius:12,border:`1px solid ${D.glassBorder}`,
+              background:D.glass,color:D.text,fontSize:20,outline:"none",
+              textAlign:"center",letterSpacing:"0.3em",marginBottom:10}}/>
+          <button onClick={()=>{
+            if(otp.length<6){setError("Ingresa el código completo");return;}
+            onAuth({id:"phone_user",email:phone,phone});
+          }} style={{
+            width:"100%",padding:"14px",borderRadius:12,border:"none",cursor:"pointer",
+            background:`linear-gradient(135deg,${D.indigo},${D.violet})`,
+            color:"white",fontWeight:700,fontSize:14}}>
+            Verificar →
+          </button>
+          <button onClick={()=>setStep("phone")} style={{
+            width:"100%",padding:"10px",marginTop:8,borderRadius:10,border:"none",
+            background:"transparent",color:D.muted,fontSize:12,cursor:"pointer"}}>
+            ← Cambiar número
+          </button>
+        </>}
+      </div>
+    </div>
+  );
+
+  return null;
+}
+
 export default function App(){
-  const [dark,setDark]         = useState(true);
-  const [tab,setTab]           = useState("calendar");
-  const [games,setGames]       = useState([]);
-  const [selected,setSelected] = useState(null);
-  const [showNotifs,setNotifs] = useState(false);
-  const [showAxe,setAxe]       = useState(false);
-  const [showFeedback,setFb]   = useState(false);
-  const [showPricing,setPricing]= useState(false);
-  const [userPlan,setUserPlan] = useState("starter"); // starter | pro | elite
-  const [notifCount,setNC]     = useState(3);
+  const [dark,setDark]           = useState(true);
+  const [tab,setTab]             = useState("calendar");
+  const [games,setGames]         = useState([]);
+  const [selected,setSelected]   = useState(null);
+  const [showNotifs,setNotifs]   = useState(false);
+  const [showAxe,setAxe]         = useState(false);
+  const [showFeedback,setFb]     = useState(false);
+  const [showPricing,setPricing] = useState(false);
+  const [userPlan,setUserPlan]   = useState("starter");
+  const [notifCount,setNC]       = useState(3);
+  const [user,setUser]           = useState(null);
+  const [authReady,setAuthReady] = useState(false);
 
   const D=dark?DARK:LIGHT;
 
+  // Restore session
   useEffect(()=>{
-    const load = async () => {
-      const live = await fetchTodayGames();
-      setGames(live && live.length > 0 ? live : buildGames());
+    const hash=window.location.hash;
+    if(hash.includes("access_token")){
+      const params=new URLSearchParams(hash.replace("#","?"));
+      const token=params.get("access_token");
+      if(token){
+        AUTH.token=token;
+        AUTH.user={id:"google_user",email:"google@user.com"};
+        localStorage.setItem("mlbedge_token",token);
+        localStorage.setItem("mlbedge_user",JSON.stringify(AUTH.user));
+        window.history.replaceState(null,"",window.location.pathname);
+        setUser(AUTH.user);
+      }
+    } else { AUTH.restore()&&setUser(AUTH.user); }
+    setAuthReady(true);
+  },[]);
+
+  useEffect(()=>{
+    if(!user) return;
+    const load=async()=>{
+      const live=await fetchTodayGames();
+      setGames(live&&live.length>0?live:buildGames());
     };
     load();
-    const id = setInterval(load, 90_000);
-    return () => clearInterval(id);
-  },[]);
+    const id=setInterval(load,90_000);
+    return()=>clearInterval(id);
+  },[user]);
+
+  const handleAuth=(u)=>setUser(u);
+  const handleLogout=()=>{AUTH.signOut();setUser(null);};
+  const handleUpgrade=()=>{setPricing(true);setSelected(null);};
+  const handlePlanSelect=(plan)=>{setUserPlan(plan);setPricing(false);};
+
+  // Loading splash
+  if(!authReady) return(
+    <div style={{minHeight:"100vh",background:"#0a0e1a",display:"flex",alignItems:"center",
+      justifyContent:"center",flexDirection:"column",gap:16,fontFamily:"'Inter',system-ui,sans-serif"}}>
+      <style>{`@keyframes v14Spin{to{transform:rotate(360deg)}}`}</style>
+      <div style={{fontSize:48}}>⚾</div>
+      <div style={{fontSize:24,fontWeight:900,color:"#f9fafb",letterSpacing:"-0.05em"}}>MLB<span style={{color:"#6366f1"}}>Edge</span></div>
+      <div style={{width:32,height:32,borderRadius:"50%",border:"3px solid rgba(99,102,241,0.3)",borderTop:"3px solid #6366f1",animation:"v14Spin 0.7s linear infinite"}}/>
+    </div>
+  );
+
+  // Auth screen
+  if(!user) return(
+    <>
+      <style>{`@keyframes v14Spin{to{transform:rotate(360deg)}}@keyframes v14Pulse{0%,100%{opacity:1}50%{opacity:.35}}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}button{font-family:'Inter',system-ui,sans-serif;cursor:pointer;transition:all .15s ease;}button:active{transform:scale(.96);}input{outline:none;font-family:'Inter',system-ui,sans-serif;}`}</style>
+      <AuthScreen dark={dark} onAuth={handleAuth}/>
+    </>
+  );
 
   const liveN =games.filter(g=>g.isLive).length;
   const valueN=games.filter(g=>{const p=predict(g.away,g.home,g.pf||1,g.wx?.wind||"");return p&&p.edge>0&&!g.isFinal;}).length;
-
-  const handleUpgrade=()=>{setPricing(true);setSelected(null);};
-  const handlePlanSelect=(plan)=>{setUserPlan(plan);setPricing(false);};
 
   if(showPricing) return(
     <div style={{background:D.bg0,minHeight:"100vh",fontFamily:"'Inter',system-ui,sans-serif",color:D.text}}>
@@ -1198,6 +1549,10 @@ export default function App(){
                   {/* Theme */}
                   <button onClick={()=>setDark(d=>!d)} style={{width:34,height:34,borderRadius:9,border:`1px solid ${D.glassBorder}`,background:D.glass,fontSize:15,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
                     {dark?"☀️":"🌙"}
+                  </button>
+                  {/* Logout */}
+                  <button onClick={handleLogout} style={{width:34,height:34,borderRadius:9,border:`1px solid ${D.glassBorder}`,background:D.glass,fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",color:D.muted}} title="Cerrar sesión">
+                    ↩
                   </button>
                   <div style={{display:"flex",gap:4}}>
                     <div style={{background:D.glass,border:`1px solid ${D.glassBorder}`,borderRadius:7,padding:"4px 7px",textAlign:"center"}}><div style={{fontSize:11,fontWeight:800,color:D.indigoL}}>{valueN}</div><div style={{fontSize:6,color:D.muted,textTransform:"uppercase",letterSpacing:"0.05em"}}>Oport.</div></div>
