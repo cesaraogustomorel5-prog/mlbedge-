@@ -79,13 +79,8 @@ async function fetchLive(){
           pf:1.0,isLive:iL,isFinal:iF,
           sim:(iL||iF)?{away:aw?.score??ls?.teams?.away?.runs??0,home:hm?.score??ls?.teams?.home?.runs??0,
             inn:ls?.currentInning??1,half:ls?.isTopInning?"T":"B",outs:ls?.outs??0,
-            balls:ls?.balls??0,strikes:ls?.strikes??0,
             awayH:ls?.teams?.away?.hits??0,homeH:ls?.teams?.home?.hits??0,
-            awayE:ls?.teams?.away?.errors??0,homeE:ls?.teams?.home?.errors??0,
-            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third],
-            pitcher:ls?.defense?.pitcher?.fullName||null,
-            batter:ls?.offense?.batter?.fullName||null,
-            speed:ls?.currentPlay?.pitchData?.startSpeed?Math.round(ls.currentPlay.pitchData.startSpeed):null}:null,source:"live"};
+            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third]}:null,source:"live"};
       }).filter(Boolean);
       return gs.length>0?gs:null;
     }catch{continue;}
@@ -96,7 +91,7 @@ async function fetchLive(){
 function buildDemo(){
   const h=new Date().getHours();
   const S=[
-    {id:1001,away:"NYY",home:"BOS",venue:"Fenway Park",time:"1:10 PM ET",gameHour:13,awayP:"Gerrit Cole",awayPERA:2.89,homeP:"Brayan Bello",homePERA:3.54,wx:{temp:71,wind:"8 mph E",sky:"⛅",desc:"Partly Cloudy"},pf:1.08,sim:{away:3,home:2,inn:7,half:"T",outs:1,balls:2,strikes:1,awayH:7,homeH:5,awayE:0,homeE:1,bases:[true,false,false],pitcher:"Brayan Bello",batter:"Aaron Judge",speed:96}},
+    {id:1001,away:"NYY",home:"BOS",venue:"Fenway Park",time:"1:10 PM ET",gameHour:13,awayP:"Gerrit Cole",awayPERA:2.89,homeP:"Brayan Bello",homePERA:3.54,wx:{temp:71,wind:"8 mph E",sky:"⛅",desc:"Partly Cloudy"},pf:1.08,sim:{away:3,home:2,inn:7,half:"T",outs:1,awayH:7,homeH:5,bases:[true,false,false]}},
     {id:1002,away:"SF",home:"LAD",venue:"Dodger Stadium",time:"2:10 PM ET",gameHour:14,awayP:"Logan Webb",awayPERA:3.21,homeP:"Y. Yamamoto",homePERA:2.71,wx:{temp:78,wind:"5 mph W",sky:"☀️",desc:"Sunny"},pf:0.99,sim:{away:1,home:4,inn:4,half:"B",outs:2,awayH:4,homeH:8,bases:[false,true,false]}},
     {id:1003,away:"ATL",home:"PHI",venue:"Citizens Bank Park",time:"4:05 PM ET",gameHour:16,awayP:"Spencer Strider",awayPERA:2.44,homeP:"Zack Wheeler",homePERA:2.91,wx:{temp:82,wind:"12 mph SW",sky:"☀️",desc:"Clear"},pf:1.06},
     {id:1004,away:"HOU",home:"TEX",venue:"Globe Life Field",time:"4:10 PM ET",gameHour:16,awayP:"Framber Valdez",awayPERA:2.97,homeP:"Nathan Eovaldi",homePERA:3.42,wx:{temp:91,wind:"7 mph S",sky:"🌡️",desc:"Hot"},pf:1.01},
@@ -105,7 +100,7 @@ function buildDemo(){
     {id:1007,away:"CLE",home:"BAL",venue:"Oriole Park",time:"7:40 PM ET",gameHour:19,awayP:"Shane Bieber",awayPERA:3.47,homeP:"Corbin Burnes",homePERA:2.78,wx:{temp:79,wind:"6 mph E",sky:"☀️",desc:"Clear"},pf:1.01},
     {id:1008,away:"MIN",home:"SEA",venue:"T-Mobile Park",time:"10:10 PM ET",gameHour:22,awayP:"Pablo Lopez",awayPERA:3.14,homeP:"Luis Castillo",homePERA:3.08,wx:{temp:65,wind:"4 mph W",sky:"🌥️",desc:"Overcast"},pf:0.95},
   ];
-  return S.map(g=>({...g,isLive:h>=g.gameHour&&h<g.gameHour+3&&!!g.sim,isFinal:h>=g.gameHour+3&&!!g.sim,source:"mlb"}));
+  return S.map(g=>({...g,isLive:h>=g.gameHour&&h<g.gameHour+3&&!!g.sim,isFinal:h>=g.gameHour+3&&!!g.sim,source:"demo"}));
 }
 
 // SUPABASE AUTH
@@ -137,21 +132,6 @@ async function askAxe(q,history,lang){
     return d.content?.map(b=>b.text||"").join("")||"Intenta de nuevo.";
   }catch{return "No pude procesar tu consulta en este momento.";}
 }
-
-// LOGOS OFICIALES MLB (ESPN CDN)
-const LOGO_BASE="https://a.espncdn.com/i/teamlogos/mlb/500/";
-const LOGO_IDS={NYY:"nyy",BOS:"bos",TOR:"tor",TB:"tb",BAL:"bal",CLE:"cle",MIN:"min",KC:"kc",CWS:"cws",DET:"det",HOU:"hou",SEA:"sea",TEX:"tex",LAA:"laa",OAK:"oak",ATL:"atl",PHI:"phi",NYM:"nym",WSH:"wsh",MIA:"mia",MIL:"mil",CHC:"chc",STL:"stl",PIT:"pit",CIN:"cin",LAD:"lad",SF:"sf",SD:"sd",ARI:"ari",COL:"col"};
-function TeamLogo({abbr,size=42}){
-  const id=LOGO_IDS[abbr];
-  const tm=TMS[abbr];
-  const clr=tm?.clr||"#6366f1";
-  const [err,setErr]=useState(false);
-  if(!id||err) return(
-    <div style={{width:size,height:size,borderRadius:Math.round(size*.22),background:clr+"22",border:"1.5px solid "+clr+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:Math.round(size*.28),fontWeight:900,color:clr,flexShrink:0}}>{abbr}</div>
-  );
-  return<img src={LOGO_BASE+id+".png"} alt={abbr} width={size} height={size} onError={()=>setErr(true)} style={{borderRadius:Math.round(size*.2),objectFit:"contain",flexShrink:0}}/>;
-}
-
 
 // ATOMS
 function Ring({grade,conf,sz=40,D}){
@@ -198,14 +178,14 @@ function AuthScreen({dark,onAuth,lang}){
         <div style={{fontSize:11,color:D.il,fontWeight:600,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:36}}>Análisis Profesional MLB</div>
         <div style={{background:D.bg1,border:"1px solid "+D.gb,borderRadius:18,padding:"28px 24px",marginBottom:16,boxShadow:dark?"0 20px 60px rgba(0,0,0,0.4)":"0 4px 20px rgba(0,0,0,0.08)"}}>
           <div style={{fontSize:15,fontWeight:700,color:D.tx,marginBottom:6}}>Bienvenido</div>
-          <div style={{fontSize:12,color:D.mt,marginBottom:24,lineHeight:1.6}}>Inicia sesión o regístrate con tu cuenta de Google. Recibirás un enlace de confirmación en tu correo.</div>
-          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,padding:"15px",borderRadius:13,border:"1px solid "+D.gb,background:dark?"rgba(255,255,255,0.06)":"#fff",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 12px rgba(0,0,0,0.1)",transition:"all 0.2s"}}>
+          <div style={{fontSize:12,color:D.mt,marginBottom:24,lineHeight:1.6}}>Inicia sesión con tu cuenta de Google para acceder a MLBEdge.</div>
+          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,padding:"15px",borderRadius:13,border:"1px solid "+D.gb,background:dark?"rgba(255,255,255,0.06)":"#fff",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 12px rgba(0,0,0,0.1)"}}>
             <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
             <span style={{fontSize:15,fontWeight:700,color:D.tx}}>Continuar con Google</span>
           </a>
         </div>
         <div style={{fontSize:10,color:D.mt,lineHeight:1.7,padding:"0 8px"}}>
-          Al continuar aceptas nuestros Términos de Uso.<br/>Solo para análisis informativo · +21
+          Solo para análisis informativo. Al continuar aceptas nuestros Términos de Uso.
         </div>
       </div>
     </div>
@@ -213,7 +193,7 @@ function AuthScreen({dark,onAuth,lang}){
 }
 
 
-// LOGOS OFICIALES MLB (ESPN CDN)
+// GAME CARD
 const GameCard=memo(function({game,idx,onSelect,D,t}){
   const H=TMS[game.home],A=TMS[game.away];
   if(!H||!A) return null;
@@ -232,7 +212,6 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
                 ?<span style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.mt}}>{t.fn}</span>
                 :<span style={{background:`${D.ind}14`,border:`1px solid ${D.il}33`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.il}}>{game.time}</span>}
             <span style={{fontSize:9,color:D.mt}}>{game.venue?.split(" ").slice(0,2).join(" ")}</span>
-            {game.delay&&<span style={{fontSize:7,color:D.am,background:D.am+"14",border:"1px solid "+D.am+"28",borderRadius:4,padding:"1px 5px",fontWeight:700}}>🌧 DELAY</span>}
             {game.source==="live"&&<span style={{fontSize:7,color:D.gr,background:`${D.gr}14`,border:`1px solid ${D.gr}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>⚡ LIVE</span>}
           </div>
           <Ring grade={p.grade} conf={p.conf} sz={36} D={D}/>
@@ -262,7 +241,7 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
             {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,i)=>{
               if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
               return<div key={i} style={{flex:1,textAlign:"center"}}>
-                <div style={{display:"flex",justifyContent:"center",marginBottom:6}}><TeamLogo abbr={x.tm.abbr} size={42}/></div>
+                <div style={{width:42,height:42,borderRadius:11,margin:"0 auto 6px",background:`linear-gradient(135deg,${x.tm.clr}22,${x.tm.clr}08)`,border:`1.5px solid ${x.tm.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:900,color:x.tm.clr}}>{x.tm.abbr}</div>
                 <div style={{fontSize:11,fontWeight:700,color:D.tx}}>{x.tm.name.split(" ").pop()}</div>
                 <div style={{fontSize:9,color:D.mt,marginTop:1}}>{x.label}</div>
               </div>;
@@ -417,7 +396,7 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
                   {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,idx)=>{
                     if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
                     return<div key={idx} style={{flex:1,textAlign:"center"}}>
-                      <div style={{display:"flex",justifyContent:"center",marginBottom:5}}><TeamLogo abbr={x.tm?.abbr} size={38}/></div>
+                      <div style={{width:38,height:38,borderRadius:10,margin:"0 auto 5px",background:`${x.tm?.clr||D.mt}22`,border:`1.5px solid ${x.tm?.clr||D.mt}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:900,color:x.tm?.clr||D.mt}}>{x.tm?.abbr}</div>
                       <div style={{fontSize:10,fontWeight:700,color:D.tx}}>{x.tm?.name.split(" ").pop()}</div>
                     </div>;
                   })}
@@ -849,7 +828,7 @@ function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
       {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.ind}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap} →</button>}
       <button onClick={onFeedback} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:8}}>💡 {t.fb}</button>
       <button onClick={onLogout} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>↩ {t.lo2}</button>
-      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge v16 · Axe AI · Monte Carlo · Bayesian · 9 idiomas<br/>Solo para análisis informativo · +21</div>
+      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge v16 · Axe AI · Monte Carlo · Bayesian · 9 idiomas Solo para análisis informativo · +21</div>
     </div>
   );
 }
@@ -892,18 +871,9 @@ export default function App(){
   const [user,setUser]          = useState(null);
   const [ready,setReady]        = useState(false);
   const [liveStatus,setLS]      = useState("loading");
-  const [showLangPicker,setLangPicker] = useState(false);
 
   const D=dark?DK:LT;
   const t=useT(lang);
-
-  // Close lang picker on click outside
-  useEffect(()=>{
-    if(!showLangPicker) return;
-    const h=e=>{setLangPicker(false);};
-    setTimeout(()=>window.addEventListener("click",h,{once:true}),0);
-    return()=>window.removeEventListener("click",h);
-  },[showLangPicker]);
 
   // Restore session + language preference
   useEffect(()=>{
@@ -939,7 +909,7 @@ export default function App(){
   const liveN=games.filter(g=>g.isLive).length;
   const edgeN=games.filter(g=>{const p=predict(g.away,g.home,g.pf||1,g.wx?.wind||"");return p&&p.edge>0&&!g.isFinal;}).length;
 
-  const handleAuth=u=>{if(u&&!u.isGuest) setUser(u);};
+  const handleAuth=u=>setUser(u);
   const handleLogout=()=>{AUTH.out();setUser(null);};
   const handleUpgrade=()=>{setPricing(true);setSelected(null);};
   const handlePlan=p=>{setUserPlan(p);setPricing(false);};
@@ -1018,22 +988,8 @@ export default function App(){
                   <span style={{fontSize:21,fontWeight:900,letterSpacing:"-0.05em",color:D.tx}}>MLB<span style={{color:D.ind}}>Edge</span></span>
                   <span onClick={handleUpgrade} style={{background:`linear-gradient(135deg,${PLANS[userPlan].clr}44,${PLANS[userPlan].clr}28)`,border:`1px solid ${PLANS[userPlan].clr}44`,borderRadius:5,padding:"2px 7px",fontSize:8,fontWeight:800,color:PLANS[userPlan].clr,letterSpacing:"0.1em",cursor:"pointer"}}>{PLANS[userPlan].n.toUpperCase()}</span>
                   {liveStatus==="live"&&<span style={{fontSize:7,color:D.gr,background:`${D.gr}14`,border:`1px solid ${D.gr}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>⚡ LIVE</span>}
-                  {liveStatus==="demo"&&<span style={{fontSize:7,color:D.il,background:`${D.il}14`,border:`1px solid ${D.il}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>MLB</span>}
-                  <div style={{position:"relative"}} onClick={e=>e.stopPropagation()}>
-                    <button onClick={()=>setLangPicker(v=>!v)} style={{background:D.gl,border:"1px solid "+D.gb,borderRadius:8,padding:"4px 8px",cursor:"pointer",display:"flex",alignItems:"center",gap:4,fontSize:13}}>
-                      {LANGS[lang]?.f}<span style={{fontSize:9,color:D.mt}}>▾</span>
-                    </button>
-                    {showLangPicker&&(
-                      <div style={{position:"absolute",top:"calc(100% + 6px)",right:0,background:D===DK?"rgba(17,24,39,0.98)":"rgba(255,255,255,0.98)",border:"1px solid "+D.gb,borderRadius:14,padding:8,zIndex:200,display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:4,minWidth:200,backdropFilter:"blur(20px)",boxShadow:"0 20px 60px rgba(0,0,0,0.4)"}}>
-                        {Object.entries(LANGS).map(([code2,{f,n}])=>(
-                          <button key={code2} onClick={()=>{setLang(code2);try{localStorage.setItem("mlb_lang",code2);}catch{}setLangPicker(false);}} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"8px 4px",borderRadius:9,border:"none",cursor:"pointer",background:lang===code2?"linear-gradient(135deg,"+D.ind+"33,"+D.vi+"22)":D.gl,outline:lang===code2?"1px solid "+D.il+"33":"1px solid "+D.gb}}>
-                            <span style={{fontSize:18}}>{f}</span>
-                            <span style={{fontSize:8,color:lang===code2?D.il:D.mt,fontWeight:lang===code2?700:400}}>{n}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  
+                  <span style={{fontSize:14}}>{LANGS[lang]?.f}</span>
                 </div>
                 <div style={{fontSize:9,color:D.mt}}>
                   {new Date().toLocaleDateString(lang==="en"?"en-US":lang==="pt"?"pt-BR":lang==="ja"?"ja-JP":lang==="ko"?"ko-KR":lang==="zh"?"zh-CN":"es",{weekday:"long",month:"long",day:"numeric"})}
@@ -1060,7 +1016,7 @@ export default function App(){
                 <div style={{fontSize:10,color:D.mt,marginBottom:10,display:"flex",alignItems:"center",gap:5}}>
                   {liveStatus==="loading"&&<span style={{color:D.am,animation:"vP 1.5s ease infinite"}}>{t.ll}</span>}
                   {liveStatus==="live"&&<span style={{color:D.gr,display:"flex",alignItems:"center",gap:3}}><Dot c={D.gr} size={5}/>{t.ld}</span>}
-                  {liveStatus==="demo"&&<span style={{color:D.il,display:"flex",alignItems:"center",gap:3}}><Dot c={D.il}/>{t.ld}</span>}
+                  {liveStatus==="demo"&&<span style={{color:D.am}}>{t.dd}</span>}
                 </div>
               </div>
               <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:9}}>
