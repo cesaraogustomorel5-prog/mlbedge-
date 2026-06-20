@@ -183,112 +183,37 @@ function Sp(){return<span style={{animation:"vS .7s linear infinite",display:"in
 // AUTH SCREEN
 function AuthScreen({dark,onAuth,lang}){
   const D=dark?DK:LT,t=useT(lang);
-  const [mode,setMode]=useState("welcome");
-  const [email,setEmail]=useState("");
-  const [pass,setPass]=useState("");
-  const [phone,setPhone]=useState("");
-  const [otp,setOtp]=useState("");
-  const [step,setStep]=useState("ph");
-  const [loading,setLoading]=useState(false);
-  const [err,setErr]=useState("");
-  const [info,setInfo]=useState("");
-  const EM={net:t.eN,creds:t.eE,phone:t.eP,otp:t.eO,signup:t.eE};
-  const reset=()=>{setErr("");setInfo("");};
-  const doEmail=async(su)=>{
-    if(!email.trim()||!pass.trim()){setErr(t.eF);return;}
-    if(pass.length<6){setErr(t.ePw);return;}
-    setLoading(true);reset();
-    const r=su?await AUTH.up(email,pass):await AUTH.si(email,pass);
-    setLoading(false);
-    if(r.ok) onAuth(r.user);
-    else if(su) setInfo(t.cE);
-    else setErr(EM[r.e]||t.eE);
-  };
-  const sendS=async()=>{
-    if(!phone.trim()){setErr(t.eP);return;}
-    setLoading(true);reset();
-    const r=await AUTH.otp(phone);
-    setLoading(false);
-    if(r.ok){setStep("otp");setInfo(t.cs);}else setErr(EM[r.e]||t.eP);
-  };
-  const vfyS=async()=>{
-    if(otp.length<4){setErr(t.eO);return;}
-    setLoading(true);reset();
-    const r=await AUTH.votp(phone,otp);
-    setLoading(false);
-    if(r.ok) onAuth(r.user);else setErr(EM[r.e]||t.eO);
-  };
   const bg={minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"};
-  const inp={width:"100%",padding:"13px 14px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.tx,fontSize:14,outline:"none",marginBottom:10};
-  const btnS=clr=>({width:"100%",padding:"14px",borderRadius:12,border:"none",cursor:"pointer",background:clr||`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontWeight:700,fontSize:14,marginBottom:8,opacity:loading?0.7:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8});
-  const ErrBox=()=>err?<div style={{fontSize:11,color:D.rd,padding:"9px",background:`${D.rd}12`,border:`1px solid ${D.rd}28`,borderRadius:9,marginBottom:10,textAlign:"center"}}>{err}</div>:null;
-  const InfBox=()=>info?<div style={{fontSize:11,color:D.gr,padding:"9px",background:`${D.gr}12`,border:`1px solid ${D.gr}28`,borderRadius:9,marginBottom:10,textAlign:"center"}}>{info}</div>:null;
-  const Logo=()=><div style={{textAlign:"center",marginBottom:28}}>
-    <div style={{fontSize:40,marginBottom:8}}>⚾</div>
-    <div style={{fontSize:26,fontWeight:900,color:D.tx,marginBottom:4}}>MLB<span style={{color:D.ind}}>Edge</span></div>
-    <div style={{fontSize:11,color:D.mt}}>{t.tag}</div>
-  </div>;
-
-  if(mode==="welcome") return(
+  return(
     <div style={bg}>
       {dark&&<div style={{position:"fixed",inset:0,pointerEvents:"none"}}>
         {[["50%","20%",400,"rgba(99,102,241,0.1)"],["15%","65%",300,"rgba(16,185,129,0.06)"]].map(([l,tp,s,c],i)=>(
           <div key={i} style={{position:"absolute",width:+s,height:+s,borderRadius:"50%",background:`radial-gradient(circle,${c},transparent 70%)`,left:`calc(${l} - ${+s/2}px)`,top:`calc(${tp} - ${+s/2}px)`,filter:"blur(40px)"}}/>
         ))}
       </div>}
-      <div style={{position:"relative",zIndex:1,width:"100%",maxWidth:380}}>
-        <Logo/>
-        <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14}}>
-          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,padding:"14px",borderRadius:14,border:`1px solid ${D.gb}`,background:D.bg1,textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 10px rgba(0,0,0,0.08)"}}>
-            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-            <span style={{fontSize:14,fontWeight:600,color:D.tx}}>{t.gb2}</span>
+      <div style={{position:"relative",zIndex:1,width:"100%",maxWidth:380,textAlign:"center"}}>
+        <div style={{fontSize:52,marginBottom:12}}>⚾</div>
+        <div style={{fontSize:28,fontWeight:900,color:D.tx,marginBottom:6,letterSpacing:"-0.04em"}}>MLB<span style={{color:D.ind}}>Edge</span></div>
+        <div style={{fontSize:12,color:D.mt,marginBottom:8}}>{t.tag}</div>
+        <div style={{fontSize:11,color:D.il,fontWeight:600,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:36}}>Análisis Profesional MLB</div>
+        <div style={{background:D.bg1,border:"1px solid "+D.gb,borderRadius:18,padding:"28px 24px",marginBottom:16,boxShadow:dark?"0 20px 60px rgba(0,0,0,0.4)":"0 4px 20px rgba(0,0,0,0.08)"}}>
+          <div style={{fontSize:15,fontWeight:700,color:D.tx,marginBottom:6}}>Bienvenido</div>
+          <div style={{fontSize:12,color:D.mt,marginBottom:24,lineHeight:1.6}}>Inicia sesión o regístrate con tu cuenta de Google. Recibirás un enlace de confirmación en tu correo.</div>
+          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,padding:"15px",borderRadius:13,border:"1px solid "+D.gb,background:dark?"rgba(255,255,255,0.06)":"#fff",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 12px rgba(0,0,0,0.1)",transition:"all 0.2s"}}>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            <span style={{fontSize:15,fontWeight:700,color:D.tx}}>Continuar con Google</span>
           </a>
-
-          {[{icon:"📧",l:t.eb,m:"email"},{icon:"📱",l:t.pb,m:"phone"}].map(({icon,l,m})=>(
-            <button key={m} onClick={()=>{setMode(m);reset();}} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,padding:"14px",borderRadius:14,border:`1px solid ${D.gb}`,background:D.bg1,cursor:"pointer",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 10px rgba(0,0,0,0.08)"}}>
-              <span style={{fontSize:20}}>{icon}</span><span style={{fontSize:14,fontWeight:600,color:D.tx}}>{l}</span>
-            </button>
-          ))}
-
         </div>
-        <div style={{textAlign:"center",fontSize:10,color:D.mt,lineHeight:1.6}}>{t.tm2}</div>
+        <div style={{fontSize:10,color:D.mt,lineHeight:1.7,padding:"0 8px"}}>
+          Al continuar aceptas nuestros Términos de Uso.<br/>Solo para análisis informativo · +21
+        </div>
       </div>
     </div>
   );
-
-  if(mode==="email") return(
-    <div style={bg}><div style={{width:"100%",maxWidth:380}}>
-      <button onClick={()=>{setMode("welcome");reset();}} style={{background:"transparent",border:"none",color:D.mt,fontSize:12,cursor:"pointer",marginBottom:20}}>{t.bk}</button>
-      <Logo/>
-      <input type="email" placeholder={t.ep} value={email} onChange={e=>{setEmail(e.target.value);reset();}} style={inp}/>
-      <input type="password" placeholder={t.pp} value={pass} onChange={e=>{setPass(e.target.value);reset();}} style={inp}/>
-      <ErrBox/><InfBox/>
-      <button onClick={()=>doEmail(false)} disabled={loading} style={btnS()}>{loading?<><Sp/>{t.si}...</>:`${t.si} →`}</button>
-      <button onClick={()=>doEmail(true)} disabled={loading} style={btnS(`linear-gradient(135deg,${D.gr},#059669)`)}>{loading?<><Sp/>{t.su}...</>:`${t.su} →`}</button>
-    </div></div>
-  );
-
-  return(
-    <div style={bg}><div style={{width:"100%",maxWidth:380}}>
-      <button onClick={()=>{setMode("welcome");reset();}} style={{background:"transparent",border:"none",color:D.mt,fontSize:12,cursor:"pointer",marginBottom:20}}>{t.bk}</button>
-      <Logo/>
-      {step==="ph"&&<>
-        <input type="tel" placeholder={t.ph} value={phone} onChange={e=>{setPhone(e.target.value);reset();}} style={inp}/>
-        <ErrBox/><InfBox/>
-        <button onClick={sendS} disabled={loading} style={btnS()}>{loading?<><Sp/>{t.ss}...</>:`${t.ss} →`}</button>
-      </>}
-      {step==="otp"&&<>
-        <div style={{fontSize:11,color:D.mt,textAlign:"center",marginBottom:12}}>{phone}</div>
-        <input type="number" placeholder="000000" value={otp} onChange={e=>setOtp(e.target.value)} style={{width:"100%",padding:"13px 14px",borderRadius:12,border:"1px solid "+D.gb,background:D.gl,color:D.tx,fontSize:22,outline:"none",marginBottom:10,textAlign:"center",letterSpacing:"0.3em"}}/>
-        <ErrBox/><InfBox/>
-        <button onClick={vfyS} disabled={loading} style={btnS()}>{loading?<><Sp/>{t.vf}...</>:`${t.vf} →`}</button>
-        <button onClick={()=>{setStep("ph");reset();}} style={{width:"100%",padding:"14px",borderRadius:12,border:"1px solid "+D.gb,cursor:"pointer",background:"transparent",color:D.mt,fontWeight:600,fontSize:14,marginBottom:8}}>{t.cn}</button>
-      </>}
-    </div></div>
-  );
 }
 
-// GAME CARD
+
+// LOGOS OFICIALES MLB (ESPN CDN)
 const GameCard=memo(function({game,idx,onSelect,D,t}){
   const H=TMS[game.home],A=TMS[game.away];
   if(!H||!A) return null;
