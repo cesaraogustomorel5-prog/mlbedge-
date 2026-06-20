@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, memo } from "react";
 
 // DESIGN
-const DK={bg0:"#0a0e1a",bg1:"#111827",bg2:"#1a2234",gl:"rgba(255,255,255,0.04)",gb:"rgba(255,255,255,0.08)",tx:"#f9fafb",sb:"#9ca3af",mt:"#4b5563",in_:"#6366f1",il:"#818cf8",gr:"#10b981",am:"#f59e0b",rd:"#ef4444",vi:"#8b5cf6"};
-const LT={bg0:"#f0f4f8",bg1:"#ffffff",bg2:"#e8edf5",gl:"rgba(0,0,0,0.03)",gb:"rgba(0,0,0,0.1)",tx:"#111827",sb:"#4b5563",mt:"#9ca3af",in_:"#4f46e5",il:"#6366f1",gr:"#059669",am:"#d97706",rd:"#dc2626",vi:"#7c3aed"};
+const DK={bg0:"#0a0e1a",bg1:"#111827",bg2:"#1a2234",gl:"rgba(255,255,255,0.04)",gb:"rgba(255,255,255,0.08)",tx:"#f9fafb",sb:"#9ca3af",mt:"#4b5563",ind:"#6366f1",il:"#818cf8",gr:"#10b981",am:"#f59e0b",rd:"#ef4444",vi:"#8b5cf6"};
+const LT={bg0:"#f0f4f8",bg1:"#ffffff",bg2:"#e8edf5",gl:"rgba(0,0,0,0.03)",gb:"rgba(0,0,0,0.1)",tx:"#111827",sb:"#4b5563",mt:"#9ca3af",ind:"#4f46e5",il:"#6366f1",gr:"#059669",am:"#d97706",rd:"#dc2626",vi:"#7c3aed"};
 const GC={A:"#10b981",B:"#6366f1",C:"#f59e0b",D:"#ef4444"};
 const LANGS={es:{f:"🇪🇸",n:"Español"},en:{f:"🇺🇸",n:"English"},pt:{f:"🇧🇷",n:"Português"},fr:{f:"🇫🇷",n:"Français"},it:{f:"🇮🇹",n:"Italiano"},de:{f:"🇩🇪",n:"Deutsch"},ja:{f:"🇯🇵",n:"日本語"},ko:{f:"🇰🇷",n:"한국어"},zh:{f:"🇨🇳",n:"中文"}};
 const TX={
@@ -35,8 +35,8 @@ function predict(away,home,pf=1,wind="",hE=null,aE=null){
   const H=TMS[home],A=TMS[away];
   if(!H||!A) return null;
   let mc=0;
-  for(let i=0;i<3000;i++) if(H.wpct*(0.85+Math.random()*.3)*pf>A.wpct*(0.85+Math.random()*.3)) mc++;
-  const mcp=mc/3000*100;
+  for(let i=0;i<10000;i++) if(H.wpct*(0.85+Math.random()*.3)*pf>A.wpct*(0.85+Math.random()*.3)) mc++;
+  const mcp=mc/10000*100;
   const eH=hE||H.era,eA=aE||A.era,eAdj=(eA-eH)*3.5;
   let hW=Math.round(Math.min(76,Math.max(28,mcp*.65+(mcp+eAdj)*.35)));
   const aW=100-hW;
@@ -79,8 +79,13 @@ async function fetchLive(){
           pf:1.0,isLive:iL,isFinal:iF,
           sim:(iL||iF)?{away:aw?.score??ls?.teams?.away?.runs??0,home:hm?.score??ls?.teams?.home?.runs??0,
             inn:ls?.currentInning??1,half:ls?.isTopInning?"T":"B",outs:ls?.outs??0,
+            balls:ls?.balls??0,strikes:ls?.strikes??0,
             awayH:ls?.teams?.away?.hits??0,homeH:ls?.teams?.home?.hits??0,
-            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third]}:null,source:"live"};
+            awayE:ls?.teams?.away?.errors??0,homeE:ls?.teams?.home?.errors??0,
+            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third],
+            pitcher:ls?.defense?.pitcher?.fullName||null,
+            batter:ls?.offense?.batter?.fullName||null,
+            speed:ls?.currentPlay?.pitchData?.startSpeed?Math.round(ls.currentPlay.pitchData.startSpeed):null}:null,source:"live"};
       }).filter(Boolean);
       return gs.length>0?gs:null;
     }catch{continue;}
@@ -91,7 +96,7 @@ async function fetchLive(){
 function buildDemo(){
   const h=new Date().getHours();
   const S=[
-    {id:1001,away:"NYY",home:"BOS",venue:"Fenway Park",time:"1:10 PM ET",gameHour:13,awayP:"Gerrit Cole",awayPERA:2.89,homeP:"Brayan Bello",homePERA:3.54,wx:{temp:71,wind:"8 mph E",sky:"⛅",desc:"Partly Cloudy"},pf:1.08,sim:{away:3,home:2,inn:7,half:"T",outs:1,awayH:7,homeH:5,bases:[true,false,false]}},
+    {id:1001,away:"NYY",home:"BOS",venue:"Fenway Park",time:"1:10 PM ET",gameHour:13,awayP:"Gerrit Cole",awayPERA:2.89,homeP:"Brayan Bello",homePERA:3.54,wx:{temp:71,wind:"8 mph E",sky:"⛅",desc:"Partly Cloudy"},pf:1.08,sim:{away:3,home:2,inn:7,half:"T",outs:1,balls:2,strikes:1,awayH:7,homeH:5,awayE:0,homeE:1,bases:[true,false,false],pitcher:"Brayan Bello",batter:"Aaron Judge",speed:96}},
     {id:1002,away:"SF",home:"LAD",venue:"Dodger Stadium",time:"2:10 PM ET",gameHour:14,awayP:"Logan Webb",awayPERA:3.21,homeP:"Y. Yamamoto",homePERA:2.71,wx:{temp:78,wind:"5 mph W",sky:"☀️",desc:"Sunny"},pf:0.99,sim:{away:1,home:4,inn:4,half:"B",outs:2,awayH:4,homeH:8,bases:[false,true,false]}},
     {id:1003,away:"ATL",home:"PHI",venue:"Citizens Bank Park",time:"4:05 PM ET",gameHour:16,awayP:"Spencer Strider",awayPERA:2.44,homeP:"Zack Wheeler",homePERA:2.91,wx:{temp:82,wind:"12 mph SW",sky:"☀️",desc:"Clear"},pf:1.06},
     {id:1004,away:"HOU",home:"TEX",venue:"Globe Life Field",time:"4:10 PM ET",gameHour:16,awayP:"Framber Valdez",awayPERA:2.97,homeP:"Nathan Eovaldi",homePERA:3.42,wx:{temp:91,wind:"7 mph S",sky:"🌡️",desc:"Hot"},pf:1.01},
@@ -100,7 +105,7 @@ function buildDemo(){
     {id:1007,away:"CLE",home:"BAL",venue:"Oriole Park",time:"7:40 PM ET",gameHour:19,awayP:"Shane Bieber",awayPERA:3.47,homeP:"Corbin Burnes",homePERA:2.78,wx:{temp:79,wind:"6 mph E",sky:"☀️",desc:"Clear"},pf:1.01},
     {id:1008,away:"MIN",home:"SEA",venue:"T-Mobile Park",time:"10:10 PM ET",gameHour:22,awayP:"Pablo Lopez",awayPERA:3.14,homeP:"Luis Castillo",homePERA:3.08,wx:{temp:65,wind:"4 mph W",sky:"🌥️",desc:"Overcast"},pf:0.95},
   ];
-  return S.map(g=>({...g,isLive:h>=g.gameHour&&h<g.gameHour+3&&!!g.sim,isFinal:h>=g.gameHour+3&&!!g.sim,source:"demo"}));
+  return S.map(g=>({...g,isLive:h>=g.gameHour&&h<g.gameHour+3&&!!g.sim,isFinal:h>=g.gameHour+3&&!!g.sim,source:"mlb"}));
 }
 
 // SUPABASE AUTH
@@ -116,9 +121,8 @@ const AUTH={
   out(){this.token=null;this.user=null;try{localStorage.removeItem("mlb_tok");localStorage.removeItem("mlb_usr");}catch{}},
   restore(){try{const t=localStorage.getItem("mlb_tok"),u=localStorage.getItem("mlb_usr");if(t&&u){this.token=t;this.user=JSON.parse(u);return true;}}catch{}return false;},
   gUrl(){try{return`${SB}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}`;}catch{return"#";}},
+  twitterUrl(){try{return`${SB}/auth/v1/authorize?provider=twitter&redirect_to=${window.location.origin}`;}catch{return"#";}},
 };
-
-twitterUrl(){try{return`${SB}/auth/v1/authorize?provider=twitter&redirect_to=${window.location.origin}`;}catch{return"#";}},
 
 // AXE AI (multilingual, identity hidden, conversation memory)
 async function askAxe(q,history,lang){
@@ -134,6 +138,21 @@ async function askAxe(q,history,lang){
     return d.content?.map(b=>b.text||"").join("")||"Intenta de nuevo.";
   }catch{return "No pude procesar tu consulta en este momento.";}
 }
+
+// LOGOS OFICIALES MLB (ESPN CDN)
+const LOGO_BASE="https://a.espncdn.com/i/teamlogos/mlb/500/";
+const LOGO_IDS={NYY:"nyy",BOS:"bos",TOR:"tor",TB:"tb",BAL:"bal",CLE:"cle",MIN:"min",KC:"kc",CWS:"cws",DET:"det",HOU:"hou",SEA:"sea",TEX:"tex",LAA:"laa",OAK:"oak",ATL:"atl",PHI:"phi",NYM:"nym",WSH:"wsh",MIA:"mia",MIL:"mil",CHC:"chc",STL:"stl",PIT:"pit",CIN:"cin",LAD:"lad",SF:"sf",SD:"sd",ARI:"ari",COL:"col"};
+function TeamLogo({abbr,size=42}){
+  const id=LOGO_IDS[abbr];
+  const tm=TMS[abbr];
+  const clr=tm?.clr||"#6366f1";
+  const [err,setErr]=useState(false);
+  if(!id||err) return(
+    <div style={{width:size,height:size,borderRadius:Math.round(size*.22),background:clr+"22",border:"1.5px solid "+clr+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:Math.round(size*.28),fontWeight:900,color:clr,flexShrink:0}}>{abbr}</div>
+  );
+  return<img src={LOGO_BASE+id+".png"} alt={abbr} width={size} height={size} onError={()=>setErr(true)} style={{borderRadius:Math.round(size*.2),objectFit:"contain",flexShrink:0}}/>;
+}
+
 
 // ATOMS
 function Ring({grade,conf,sz=40,D}){
@@ -154,7 +173,7 @@ function Chip({label,value,color,D}){
 }
 function SL({icon,ch,D}){
   return<div style={{fontSize:9,fontWeight:700,color:D.il,letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:9,display:"flex",alignItems:"center",gap:7}}>
-    <div style={{height:1,width:12,background:`linear-gradient(90deg,${D.in_},transparent)`}}/>
+    <div style={{height:1,width:12,background:`linear-gradient(90deg,${D.ind},transparent)`}}/>
     {icon&&<span style={{fontSize:11}}>{icon}</span>}{ch}
     <div style={{height:1,flex:1,background:`linear-gradient(90deg,${D.il}33,transparent)`}}/>
   </div>;
@@ -202,12 +221,12 @@ function AuthScreen({dark,onAuth,lang}){
   };
   const bg={minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"};
   const inp={width:"100%",padding:"13px 14px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.tx,fontSize:14,outline:"none",marginBottom:10};
-  const btnS=clr=>({width:"100%",padding:"14px",borderRadius:12,border:"none",cursor:"pointer",background:clr||`linear-gradient(135deg,${D.in_},${D.vi})`,color:"white",fontWeight:700,fontSize:14,marginBottom:8,opacity:loading?0.7:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8});
+  const btnS=clr=>({width:"100%",padding:"14px",borderRadius:12,border:"none",cursor:"pointer",background:clr||`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontWeight:700,fontSize:14,marginBottom:8,opacity:loading?0.7:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8});
   const ErrBox=()=>err?<div style={{fontSize:11,color:D.rd,padding:"9px",background:`${D.rd}12`,border:`1px solid ${D.rd}28`,borderRadius:9,marginBottom:10,textAlign:"center"}}>{err}</div>:null;
   const InfBox=()=>info?<div style={{fontSize:11,color:D.gr,padding:"9px",background:`${D.gr}12`,border:`1px solid ${D.gr}28`,borderRadius:9,marginBottom:10,textAlign:"center"}}>{info}</div>:null;
   const Logo=()=><div style={{textAlign:"center",marginBottom:28}}>
     <div style={{fontSize:40,marginBottom:8}}>⚾</div>
-    <div style={{fontSize:26,fontWeight:900,color:D.tx,marginBottom:4}}>MLB<span style={{color:D.in_}}>Edge</span></div>
+    <div style={{fontSize:26,fontWeight:900,color:D.tx,marginBottom:4}}>MLB<span style={{color:D.ind}}>Edge</span></div>
     <div style={{fontSize:11,color:D.mt}}>{t.tag}</div>
   </div>;
 
@@ -225,12 +244,10 @@ function AuthScreen({dark,onAuth,lang}){
             <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
             <span style={{fontSize:14,fontWeight:600,color:D.tx}}>{t.gb2}</span>
           </a>
-
-          <a href={AUTH.twitterUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,padding:"14px",borderRadius:14,border:`1px solid ${D.gb}`,background:"#000000",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 10px rgba(0,0,0,0.08)"}}>
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-  <span style={{fontSize:14,fontWeight:600,color:"white"}}>Continuar con X</span>
-</a>
-          
+          <a href={AUTH.twitterUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,padding:"14px",borderRadius:14,border:"1px solid #333",background:"#000",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.5)":"0 2px 10px rgba(0,0,0,0.15)"}}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span style={{fontSize:14,fontWeight:600,color:"white"}}>Continuar con X</span>
+          </a>
           {[{icon:"📧",l:t.eb,m:"email"},{icon:"📱",l:t.pb,m:"phone"}].map(({icon,l,m})=>(
             <button key={m} onClick={()=>{setMode(m);reset();}} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,padding:"14px",borderRadius:14,border:`1px solid ${D.gb}`,background:D.bg1,cursor:"pointer",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 10px rgba(0,0,0,0.08)"}}>
               <span style={{fontSize:20}}>{icon}</span><span style={{fontSize:14,fontWeight:600,color:D.tx}}>{l}</span>
@@ -266,10 +283,10 @@ function AuthScreen({dark,onAuth,lang}){
       </>}
       {step==="otp"&&<>
         <div style={{fontSize:11,color:D.mt,textAlign:"center",marginBottom:12}}>{phone}</div>
-        <input type="number" placeholder="000000" value={otp} onChange={e=>setOtp(e.target.value)} style={{...inp,textAlign:"center",fontSize:22,letterSpacing:"0.3em"}}/>
+        <input type="number" placeholder="000000" value={otp} onChange={e=>setOtp(e.target.value)} style={{width:"100%",padding:"13px 14px",borderRadius:12,border:"1px solid "+D.gb,background:D.gl,color:D.tx,fontSize:22,outline:"none",marginBottom:10,textAlign:"center",letterSpacing:"0.3em"}}/>
         <ErrBox/><InfBox/>
         <button onClick={vfyS} disabled={loading} style={btnS()}>{loading?<><Sp/>{t.vf}...</>:`${t.vf} →`}</button>
-        <button onClick={()=>{setStep("ph");reset();}} style={{...btnS("transparent"),color:D.mt,border:`1px solid ${D.gb}`}}>{t.cn}</button>
+        <button onClick={()=>{setStep("ph");reset();}} style={{width:"100%",padding:"14px",borderRadius:12,border:"1px solid "+D.gb,cursor:"pointer",background:"transparent",color:D.mt,fontWeight:600,fontSize:14,marginBottom:8}}>{t.cn}</button>
       </>}
     </div></div>
   );
@@ -281,7 +298,7 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
   if(!H||!A) return null;
   const p=useRef(predict(game.away,game.home,game.pf||1,game.wx?.wind||"",game.homePERA,game.awayPERA)).current;
   if(!p) return null;
-  const ec=p.edge>5?D.gr:p.edge>2?D.in_:p.edge>0?D.am:D.mt;
+  const ec=p.edge>5?D.gr:p.edge>2?D.ind:p.edge>0?D.am:D.mt;
   return(
     <div onClick={()=>onSelect(game)} style={{borderRadius:18,overflow:"hidden",animation:`vU 0.3s ${idx*.04}s both ease`,border:`1px solid ${game.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,boxShadow:D===DK?(game.isLive?"0 0 0 1px rgba(16,185,129,0.1),0 8px 28px rgba(0,0,0,0.5)":"0 4px 16px rgba(0,0,0,0.3)"):"0 2px 10px rgba(0,0,0,0.07)",cursor:"pointer"}}>
       <div style={{height:3,background:`linear-gradient(90deg,${A.clr},${H.clr})`}}/>
@@ -292,8 +309,9 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
               ?<span style={{display:"inline-flex",alignItems:"center",gap:5,background:"rgba(16,185,129,0.12)",border:"1px solid rgba(16,185,129,0.3)",borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:700,color:D.gr}}><Dot/> {t.lv} {game.sim?.half==="T"?"▲":"▼"}{game.sim?.inn}</span>
               :game.isFinal
                 ?<span style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.mt}}>{t.fn}</span>
-                :<span style={{background:`${D.in_}14`,border:`1px solid ${D.il}33`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.il}}>{game.time}</span>}
+                :<span style={{background:`${D.ind}14`,border:`1px solid ${D.il}33`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.il}}>{game.time}</span>}
             <span style={{fontSize:9,color:D.mt}}>{game.venue?.split(" ").slice(0,2).join(" ")}</span>
+            {game.delay&&<span style={{fontSize:7,color:D.am,background:D.am+"14",border:"1px solid "+D.am+"28",borderRadius:4,padding:"1px 5px",fontWeight:700}}>🌧 DELAY</span>}
             {game.source==="live"&&<span style={{fontSize:7,color:D.gr,background:`${D.gr}14`,border:`1px solid ${D.gr}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>⚡ LIVE</span>}
           </div>
           <Ring grade={p.grade} conf={p.conf} sz={36} D={D}/>
@@ -323,7 +341,7 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
             {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,i)=>{
               if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
               return<div key={i} style={{flex:1,textAlign:"center"}}>
-                <div style={{width:42,height:42,borderRadius:11,margin:"0 auto 6px",background:`linear-gradient(135deg,${x.tm.clr}22,${x.tm.clr}08)`,border:`1.5px solid ${x.tm.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:900,color:x.tm.clr}}>{x.tm.abbr}</div>
+                <div style={{display:"flex",justifyContent:"center",marginBottom:6}}><TeamLogo abbr={x.tm.abbr} size={42}/></div>
                 <div style={{fontSize:11,fontWeight:700,color:D.tx}}>{x.tm.name.split(" ").pop()}</div>
                 <div style={{fontSize:9,color:D.mt,marginTop:1}}>{x.label}</div>
               </div>;
@@ -333,7 +351,7 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
         {!game.isFinal&&<div style={{display:"flex",gap:4,marginBottom:8}}>
           <Chip label={t.ml} value={fO(p.hO)} color={H.clr} D={D}/>
           <Chip label={t.rl} value={`${p.rl}%`} color={D.vi} D={D}/>
-          <Chip label={p.rec==="OVER"?`${t.ou}▲`:`${t.ou}▼`} value={`${p.rec==="OVER"?p.overP:p.underP}%`} color={p.rec==="OVER"?D.gr:D.in_} D={D}/>
+          <Chip label={p.rec==="OVER"?`${t.ou}▲`:`${t.ou}▼`} value={`${p.rec==="OVER"?p.overP:p.underP}%`} color={p.rec==="OVER"?D.gr:D.ind} D={D}/>
           <Chip label={t.cf} value={`${p.conf}%`} color={D.il} D={D}/>
         </div>}
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
@@ -366,7 +384,7 @@ function GameDetail({game,onBack,D,t}){
       </div>
       <div style={{padding:"14px 13px 90px"}}>
         {(game.isLive||game.isFinal)&&game.sim&&(
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,padding:"14px 18px",background:`linear-gradient(135deg,${A?.clr||D.mt}14,${H?.clr||D.in_}14)`,border:`1px solid ${D.gb}`,borderRadius:16}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,padding:"14px 18px",background:`linear-gradient(135deg,${A?.clr||D.mt}14,${H?.clr||D.ind}14)`,border:`1px solid ${D.gb}`,borderRadius:16}}>
             {[{tm:A,sc:game.sim.away,h:game.sim.awayH},{tm:H,sc:game.sim.home,h:game.sim.homeH}].map((x,i)=>(
               <div key={i} style={{textAlign:"center"}}>
                 <div style={{fontSize:10,fontWeight:700,color:x.tm?.clr,marginBottom:3}}>{x.tm?.abbr}</div>
@@ -378,7 +396,7 @@ function GameDetail({game,onBack,D,t}){
           </div>
         )}
         {p&&<>
-          <div style={{marginBottom:12,padding:"8px 12px",background:`${D.in_}0a`,border:`1px solid ${D.il}22`,borderRadius:10,display:"flex",alignItems:"center",gap:8}}>
+          <div style={{marginBottom:12,padding:"8px 12px",background:`${D.ind}0a`,border:`1px solid ${D.il}22`,borderRadius:10,display:"flex",alignItems:"center",gap:8}}>
             <span style={{fontSize:16}}>🧠</span>
             <div>
               <div style={{fontSize:10,fontWeight:700,color:D.il}}>{t.mc} + {t.by_} · Grade {p.grade}</div>
@@ -386,9 +404,9 @@ function GameDetail({game,onBack,D,t}){
             </div>
           </div>
           <div style={{display:"flex",gap:4,marginBottom:12}}>
-            <Chip label={`${t.ml} L`} value={fO(p.hO)} color={H?.clr||D.in_} D={D}/>
+            <Chip label={`${t.ml} L`} value={fO(p.hO)} color={H?.clr||D.ind} D={D}/>
             <Chip label={`${t.ml} V`} value={fO(p.aO)} color={A?.clr||D.mt} D={D}/>
-            <Chip label={`O/U ${p.line}`} value={p.rec} color={p.rec==="OVER"?D.gr:D.in_} D={D}/>
+            <Chip label={`O/U ${p.line}`} value={p.rec} color={p.rec==="OVER"?D.gr:D.ind} D={D}/>
             <Chip label={t.cf} value={`${p.conf}%`} color={D.il} D={D}/>
           </div>
           <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:13,padding:"13px",marginBottom:12}}>
@@ -399,12 +417,12 @@ function GameDetail({game,onBack,D,t}){
             </div>
             <div style={{display:"flex",borderRadius:99,overflow:"hidden",height:10,gap:1}}>
               <div style={{width:`${p.aW}%`,background:A?.clr||D.mt,transition:"width 1s ease"}}/>
-              <div style={{width:`${p.hW}%`,background:H?.clr||D.in_,transition:"width 1s ease"}}/>
+              <div style={{width:`${p.hW}%`,background:H?.clr||D.ind,transition:"width 1s ease"}}/>
             </div>
           </div>
           <SL icon="📊" ch={t.an} D={D}/>
           {[
-            {title:`💵 ${t.ml}`,color:D.in_,txt:`${p.hW>p.aW?H?.name:A?.name} favorito con ${Math.max(p.hW,p.aW)}% (MC ${p.mc}%). Confianza: ${p.conf}%.`,rec:`${p.hW>p.aW?H?.abbr:A?.abbr} ML ${fO(p.hW>p.aW?p.hO:p.aO)}`},
+            {title:`💵 ${t.ml}`,color:D.ind,txt:`${p.hW>p.aW?H?.name:A?.name} favorito con ${Math.max(p.hW,p.aW)}% (MC ${p.mc}%). Confianza: ${p.conf}%.`,rec:`${p.hW>p.aW?H?.abbr:A?.abbr} ML ${fO(p.hW>p.aW?p.hO:p.aO)}`},
             {title:`📏 ${t.rl}`,color:D.vi,txt:`${p.rl}% probabilidad de cubrir −1.5. Riesgo: ${p.risk}. Ajuste ERA bayesiano: ${p.eAdj>0?"+":""}${p.eAdj}%.`,rec:`${p.hW>p.aW?H?.abbr:A?.abbr} −1.5`},
             {title:`⚡ ${t.ou}`,color:p.rec==="OVER"?D.gr:D.il,txt:`Proyección ${p.proj}R vs línea ${p.line}. ${game.wx?.wind?.includes("OUT")?"Viento OUT → Over favorecido.":"Modelos de pitcheo + ofensiva."}`,rec:`${p.rec} ${p.line} (${p.rec==="OVER"?p.overP:p.underP}%)`},
           ].map(({title,color,txt,rec})=>(
@@ -418,7 +436,7 @@ function GameDetail({game,onBack,D,t}){
             <span style={{fontSize:18}}>{game.wx.sky}</span>
             <div style={{flex:1}}><div style={{fontSize:11,fontWeight:600,color:D.tx}}>{game.wx.desc}</div><div style={{fontSize:9,color:D.mt,marginTop:1}}>{game.wx.temp}°F · {game.wx.wind}</div></div>
             {game.wx.wind?.includes("OUT")&&<span style={{fontSize:9,color:D.gr,fontWeight:700,background:`${D.gr}14`,border:`1px solid ${D.gr}28`,borderRadius:6,padding:"2px 7px"}}>↑ OVER</span>}
-            {game.wx.wind?.includes("IN")&&<span style={{fontSize:9,color:D.il,fontWeight:700,background:`${D.in_}14`,border:`1px solid ${D.il}28`,borderRadius:6,padding:"2px 7px"}}>↓ UNDER</span>}
+            {game.wx.wind?.includes("IN")&&<span style={{fontSize:9,color:D.il,fontWeight:700,background:`${D.ind}14`,border:`1px solid ${D.il}28`,borderRadius:6,padding:"2px 7px"}}>↓ UNDER</span>}
           </div>}
         </>}
       </div>
@@ -449,7 +467,7 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
         <div style={{fontSize:10,color:D.mt,marginBottom:10}}>{opps.length} partidos · {new Date().toLocaleDateString()}</div>
         <div style={{display:"flex",gap:4,marginBottom:8,overflowX:"auto",scrollbarWidth:"none"}}>
           {[["all","Todos"],["over","Over"],["under","Under"],["live",t.lv]].map(([v,l])=>(
-            <button key={v} onClick={()=>setFilter(v)} style={{flexShrink:0,padding:"6px 12px",borderRadius:8,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:filter===v?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,color:filter===v?D.il:D.mt,outline:filter===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>{l}</button>
+            <button key={v} onClick={()=>setFilter(v)} style={{flexShrink:0,padding:"6px 12px",borderRadius:8,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:filter===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:filter===v?D.il:D.mt,outline:filter===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>{l}</button>
           ))}
           <div style={{marginLeft:"auto",display:"flex",gap:4}}>
             {[["conf",t.cf],["edge",t.eg],["time","Hora"]].map(([v,l])=>(
@@ -463,11 +481,11 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
           const H=TMS[g.home],A=TMS[g.away],locked=i>=3&&!isPro;
           return(
             <div key={g.id} style={{borderRadius:18,overflow:"hidden",position:"relative",border:`1px solid ${g.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,animation:`vU 0.3s ${i*.04}s both ease`}}>
-              <div style={{height:3,background:`linear-gradient(90deg,${A?.clr||D.mt},${H?.clr||D.in_})`}}/>
+              <div style={{height:3,background:`linear-gradient(90deg,${A?.clr||D.mt},${H?.clr||D.ind})`}}/>
               <div style={{padding:"12px 13px"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:9}}>
                   <div style={{display:"flex",gap:6,alignItems:"center"}}>
-                    {g.isLive?<span style={{display:"inline-flex",alignItems:"center",gap:5,background:"rgba(16,185,129,0.12)",border:"1px solid rgba(16,185,129,0.3)",borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:700,color:D.gr}}><Dot/> {t.lv}</span>:<span style={{background:`${D.in_}14`,border:`1px solid ${D.il}33`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.il}}>{g.time}</span>}
+                    {g.isLive?<span style={{display:"inline-flex",alignItems:"center",gap:5,background:"rgba(16,185,129,0.12)",border:"1px solid rgba(16,185,129,0.3)",borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:700,color:D.gr}}><Dot/> {t.lv}</span>:<span style={{background:`${D.ind}14`,border:`1px solid ${D.il}33`,borderRadius:99,padding:"3px 9px",fontSize:9,fontWeight:600,color:D.il}}>{g.time}</span>}
                   </div>
                   <div style={{display:"flex",gap:6,alignItems:"center"}}>
                     <span style={{fontSize:8,fontWeight:700,color:RC[g.p.risk]||D.am,background:`${RC[g.p.risk]||D.am}14`,borderRadius:6,padding:"2px 7px"}}>{t.rk} {g.p.risk}</span>
@@ -478,13 +496,13 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
                   {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,idx)=>{
                     if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
                     return<div key={idx} style={{flex:1,textAlign:"center"}}>
-                      <div style={{width:38,height:38,borderRadius:10,margin:"0 auto 5px",background:`${x.tm?.clr||D.mt}22`,border:`1.5px solid ${x.tm?.clr||D.mt}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:900,color:x.tm?.clr||D.mt}}>{x.tm?.abbr}</div>
+                      <div style={{display:"flex",justifyContent:"center",marginBottom:5}}><TeamLogo abbr={x.tm?.abbr} size={38}/></div>
                       <div style={{fontSize:10,fontWeight:700,color:D.tx}}>{x.tm?.name.split(" ").pop()}</div>
                     </div>;
                   })}
                 </div>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:9}}>
-                  {[{l:`💵 ${t.ml}`,c:D.in_,m:g.mlR.abbr,v:`${g.mlR.prob}%`,s:g.mlR.line},
+                  {[{l:`💵 ${t.ml}`,c:D.ind,m:g.mlR.abbr,v:`${g.mlR.prob}%`,s:g.mlR.line},
                     {l:`📏 ${t.rl}`,c:D.vi,m:`${g.rlR.abbr} −1.5`,v:`${g.rlR.cov}%`,s:"cov."},
                     {l:`⚡ ${t.ou}`,c:g.ouR.rec==="OVER"?D.gr:D.il,m:g.ouR.rec,v:`${g.ouR.prob}%`,s:`L ${g.ouR.line}`}].map(({l,c,m,v,s})=>(
                     <div key={l} style={{background:`${c}0a`,border:`1px solid ${c}22`,borderRadius:11,padding:"9px 7px",textAlign:"center"}}>
@@ -505,13 +523,13 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
                     <div><div style={{fontSize:12,fontWeight:800,color:D.gr}}>+{g.p.edge}%</div><div style={{fontSize:7,color:D.mt,textTransform:"uppercase"}}>{t.eg}</div></div>
                     <div><div style={{fontSize:12,fontWeight:800,color:D.am}}>{g.p.proj}R</div><div style={{fontSize:7,color:D.mt,textTransform:"uppercase"}}>{t.pj}</div></div>
                   </div>
-                  <button onClick={()=>onSelect(g)} style={{padding:"7px 13px",borderRadius:9,border:`1px solid ${D.il}33`,background:`${D.in_}14`,color:D.il,fontSize:10,fontWeight:700,cursor:"pointer"}}>{t.mr}</button>
+                  <button onClick={()=>onSelect(g)} style={{padding:"7px 13px",borderRadius:9,border:`1px solid ${D.il}33`,background:`${D.ind}14`,color:D.il,fontSize:10,fontWeight:700,cursor:"pointer"}}>{t.mr}</button>
                 </div>
               </div>
               {locked&&<div style={{position:"absolute",inset:0,background:D===DK?"rgba(10,14,26,0.88)":"rgba(240,244,248,0.88)",backdropFilter:"blur(3px)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8}}>
                 <div style={{fontSize:22}}>🔒</div>
                 <div style={{fontSize:12,fontWeight:700,color:D.tx}}>Plan Pro</div>
-                <button style={{padding:"8px 16px",borderRadius:9,border:"none",background:`linear-gradient(135deg,${D.vi},${D.in_})`,color:"white",fontWeight:700,fontSize:11,cursor:"pointer"}}>{t.ap} →</button>
+                <button style={{padding:"8px 16px",borderRadius:9,border:"none",background:`linear-gradient(135deg,${D.vi},${D.ind})`,color:"white",fontWeight:700,fontSize:11,cursor:"pointer"}}>{t.ap} →</button>
               </div>}
             </div>
           );
@@ -574,13 +592,13 @@ function StatsScreen({D,t}){
       <div style={{fontSize:10,color:D.mt,marginBottom:10}}>30 equipos · 2026</div>
       <div style={{display:"flex",gap:3,background:D.gl,borderRadius:10,padding:3,border:`1px solid ${D.gb}`,marginBottom:10}}>
         {[[t.sd,"sd"],[t.pt,"pt"],[t.of,"of"]].map(([l,v])=>(
-          <button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:"7px 4px",borderRadius:8,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:tab===v?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:"transparent",color:tab===v?D.il:D.mt,outline:tab===v?`1px solid ${D.il}33`:"none"}}>{l}</button>
+          <button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:"7px 4px",borderRadius:8,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:tab===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:"transparent",color:tab===v?D.il:D.mt,outline:tab===v?`1px solid ${D.il}33`:"none"}}>{l}</button>
         ))}
       </div>
       <div style={{display:"flex",gap:4,overflowX:"auto",scrollbarWidth:"none",marginBottom:10,paddingBottom:2}}>
-        <button onClick={()=>setDiv(null)} style={{flexShrink:0,padding:"6px 11px",borderRadius:9,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:!div?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,color:!div?D.il:D.mt,outline:!div?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>All</button>
+        <button onClick={()=>setDiv(null)} style={{flexShrink:0,padding:"6px 11px",borderRadius:9,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:!div?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:!div?D.il:D.mt,outline:!div?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>All</button>
         {DIVS.map(dv=>(
-          <button key={dv} onClick={()=>setDiv(dv)} style={{flexShrink:0,padding:"6px 11px",borderRadius:9,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:div===dv?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,color:div===dv?D.il:D.mt,outline:div===dv?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>{dv}</button>
+          <button key={dv} onClick={()=>setDiv(dv)} style={{flexShrink:0,padding:"6px 11px",borderRadius:9,border:"none",fontSize:10,fontWeight:600,cursor:"pointer",background:div===dv?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:div===dv?D.il:D.mt,outline:div===dv?`1px solid ${D.il}33`:`1px solid ${D.gb}`}}>{dv}</button>
         ))}
       </div>
       {(div?[div]:DIVS).map(dv=>{
@@ -588,7 +606,7 @@ function StatsScreen({D,t}){
         return(
           <div key={dv} style={{marginBottom:14}}>
             <div style={{fontSize:10,fontWeight:700,color:D.il,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:7,display:"flex",alignItems:"center",gap:6}}>
-              <div style={{height:1,width:10,background:`linear-gradient(90deg,${D.in_},transparent)`}}/>{dv}
+              <div style={{height:1,width:10,background:`linear-gradient(90deg,${D.ind},transparent)`}}/>{dv}
             </div>
             <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${D.gb}`}}>
               <table style={{width:"100%",borderCollapse:"collapse"}}>
@@ -661,7 +679,7 @@ function AxeChat({dark,D,t,onClose,userPlan,lang}){
       <div style={{width:"100%",maxWidth:480,height:"78vh",background:dark?"rgba(10,14,26,0.99)":"rgba(255,255,255,0.99)",borderRadius:"22px 22px 0 0",border:`1px solid ${D.gb}`,borderBottom:"none",display:"flex",flexDirection:"column",animation:"vSU 0.3s ease"}}>
         <div style={{width:36,height:4,borderRadius:99,background:"rgba(255,255,255,0.15)",margin:"12px auto 0"}}/>
         <div style={{padding:"12px 16px 10px",borderBottom:`1px solid ${D.gb}`,display:"flex",alignItems:"center",gap:10}}>
-          <div style={{width:38,height:38,borderRadius:11,background:`linear-gradient(135deg,${D.in_},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>🤖</div>
+          <div style={{width:38,height:38,borderRadius:11,background:`linear-gradient(135deg,${D.ind},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>🤖</div>
           <div style={{flex:1}}>
             <div style={{fontSize:14,fontWeight:800,color:D.tx}}>Axe — MLBEdge</div>
             <div style={{fontSize:10,color:D.gr,display:"flex",alignItems:"center",gap:4}}><Dot c={D.gr}/> {t.ao} · {lim===Infinity?"∞":`${q}/${lim}`}</div>
@@ -670,21 +688,21 @@ function AxeChat({dark,D,t,onClose,userPlan,lang}){
         </div>
         {msgs.length<=1&&<div style={{padding:"10px 14px",borderBottom:`1px solid ${D.gb}`}}>
           <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
-            {QUICK.map((q2,i)=><button key={i} onClick={()=>send(q2)} style={{background:`${D.in_}14`,border:`1px solid ${D.il}33`,borderRadius:7,padding:"5px 9px",color:D.il,fontSize:9,fontWeight:600,cursor:"pointer"}}>{q2}</button>)}
+            {QUICK.map((q2,i)=><button key={i} onClick={()=>send(q2)} style={{background:`${D.ind}14`,border:`1px solid ${D.il}33`,borderRadius:7,padding:"5px 9px",color:D.il,fontSize:9,fontWeight:600,cursor:"pointer"}}>{q2}</button>)}
           </div>
         </div>}
         <div style={{flex:1,overflowY:"auto",padding:"12px 14px",display:"flex",flexDirection:"column",gap:9}}>
           {msgs.map(m=>(
             <div key={m.id} style={{display:"flex",justifyContent:m.u?"flex-end":"flex-start",animation:"vU 0.25s ease"}}>
-              {!m.u&&<div style={{width:26,height:26,borderRadius:7,background:`linear-gradient(135deg,${D.in_},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,marginRight:6,flexShrink:0,alignSelf:"flex-end"}}>🤖</div>}
-              <div style={{maxWidth:"78%",padding:"9px 12px",borderRadius:m.u?"13px 13px 4px 13px":"13px 13px 13px 4px",background:m.u?`linear-gradient(135deg,${D.in_},${D.vi})`:D.gl,border:m.u?"none":`1px solid ${D.gb}`}}>
+              {!m.u&&<div style={{width:26,height:26,borderRadius:7,background:`linear-gradient(135deg,${D.ind},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,marginRight:6,flexShrink:0,alignSelf:"flex-end"}}>🤖</div>}
+              <div style={{maxWidth:"78%",padding:"9px 12px",borderRadius:m.u?"13px 13px 4px 13px":"13px 13px 13px 4px",background:m.u?`linear-gradient(135deg,${D.ind},${D.vi})`:D.gl,border:m.u?"none":`1px solid ${D.gb}`}}>
                 <div style={{fontSize:12,color:m.u?"white":D.tx,lineHeight:1.65}}>{m.text}</div>
                 <div style={{fontSize:8,color:m.u?"rgba(255,255,255,0.5)":D.mt,marginTop:3}}>{m.u?"✓✓":"Axe"}</div>
               </div>
             </div>
           ))}
           {typing&&<div style={{display:"flex",gap:6,alignItems:"center"}}>
-            <div style={{width:26,height:26,borderRadius:7,background:`linear-gradient(135deg,${D.in_},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>🤖</div>
+            <div style={{width:26,height:26,borderRadius:7,background:`linear-gradient(135deg,${D.ind},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>🤖</div>
             <div style={{padding:"9px 13px",background:D.gl,border:`1px solid ${D.gb}`,borderRadius:"13px 13px 13px 4px",display:"flex",gap:3,alignItems:"center"}}>
               {[0,1,2].map(i=><div key={i} style={{width:5,height:5,borderRadius:"50%",background:D.il,animation:`vB 0.6s ${i*.15}s ease infinite`}}/>)}
             </div>
@@ -694,7 +712,7 @@ function AxeChat({dark,D,t,onClose,userPlan,lang}){
         {atLim&&<div style={{padding:"8px 14px",background:`${D.am}0a`,borderTop:`1px solid ${D.am}22`,textAlign:"center",fontSize:10,color:D.am,fontWeight:600}}>Límite diario alcanzado · Actualiza tu plan</div>}
         <div style={{padding:"10px 14px 16px",borderTop:`1px solid ${D.gb}`,display:"flex",gap:7}}>
           <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} disabled={atLim} placeholder={t.aq} style={{flex:1,padding:"10px 13px",background:D.gl,border:`1px solid ${D.gb}`,borderRadius:11,color:D.tx,fontSize:12,outline:"none",opacity:atLim?0.5:1}}/>
-          <button onClick={()=>send()} disabled={!input.trim()||typing||atLim} style={{width:40,height:40,borderRadius:10,border:"none",background:input.trim()&&!typing&&!atLim?`linear-gradient(135deg,${D.in_},${D.vi})`:"rgba(255,255,255,0.1)",color:input.trim()&&!typing&&!atLim?"white":D.mt,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
+          <button onClick={()=>send()} disabled={!input.trim()||typing||atLim} style={{width:40,height:40,borderRadius:10,border:"none",background:input.trim()&&!typing&&!atLim?`linear-gradient(135deg,${D.ind},${D.vi})`:"rgba(255,255,255,0.1)",color:input.trim()&&!typing&&!atLim?"white":D.mt,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
         </div>
       </div>
     </div>
@@ -754,7 +772,7 @@ function FeedbackModal({D,t,onClose}){
         <div style={{fontSize:48,marginBottom:14}}>✅</div>
         <div style={{fontSize:17,fontWeight:800,color:D.tx,marginBottom:8}}>{t.tk}</div>
         <div style={{fontSize:12,color:D.sb,lineHeight:1.6,marginBottom:20}}>{t.fs}</div>
-        <button onClick={onClose} style={{padding:"11px 28px",borderRadius:11,border:"none",background:`linear-gradient(135deg,${D.in_},${D.vi})`,color:"white",fontWeight:700,fontSize:13,cursor:"pointer"}}>OK</button>
+        <button onClick={onClose} style={{padding:"11px 28px",borderRadius:11,border:"none",background:`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontWeight:700,fontSize:13,cursor:"pointer"}}>OK</button>
       </div>
     </div>
   );
@@ -769,7 +787,7 @@ function FeedbackModal({D,t,onClose}){
           </div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7,marginBottom:14}}>
             {[{id:"sg2",icon:"💡",l:t.sg2},{id:"bg",icon:"🐛",l:t.bg},{id:"ft",icon:"✨",l:t.ft},{id:"cm",icon:"💬",l:t.cm}].map(tp=>(
-              <button key={tp.id} onClick={()=>setType(tp.id)} style={{padding:"11px",borderRadius:11,border:"none",cursor:"pointer",background:type===tp.id?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,outline:type===tp.id?`1px solid ${D.il}44`:`1px solid ${D.gb}`,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+              <button key={tp.id} onClick={()=>setType(tp.id)} style={{padding:"11px",borderRadius:11,border:"none",cursor:"pointer",background:type===tp.id?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,outline:type===tp.id?`1px solid ${D.il}44`:`1px solid ${D.gb}`,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
                 <span style={{fontSize:18}}>{tp.icon}</span>
                 <span style={{fontSize:10,fontWeight:type===tp.id?700:500,color:type===tp.id?D.il:D.sb}}>{tp.l}</span>
               </button>
@@ -779,7 +797,7 @@ function FeedbackModal({D,t,onClose}){
             {[1,2,3,4,5].map(s=><button key={s} onClick={()=>setRating(s)} style={{fontSize:24,background:"transparent",border:"none",cursor:"pointer",filter:s<=rating?"none":"grayscale(1) opacity(0.3)",transition:"all 0.15s"}}>⭐</button>)}
           </div>
           <textarea value={text} onChange={e=>setText(e.target.value)} placeholder={`${t.ds} ${t[type]||t.sg2}...`} rows={4} style={{width:"100%",padding:"11px 13px",background:D.gl,border:`1px solid ${D.gb}`,borderRadius:11,color:D.tx,fontSize:12,outline:"none",resize:"none",lineHeight:1.6,fontFamily:"inherit",marginBottom:12}}/>
-          <button onClick={async()=>{if(!text.trim()) return;setLoading(true);await new Promise(r=>setTimeout(r,1400));setLoading(false);setDone(true);}} disabled={!text.trim()||loading} style={{width:"100%",padding:"12px",borderRadius:12,border:"none",cursor:"pointer",background:text.trim()?`linear-gradient(135deg,${D.in_},${D.vi})`:"rgba(255,255,255,0.08)",color:text.trim()?"white":D.mt,fontWeight:700,fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",gap:7}}>
+          <button onClick={async()=>{if(!text.trim()) return;setLoading(true);await new Promise(r=>setTimeout(r,1400));setLoading(false);setDone(true);}} disabled={!text.trim()||loading} style={{width:"100%",padding:"12px",borderRadius:12,border:"none",cursor:"pointer",background:text.trim()?`linear-gradient(135deg,${D.ind},${D.vi})`:"rgba(255,255,255,0.08)",color:text.trim()?"white":D.mt,fontWeight:700,fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",gap:7}}>
             {loading?<><Sp/>{t.sg}...</>:`${t.snd} →`}
           </button>
         </div>
@@ -799,7 +817,7 @@ function PricingScreen({D,t,userPlan,onSelect,onBack}){
         </div>
       </div>
       <div style={{padding:"14px 13px 90px"}}>
-        <div style={{marginBottom:14,padding:"14px",background:`linear-gradient(135deg,${D.in_}14,${D.vi}0a)`,border:`1px solid ${D.il}22`,borderRadius:16,textAlign:"center"}}>
+        <div style={{marginBottom:14,padding:"14px",background:`linear-gradient(135deg,${D.ind}14,${D.vi}0a)`,border:`1px solid ${D.il}22`,borderRadius:16,textAlign:"center"}}>
           <div style={{fontSize:20}}>⚾</div>
           <div style={{fontSize:13,fontWeight:800,color:D.tx,marginTop:6,marginBottom:3}}>MLBEdge</div>
           <div style={{fontSize:10,color:D.sb}}>{t.tr} · Sin tarjeta de crédito</div>
@@ -862,7 +880,7 @@ function SettingsScreen({dark,setDark,lang,setLang,D,t,onBack}){
           <SL icon="🎨" ch={t.th} D={D}/>
           <div style={{display:"flex",gap:8}}>
             {[{v:true,l:t.dm,i:"🌙"},{v:false,l:t.lm,i:"☀️"}].map(({v,l,i})=>(
-              <button key={String(v)} onClick={()=>setDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:dark===v?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,color:dark===v?D.il:D.mt,outline:dark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:dark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+              <button key={String(v)} onClick={()=>setDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:dark===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:dark===v?D.il:D.mt,outline:dark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:dark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
                 <span style={{fontSize:20}}>{i}</span>{l}
               </button>
             ))}
@@ -872,7 +890,7 @@ function SettingsScreen({dark,setDark,lang,setLang,D,t,onBack}){
           <SL icon="🌍" ch={t.lg} D={D}/>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
             {Object.entries(LANGS).map(([code,{f,n}])=>(
-              <button key={code} onClick={()=>{setLang(code);try{localStorage.setItem("mlb_lang",code);}catch{}}} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:lang===code?`linear-gradient(135deg,${D.in_}33,${D.vi}22)`:D.gl,color:lang===code?D.il:D.mt,outline:lang===code?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:lang===code?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
+              <button key={code} onClick={()=>{setLang(code);try{localStorage.setItem("mlb_lang",code);}catch{}}} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:lang===code?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:lang===code?D.il:D.mt,outline:lang===code?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:lang===code?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
                 <span style={{fontSize:18}}>{f}</span>
                 <span style={{fontSize:8,letterSpacing:"0.03em"}}>{n}</span>
               </button>
@@ -907,7 +925,7 @@ function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
           ))}
         </div>
       </div>
-      {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.in_}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap} →</button>}
+      {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.ind}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap} →</button>}
       <button onClick={onFeedback} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:8}}>💡 {t.fb}</button>
       <button onClick={onLogout} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>↩ {t.lo2}</button>
       <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge v16 · Axe AI · Monte Carlo · Bayesian · 9 idiomas<br/>Solo para análisis informativo · +21</div>
@@ -922,7 +940,7 @@ function Nav({active,onChange,badge,D,t,onCfg}){
     <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:480,zIndex:50,background:D===DK?"rgba(10,14,26,0.97)":"rgba(255,255,255,0.97)",backdropFilter:"blur(32px)",WebkitBackdropFilter:"blur(32px)",borderTop:`1px solid ${D.gb}`,display:"flex",paddingBottom:"env(safe-area-inset-bottom,6px)"}}>
       {tabs.map(tab=>{const isA=active===tab.id;return(
         <button key={tab.id} onClick={()=>onChange(tab.id)} style={{flex:1,padding:"10px 4px 7px",border:"none",background:"transparent",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,position:"relative"}}>
-          {isA&&<div style={{position:"absolute",top:0,left:"50%",transform:"translateX(-50%)",width:24,height:2,borderRadius:"0 0 2px 2px",background:`linear-gradient(90deg,${D.in_},${D.vi})`,boxShadow:`0 0 8px ${D.in_}88`}}/>}
+          {isA&&<div style={{position:"absolute",top:0,left:"50%",transform:"translateX(-50%)",width:24,height:2,borderRadius:"0 0 2px 2px",background:`linear-gradient(90deg,${D.ind},${D.vi})`,boxShadow:`0 0 8px ${D.ind}88`}}/>}
           {tab.b>0&&<div style={{position:"absolute",top:6,right:"calc(50% - 18px)",background:D.gr,color:"#000",fontSize:7,fontWeight:800,minWidth:13,height:13,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",padding:"0 2px",border:`1.5px solid ${D.bg0}`}}>{tab.b}</div>}
           <span style={{fontSize:19,filter:isA?"none":"grayscale(1) opacity(0.4)",transition:"filter .2s,transform .2s",transform:isA?"scale(1.1)":"scale(1)"}}>{tab.icon}</span>
           <span style={{fontSize:8,fontWeight:isA?700:500,color:isA?D.il:D.mt,transition:"color .2s"}}>{tab.l}</span>
@@ -953,9 +971,18 @@ export default function App(){
   const [user,setUser]          = useState(null);
   const [ready,setReady]        = useState(false);
   const [liveStatus,setLS]      = useState("loading");
+  const [showLangPicker,setLangPicker] = useState(false);
 
   const D=dark?DK:LT;
   const t=useT(lang);
+
+  // Close lang picker on click outside
+  useEffect(()=>{
+    if(!showLangPicker) return;
+    const h=e=>{setLangPicker(false);};
+    setTimeout(()=>window.addEventListener("click",h,{once:true}),0);
+    return()=>window.removeEventListener("click",h);
+  },[showLangPicker]);
 
   // Restore session + language preference
   useEffect(()=>{
@@ -984,7 +1011,7 @@ export default function App(){
       else{setGames(buildDemo());setLS("demo");}
     };
     load();
-    const id=setInterval(load,90000);
+    const id=setInterval(load,30000);
     return()=>clearInterval(id);
   },[user]);
 
@@ -1067,11 +1094,25 @@ export default function App(){
               <div>
                 <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:2}}>
                   <span style={{fontSize:22}}>⚾</span>
-                  <span style={{fontSize:21,fontWeight:900,letterSpacing:"-0.05em",color:D.tx}}>MLB<span style={{color:D.in_}}>Edge</span></span>
+                  <span style={{fontSize:21,fontWeight:900,letterSpacing:"-0.05em",color:D.tx}}>MLB<span style={{color:D.ind}}>Edge</span></span>
                   <span onClick={handleUpgrade} style={{background:`linear-gradient(135deg,${PLANS[userPlan].clr}44,${PLANS[userPlan].clr}28)`,border:`1px solid ${PLANS[userPlan].clr}44`,borderRadius:5,padding:"2px 7px",fontSize:8,fontWeight:800,color:PLANS[userPlan].clr,letterSpacing:"0.1em",cursor:"pointer"}}>{PLANS[userPlan].n.toUpperCase()}</span>
                   {liveStatus==="live"&&<span style={{fontSize:7,color:D.gr,background:`${D.gr}14`,border:`1px solid ${D.gr}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>⚡ LIVE</span>}
-                  {liveStatus==="demo"&&<span style={{fontSize:7,color:D.am,background:`${D.am}14`,border:`1px solid ${D.am}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>DEMO</span>}
-                  <span style={{fontSize:14}}>{LANGS[lang]?.f}</span>
+                  {liveStatus==="demo"&&<span style={{fontSize:7,color:D.il,background:`${D.il}14`,border:`1px solid ${D.il}28`,borderRadius:4,padding:"1px 5px",fontWeight:700}}>MLB</span>}
+                  <div style={{position:"relative"}} onClick={e=>e.stopPropagation()}>
+                    <button onClick={()=>setLangPicker(v=>!v)} style={{background:D.gl,border:"1px solid "+D.gb,borderRadius:8,padding:"4px 8px",cursor:"pointer",display:"flex",alignItems:"center",gap:4,fontSize:13}}>
+                      {LANGS[lang]?.f}<span style={{fontSize:9,color:D.mt}}>▾</span>
+                    </button>
+                    {showLangPicker&&(
+                      <div style={{position:"absolute",top:"calc(100% + 6px)",right:0,background:D===DK?"rgba(17,24,39,0.98)":"rgba(255,255,255,0.98)",border:"1px solid "+D.gb,borderRadius:14,padding:8,zIndex:200,display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:4,minWidth:200,backdropFilter:"blur(20px)",boxShadow:"0 20px 60px rgba(0,0,0,0.4)"}}>
+                        {Object.entries(LANGS).map(([code2,{f,n}])=>(
+                          <button key={code2} onClick={()=>{setLang(code2);try{localStorage.setItem("mlb_lang",code2);}catch{}setLangPicker(false);}} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"8px 4px",borderRadius:9,border:"none",cursor:"pointer",background:lang===code2?"linear-gradient(135deg,"+D.ind+"33,"+D.vi+"22)":D.gl,outline:lang===code2?"1px solid "+D.il+"33":"1px solid "+D.gb}}>
+                            <span style={{fontSize:18}}>{f}</span>
+                            <span style={{fontSize:8,color:lang===code2?D.il:D.mt,fontWeight:lang===code2?700:400}}>{n}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div style={{fontSize:9,color:D.mt}}>
                   {new Date().toLocaleDateString(lang==="en"?"en-US":lang==="pt"?"pt-BR":lang==="ja"?"ja-JP":lang==="ko"?"ko-KR":lang==="zh"?"zh-CN":"es",{weekday:"long",month:"long",day:"numeric"})}
@@ -1098,7 +1139,7 @@ export default function App(){
                 <div style={{fontSize:10,color:D.mt,marginBottom:10,display:"flex",alignItems:"center",gap:5}}>
                   {liveStatus==="loading"&&<span style={{color:D.am,animation:"vP 1.5s ease infinite"}}>{t.ll}</span>}
                   {liveStatus==="live"&&<span style={{color:D.gr,display:"flex",alignItems:"center",gap:3}}><Dot c={D.gr} size={5}/>{t.ld}</span>}
-                  {liveStatus==="demo"&&<span style={{color:D.am}}>{t.dd}</span>}
+                  {liveStatus==="demo"&&<span style={{color:D.il,display:"flex",alignItems:"center",gap:3}}><Dot c={D.il}/>{t.ld}</span>}
                 </div>
               </div>
               <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:9}}>
@@ -1116,7 +1157,7 @@ export default function App(){
           <Nav active={tab} onChange={setTab} badge={edgeN} D={D} t={t} onCfg={()=>setCfg(true)}/>
 
           {/* AXE FLOATING BUTTON */}
-          <button onClick={()=>setAxe(true)} style={{position:"fixed",bottom:80,right:16,width:52,height:52,borderRadius:"50%",border:"none",zIndex:40,background:`linear-gradient(135deg,${D.in_},${D.vi})`,color:"white",fontSize:22,cursor:"pointer",boxShadow:`0 4px 20px ${D.in_}66`,display:"flex",alignItems:"center",justifyContent:"center",animation:"vU 0.5s 0.3s both ease"}}>
+          <button onClick={()=>setAxe(true)} style={{position:"fixed",bottom:80,right:16,width:52,height:52,borderRadius:"50%",border:"none",zIndex:40,background:`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontSize:22,cursor:"pointer",boxShadow:`0 4px 20px ${D.ind}66`,display:"flex",alignItems:"center",justifyContent:"center",animation:"vU 0.5s 0.3s both ease"}}>
             🤖
           </button>
         </>}
