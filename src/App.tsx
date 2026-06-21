@@ -83,7 +83,7 @@ async function fetchLive(){
             bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third]}:null,source:"live"};
       }).filter(Boolean);
       return gs.length>0?gs:null;
-    }catch{continue;}
+    }catch(e){continue;}
   }
   return null;
 }
@@ -107,15 +107,15 @@ function buildDemo(){
 const SB="https://mojcqdvsahciksczoqhb.supabase.co";
 const AUTH={
   user:null,token:null,
-  k(){try{return localStorage.getItem("mlb_sbk")||"";}catch{return "";}},
-  async up(e,p){try{const r=await fetch(`${SB}/auth/v1/signup`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({email:e,password:p})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"signup"};}catch{return{ok:false,e:"net"};}},
-  async si(e,p){try{const r=await fetch(`${SB}/auth/v1/token?grant_type=password`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({email:e,password:p})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"creds"};}catch{return{ok:false,e:"net"};}},
-  async otp(ph){try{const r=await fetch(`${SB}/auth/v1/otp`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({phone:ph})});const d=await r.json();return d.error?{ok:false,e:"phone"}:{ok:true};}catch{return{ok:false,e:"net"};}},
-  async votp(ph,tok){try{const r=await fetch(`${SB}/auth/v1/verify`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({phone:ph,token:tok,type:"sms"})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"otp"};}catch{return{ok:false,e:"net"};}},
-  sv(d){this.token=d.access_token;this.user=d.user;try{localStorage.setItem("mlb_tok",d.access_token);localStorage.setItem("mlb_usr",JSON.stringify(d.user));}catch{}},
-  out(){this.token=null;this.user=null;try{localStorage.removeItem("mlb_tok");localStorage.removeItem("mlb_usr");}catch{}},
-  restore(){try{const t=localStorage.getItem("mlb_tok"),u=localStorage.getItem("mlb_usr");if(t&&u){this.token=t;this.user=JSON.parse(u);return true;}}catch{}return false;},
-  gUrl(){try{return`${SB}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}`;}catch{return"#";}},
+  k(){try{return localStorage.getItem("mlb_sbk")||"";}catch(e){return "";}},
+  async up(e,p){try{const r=await fetch(`${SB}/auth/v1/signup`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({email:e,password:p})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"signup"};}catch(e){return{ok:false,e:"net"};}},
+  async si(e,p){try{const r=await fetch(`${SB}/auth/v1/token?grant_type=password`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({email:e,password:p})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"creds"};}catch(e){return{ok:false,e:"net"};}},
+  async otp(ph){try{const r=await fetch(`${SB}/auth/v1/otp`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({phone:ph})});const d=await r.json();return d.error?{ok:false,e:"phone"}:{ok:true};}catch(e){return{ok:false,e:"net"};}},
+  async votp(ph,tok){try{const r=await fetch(`${SB}/auth/v1/verify`,{method:"POST",headers:{"apikey":this.k(),"Content-Type":"application/json"},body:JSON.stringify({phone:ph,token:tok,type:"sms"})});const d=await r.json();if(d.access_token){this.sv(d);return{ok:true,user:d.user};}return{ok:false,e:"otp"};}catch(e){return{ok:false,e:"net"};}},
+  sv(d){this.token=d.access_token;this.user=d.user;try{localStorage.setItem("mlb_tok",d.access_token);localStorage.setItem("mlb_usr",JSON.stringify(d.user));}catch(e){}},
+  out(){this.token=null;this.user=null;try{localStorage.removeItem("mlb_tok");localStorage.removeItem("mlb_usr");}catch(e){}},
+  restore(){try{const t=localStorage.getItem("mlb_tok"),u=localStorage.getItem("mlb_usr");if(t&&u){this.token=t;this.user=JSON.parse(u);return true;}}catch(e){}return false;},
+  gUrl(){try{return`${SB}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}`;}catch(e){return"#";}},
 };
 
 // AXE AI (multilingual, identity hidden, conversation memory)
@@ -130,7 +130,7 @@ async function askAxe(q,history,lang){
       messages:msgs})});
     const d=await r.json();
     return d.content?.map(b=>b.text||"").join("")||"Intenta de nuevo.";
-  }catch{return "No pude procesar tu consulta en este momento.";}
+  }catch(e){return "No pude procesar tu consulta en este momento.";}
 }
 
 // ATOMS
@@ -324,7 +324,7 @@ function GameDetail({game,onBack,D,t}){
           {[
             {title:`💵 ${t.ml}`,color:D.ind,txt:`${p.hW>p.aW?H?.name:A?.name} favorito con ${Math.max(p.hW,p.aW)}% (MC ${p.mc}%). Confianza: ${p.conf}%.`,rec:`${p.hW>p.aW?H?.abbr:A?.abbr} ML ${fO(p.hW>p.aW?p.hO:p.aO)}`},
             {title:`📏 ${t.rl}`,color:D.vi,txt:`${p.rl}% probabilidad de cubrir −1.5. Riesgo: ${p.risk}. Ajuste ERA bayesiano: ${p.eAdj>0?"+":""}${p.eAdj}%.`,rec:`${p.hW>p.aW?H?.abbr:A?.abbr} −1.5`},
-            {title:`⚡ ${t.ou}`,color:p.rec==="OVER"?D.gr:D.il,txt:`Proyección ${p.proj}R vs línea ${p.line}. ${game.wx?.wind?.includes("OUT")?"Viento OUT → Over favorecido.":"Modelos de pitcheo + ofensiva."}`,rec:`${p.rec} ${p.line} (${p.rec==="OVER"?p.overP:p.underP}%)`},
+            {title:`⚡ ${t.ou} · Linea ${p.line}`,color:p.rec==="OVER"?D.gr:D.il,txt:p.rec==="OVER"?`Over: se esperan MAS de ${p.line} carreras. Proyeccion: ${p.proj}R`:`Under: se esperan MENOS de ${p.line} carreras. Proyeccion: ${p.proj}R`,rec:`${p.rec} ${p.line} · ${p.rec==="OVER"?p.overP:p.underP}% prob.`},
           ].map(({title,color,txt,rec})=>(
             <div key={title} style={{background:`${color}0a`,border:`1px solid ${color}22`,borderRadius:13,padding:"12px",marginBottom:9}}>
               <div style={{fontSize:11,fontWeight:800,color,marginBottom:6}}>{title}</div>
@@ -767,36 +767,55 @@ function PricingScreen({D,t,userPlan,onSelect,onBack}){
 
 // SETTINGS (idioma + tema)
 function SettingsScreen({dark,setDark,lang,setLang,D,t,onBack}){
+  const [tmpDark,setTmpDark]=useState(dark);
+  const [tmpLang,setTmpLang]=useState(lang);
+  const [saved,setSaved]=useState(false);
+  const changed=tmpDark!==dark||tmpLang!==lang;
+  const doSave=()=>{
+    setDark(tmpDark);
+    setLang(tmpLang);
+    try{
+      localStorage.setItem("mlb_dark",String(tmpDark));
+      localStorage.setItem("mlb_lang",tmpLang);
+    }catch(e){}
+    setSaved(true);
+    setTimeout(()=>setSaved(false),2500);
+  };
   return(
     <div style={{minHeight:"100vh",background:D.bg0}}>
       <div style={{position:"sticky",top:0,zIndex:30,background:D===DK?"rgba(10,14,26,0.97)":"rgba(240,244,248,0.97)",backdropFilter:"blur(24px)",borderBottom:`1px solid ${D.gb}`,padding:"12px 14px"}}>
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <button onClick={onBack} style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:10,padding:"7px 12px",color:D.sb,fontSize:12,fontWeight:600,cursor:"pointer"}}>{t.bk}</button>
-          <div style={{fontSize:16,fontWeight:800,color:D.tx}}>⚙️ {t.cfg}</div>
+          <div style={{flex:1,fontSize:16,fontWeight:800,color:D.tx}}>⚙️ {t.cfg}</div>
+          {saved&&<div style={{fontSize:10,color:D.gr,fontWeight:700,background:`${D.gr}18`,border:`1px solid ${D.gr}33`,borderRadius:8,padding:"4px 10px"}}>Guardado</div>}
         </div>
       </div>
-      <div style={{padding:"16px 13px 90px"}}>
+      <div style={{padding:"16px 13px 24px"}}>
         <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px",marginBottom:12}}>
           <SL icon="🎨" ch={t.th} D={D}/>
           <div style={{display:"flex",gap:8}}>
             {[{v:true,l:t.dm,i:"🌙"},{v:false,l:t.lm,i:"☀️"}].map(({v,l,i})=>(
-              <button key={String(v)} onClick={()=>setDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:dark===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:dark===v?D.il:D.mt,outline:dark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:dark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+              <button key={String(v)} onClick={()=>setTmpDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:tmpDark===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:tmpDark===v?D.il:D.mt,outline:tmpDark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:tmpDark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
                 <span style={{fontSize:20}}>{i}</span>{l}
               </button>
             ))}
           </div>
         </div>
-        <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px"}}>
+        <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px",marginBottom:14}}>
           <SL icon="🌍" ch={t.lg} D={D}/>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
-            {Object.entries(LANGS).map(([code,{f,n}])=>(
-              <button key={code} onClick={()=>{setLang(code);try{localStorage.setItem("mlb_lang",code);}catch{}}} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:lang===code?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:lang===code?D.il:D.mt,outline:lang===code?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:lang===code?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
+            {Object.entries(LANGS).map(([lcode,{f,n}])=>(
+              <button key={lcode} onClick={()=>setTmpLang(lcode)} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:tmpLang===lcode?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:tmpLang===lcode?D.il:D.mt,outline:tmpLang===lcode?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:tmpLang===lcode?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
                 <span style={{fontSize:18}}>{f}</span>
                 <span style={{fontSize:8,letterSpacing:"0.03em"}}>{n}</span>
               </button>
             ))}
           </div>
         </div>
+        <button onClick={doSave} style={{width:"100%",padding:"14px",borderRadius:13,border:"none",cursor:"pointer",background:changed?`linear-gradient(135deg,${D.ind},${D.vi})`:"rgba(255,255,255,0.08)",color:changed?"white":D.mt,fontWeight:700,fontSize:14,transition:"all 0.2s"}}>
+          {saved?"Configuracion guardada":"Guardar cambios"}
+        </button>
+        {changed&&!saved&&<div style={{textAlign:"center",fontSize:10,color:D.am,marginTop:8}}>Cambios sin guardar</div>}
       </div>
     </div>
   );
@@ -805,12 +824,13 @@ function SettingsScreen({dark,setDark,lang,setLang,D,t,onBack}){
 // PROFILE
 function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
   const plan=PLANS[userPlan];
+  const [confirm,setConfirm]=useState(false);
   return(
     <div style={{padding:"12px 13px 0"}}>
       <div style={{background:`linear-gradient(135deg,${plan.clr}18,${plan.clr}08)`,border:`1px solid ${plan.clr}28`,borderRadius:18,padding:"18px",marginBottom:12,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,transparent,${plan.clr},transparent)`}}/>
         <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:14}}>
-          <div style={{width:52,height:52,borderRadius:14,background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>{user?.isGuest?"👤":"⚾"}</div>
+          <div style={{width:52,height:52,borderRadius:14,background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>⚾</div>
           <div>
             <div style={{fontSize:14,fontWeight:800,color:D.tx,marginBottom:3}}>{user?.email||"Usuario"}</div>
             <span style={{background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,borderRadius:6,padding:"2px 9px",fontSize:8,fontWeight:800,color:plan.clr,letterSpacing:"0.1em"}}>{plan.n.toUpperCase()}</span>
@@ -827,8 +847,83 @@ function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
       </div>
       {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.ind}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap} →</button>}
       <button onClick={onFeedback} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:8}}>💡 {t.fb}</button>
-      <button onClick={onLogout} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>↩ {t.lo2}</button>
-      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge v16 · Axe AI · Monte Carlo · Bayesian · 9 idiomas Solo para análisis informativo · +21</div>
+      {!confirm
+        ?<button onClick={()=>setConfirm(true)} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>{t.lo2}</button>
+        :<div style={{background:`${D.rd}08`,border:`1px solid ${D.rd}28`,borderRadius:12,padding:"14px",marginBottom:12}}>
+          <div style={{fontSize:12,fontWeight:700,color:D.tx,textAlign:"center",marginBottom:4}}>¿Cerrar sesión?</div>
+          <div style={{fontSize:10,color:D.mt,textAlign:"center",marginBottom:12}}>Necesitarás iniciar sesión de nuevo con Google.</div>
+          <div style={{display:"flex",gap:8}}>
+            <button onClick={()=>setConfirm(false)} style={{flex:1,padding:"10px",borderRadius:10,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer"}}>Cancelar</button>
+            <button onClick={onLogout} style={{flex:1,padding:"10px",borderRadius:10,border:"none",background:D.rd,color:"white",fontWeight:700,fontSize:12,cursor:"pointer"}}>Cerrar sesión</button>
+          </div>
+        </div>
+      }
+      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge · Solo para análisis informativo · +21</div>
+    </div>
+  );
+}
+
+// CALENDARIO
+function CalendarScreen({games,onSelect,D,t}){
+  const [view,setView]=useState("all");
+  const today=new Date();
+  const MON=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+  const WD=["Dom","Lun","Mar","Mie","Jue","Vie","Sab"];
+  const days=[];
+  for(let i=-3;i<=6;i++){const d=new Date(today);d.setDate(today.getDate()+i);days.push(d);}
+  const [sel,setSel]=useState(3);
+
+  const filtered=games.filter(g=>{
+    if(view==="live") return g.isLive;
+    if(view==="next") return !g.isFinal&&!g.isLive;
+    if(view==="done") return g.isFinal;
+    return true;
+  });
+
+  return(
+    <div>
+      <div style={{padding:"12px 13px 0"}}>
+        <div style={{fontSize:20,fontWeight:900,color:D.tx,marginBottom:2,letterSpacing:"-0.03em"}}>
+          📅 {t.cal}
+        </div>
+        <div style={{fontSize:10,color:D.mt,marginBottom:10}}>
+          {today.getDate()} {MON[today.getMonth()]} {today.getFullYear()}
+        </div>
+      </div>
+      <div style={{padding:"0 13px",marginBottom:10}}>
+        <div style={{display:"flex",gap:4,overflowX:"auto",scrollbarWidth:"none",paddingBottom:2}}>
+          {days.map((d,i)=>{
+            const isToday=i===3;
+            const isSel=i===sel;
+            return(
+              <button key={i} onClick={()=>setSel(i)} style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"8px 10px",borderRadius:12,border:"none",cursor:"pointer",background:isSel?`linear-gradient(135deg,${D.ind},${D.vi})`:isToday?`${D.ind}22`:D.gl,minWidth:44}}>
+                <span style={{fontSize:8,color:isSel?"rgba(255,255,255,0.7)":D.mt,fontWeight:600,textTransform:"uppercase"}}>{WD[d.getDay()]}</span>
+                <span style={{fontSize:15,fontWeight:900,color:isSel?"white":isToday?D.il:D.tx}}>{d.getDate()}</span>
+                {isToday&&<div style={{width:4,height:4,borderRadius:"50%",background:isSel?"rgba(255,255,255,0.6)":D.il}}/>}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div style={{padding:"0 13px",marginBottom:10}}>
+        <div style={{display:"flex",gap:3,background:D.gl,borderRadius:10,padding:3,border:`1px solid ${D.gb}`}}>
+          {[["all","Todos"],["live","En Vivo"],["next","Proximos"],["done","Finalizados"]].map(([v,l])=>(
+            <button key={v} onClick={()=>setView(v)} style={{flex:1,padding:"7px 2px",borderRadius:8,border:"none",fontSize:9,fontWeight:600,cursor:"pointer",background:view===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:"transparent",color:view===v?D.il:D.mt}}>
+              {l}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:9}}>
+        {filtered.length===0&&(
+          <div style={{textAlign:"center",padding:"40px 20px"}}>
+            <div style={{fontSize:32,marginBottom:10}}>:D</div>
+            <div style={{fontSize:13,fontWeight:600,color:D.tx,marginBottom:4}}>Sin partidos</div>
+            <div style={{fontSize:11,color:D.mt}}>No hay juegos para esta seleccion</div>
+          </div>
+        )}
+        {filtered.map((g,i)=><GameCard key={g.id} game={g} idx={i} onSelect={onSelect} D={D} t={t}/>)}
+      </div>
     </div>
   );
 }
@@ -875,11 +970,13 @@ export default function App(){
   const D=dark?DK:LT;
   const t=useT(lang);
 
-  // Restore session + language preference
+  // Restore session + language + theme preference
   useEffect(()=>{
     try{
       const sl=localStorage.getItem("mlb_lang");
       if(sl&&LANGS[sl]) setLang(sl);
+      const sd=localStorage.getItem("mlb_dark");
+      if(sd!==null) setDark(sd!=="false");
       const hash=window.location.hash;
       if(hash.includes("access_token")){
         const p=new URLSearchParams(hash.replace("#","?"));
@@ -888,7 +985,7 @@ export default function App(){
       } else {
         if(AUTH.restore()) setUser(AUTH.user);
       }
-    }catch{}
+    }catch(e){}
     setReady(true);
   },[]);
 
@@ -1009,23 +1106,7 @@ export default function App(){
           </div>
 
           {/* CALENDAR TAB */}
-          {tab==="calendar"&&(
-            <div>
-              <div style={{padding:"10px 13px 0"}}>
-                <div style={{fontSize:18,fontWeight:900,color:D.tx,marginBottom:1}}>{t.cal}</div>
-                <div style={{fontSize:10,color:D.mt,marginBottom:10,display:"flex",alignItems:"center",gap:5}}>
-                  {liveStatus==="loading"&&<span style={{color:D.am,animation:"vP 1.5s ease infinite"}}>{t.ll}</span>}
-                  {liveStatus==="live"&&<span style={{color:D.gr,display:"flex",alignItems:"center",gap:3}}><Dot c={D.gr} size={5}/>{t.ld}</span>}
-                  {liveStatus==="demo"&&<span style={{color:D.am}}>{t.dd}</span>}
-                </div>
-              </div>
-              <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:9}}>
-                {games.map((g,i)=><GameCard key={g.id} game={g} idx={i} onSelect={setSelected} D={D} t={t}/>)}
-                {games.length===0&&<div style={{textAlign:"center",padding:"40px 20px",color:D.mt,fontSize:14}}>{t.ng}</div>}
-              </div>
-            </div>
-          )}
-
+          {tab==="calendar"&&<CalendarScreen games={games} onSelect={setSelected} D={D} t={t}/>}
           {tab==="opps"&&<OppsScreen games={games} onSelect={setSelected} D={D} t={t} userPlan={userPlan}/>}
           {tab==="stats"&&<StatsScreen D={D} t={t}/>}
           {tab==="profile"&&<ProfileScreen D={D} t={t} user={user} userPlan={userPlan} onChangePlan={handleUpgrade} onLogout={handleLogout} onFeedback={()=>setFb(true)}/>}
@@ -1034,9 +1115,7 @@ export default function App(){
           <Nav active={tab} onChange={setTab} badge={edgeN} D={D} t={t} onCfg={()=>setCfg(true)}/>
 
           {/* AXE FLOATING BUTTON */}
-          <button onClick={()=>setAxe(true)} style={{position:"fixed",bottom:80,right:16,width:52,height:52,borderRadius:"50%",border:"none",zIndex:40,background:`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontSize:22,cursor:"pointer",boxShadow:`0 4px 20px ${D.ind}66`,display:"flex",alignItems:"center",justifyContent:"center",animation:"vU 0.5s 0.3s both ease"}}>
-            🤖
-          </button>
+          <button onClick={()=>setAxe(true)} style={{position:"fixed",bottom:80,right:16,width:52,height:52,borderRadius:"50%",border:"none",zIndex:40,background:`linear-gradient(135deg,${D.ind},${D.vi})`,color:"white",fontSize:22,cursor:"pointer",boxShadow:`0 4px 20px ${D.ind}66`,display:"flex",alignItems:"center",justifyContent:"center",animation:"vU 0.5s 0.3s both ease"}}>🤖</button>
         </>}
       </div>
 
