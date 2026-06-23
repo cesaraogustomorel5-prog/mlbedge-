@@ -6,14 +6,14 @@ const LT={bg0:"#f0f4f8",bg1:"#ffffff",bg2:"#e8edf5",gl:"rgba(0,0,0,0.03)",gb:"rg
 const GC={A:"#10b981",B:"#6366f1",C:"#f59e0b",D:"#ef4444"};
 const LANGS={es:{f:"🇪🇸",n:"Español"},en:{f:"🇺🇸",n:"English"},pt:{f:"🇧🇷",n:"Português"},fr:{f:"🇫🇷",n:"Français"},it:{f:"🇮🇹",n:"Italiano"},de:{f:"🇩🇪",n:"Deutsch"},ja:{f:"🇯🇵",n:"日本語"},ko:{f:"🇰🇷",n:"한국어"},zh:{f:"🇨🇳",n:"中文"}};
 const TX={
-  es:{tag:"Análisis MLB profesional",cal:"Calendario",opp:"Oportunidades",sts:"Estadísticas",prf:"Perfil",cfg:"Configuración",lv:"En Vivo",fn:"Final",hm:"Local",aw:"Visitante",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confianza",eg:"Ventaja",rk:"Riesgo",lo:"Bajo",md:"Medio",hi:"Alto",pj:"Proyección",wp:"Prob. Victoria",an:"Análisis",bk:"← Atrás",mr:"Ver Análisis →",lg:"Idioma",th:"Tema",dm:"Oscuro",lm:"Claro",lo2:"Cerrar sesión",mp:"Mi Plan",ap:"Ver planes",tr:"3 días gratis",aq:"Pregunta a Axe...",ao:"Axe · En línea",nt:"Notificaciones",ra:"Leer todas",fb:"Sugerencias",snd:"Enviar",sg:"Enviando...",tk:"¡Gracias!",fs:"Tu sugerencia fue recibida.",ld:"Datos en vivo",dd:"Demo",ll:"Cargando...",ng:"Sin partidos",ep:"Email",pp:"Contraseña (mín. 6)",si:"Iniciar sesión",su:"Crear cuenta gratis",ph:"+1 (809) 000-0000",ss:"Enviar SMS",vf:"Verificar código",cn:"← Cambiar número",cs:"SMS enviado.",gb2:"Continuar con Google",eb:"Continuar con Email",pb:"Continuar con Teléfono",gb3:"Explorar sin cuenta →",tm2:"Al registrarte aceptas nuestros Términos · Solo informativo · +21",eE:"Email o contraseña incorrectos.",eP:"Error al enviar SMS.",eO:"Código incorrecto.",eN:"Sin conexión.",eF:"Completa todos los campos.",ePw:"Mínimo 6 caracteres.",cE:"¡Cuenta creada! Revisa tu email.",cp:"Elige tu plan",pm:"/mes",cu:"Plan Actual",ac:"ACTIVO",sf:"Comenzar Gratis →",cp2:"Elegir Pro →",cp3:"Elegir Premium →",fq:"Preguntas frecuentes",q1:"¿Puedo cambiar de plan?",a1:"Sí, en cualquier momento.",q2:"¿Hay prueba gratis?",a2:"Todos los planes tienen 3 días gratis.",q3:"¿Se renueva automáticamente?",a3:"Sí, mensualmente. Cancela cuando quieras.",W:"G",LL:"P",PC:"PCG",sk:"Racha",l10:"Últ.10",pt:"Pitcheo",of:"Ofensiva",sd:"Posiciones",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Sugerencia",bg:"Error",ft:"Función",cm:"Comentario",rt:"Calificación",ds:"Describe tu",today:"Hoy",upcoming:"Proximos",finished:"Finalizados",allGames:"Todos",noGames2:"Sin partidos",noGamesDesc:"No hay juegos",months:"Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic",wdays:"Dom,Lun,Mar,Mie,Jue,Vie,Sab",saveBtn:"Guardar cambios",savedMsg:"Guardado",unsaved:"Cambios sin guardar",closeAcc:"Cerrar sesion",cancelBtn:"Cancelar",confirmLogoutQ:"Cerrar sesion?",confirmLogoutMsg:"Necesitaras iniciar sesion de nuevo con Google.",jan:"Enero",feb:"Febrero",mar:"Marzo",apr:"Abril",may2:"Mayo",jun:"Junio",jul:"Julio",aug:"Agosto",sep:"Septiembre",oct:"Octubre",nov:"Noviembre",dec:"Diciembre"},
-  en:{tag:"Professional MLB Analytics",cal:"Schedule",opp:"Opportunities",sts:"Stats",prf:"Profile",cfg:"Settings",lv:"Live",fn:"Final",hm:"Home",aw:"Away",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confidence",eg:"Edge",rk:"Risk",lo:"Low",md:"Medium",hi:"High",pj:"Projection",wp:"Win Probability",an:"Analysis",bk:"← Back",mr:"See Analysis →",lg:"Language",th:"Theme",dm:"Dark",lm:"Light",lo2:"Sign out",mp:"My Plan",ap:"See plans",tr:"3 days free",aq:"Ask Axe...",ao:"Axe · Online",nt:"Notifications",ra:"Mark all read",fb:"Feedback",snd:"Send",sg:"Sending...",tk:"Thank you!",fs:"Feedback received.",ld:"Live data",dd:"Demo",ll:"Loading...",ng:"No games",ep:"Email",pp:"Password (min. 6)",si:"Sign in",su:"Create free account",ph:"+1 (809) 000-0000",ss:"Send SMS",vf:"Verify code",cn:"← Change number",cs:"SMS sent.",gb2:"Continue with Google",eb:"Continue with Email",pb:"Continue with Phone",gb3:"Explore without account →",tm2:"By signing up you agree to our Terms · 21+",eE:"Incorrect email or password.",eP:"Error sending SMS.",eO:"Incorrect code.",eN:"No connection.",eF:"Fill in all fields.",ePw:"Min 6 characters.",cE:"Account created! Check your email.",cp:"Choose your plan",pm:"/month",cu:"Current Plan",ac:"ACTIVE",sf:"Get Started Free →",cp2:"Choose Pro →",cp3:"Choose Premium →",fq:"FAQ",q1:"Can I change plans?",a1:"Yes, at any time.",q2:"Free trial?",a2:"All plans have 3 days free.",q3:"Auto-renewal?",a3:"Yes, monthly. Cancel anytime.",W:"W",LL:"L",PC:"PCT",sk:"Streak",l10:"Last 10",pt:"Pitching",of:"Offense",sd:"Standings",mc:"Monte Carlo",by_:"Bayesian",sg2:"Suggestion",bg:"Bug",ft:"Feature",cm:"Comment",rt:"Rating",ds:"Describe your",today:"Today",upcoming:"Upcoming",finished:"Finished",allGames:"All",noGames2:"No games",noGamesDesc:"No games for this selection",months:"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",wdays:"Sun,Mon,Tue,Wed,Thu,Fri,Sat",saveBtn:"Save changes",savedMsg:"Saved",unsaved:"Unsaved changes",closeAcc:"Sign out",cancelBtn:"Cancel",confirmLogoutQ:"Sign out?",confirmLogoutMsg:"You will need to sign in again with Google.",jan:"January",feb:"February",mar:"March",apr:"April",may2:"May",jun:"June",jul:"July",aug:"August",sep:"September",oct:"October",nov:"November",dec:"December"},
-  pt:{tag:"Análise profissional MLB",cal:"Calendário",opp:"Oportunidades",sts:"Estatísticas",prf:"Perfil",cfg:"Configurações",lv:"Ao Vivo",fn:"Final",hm:"Casa",aw:"Visitante",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confiança",eg:"Vantagem",rk:"Risco",lo:"Baixo",md:"Médio",hi:"Alto",pj:"Projeção",wp:"Prob. Vitória",an:"Análise",bk:"← Voltar",mr:"Ver Análise →",lg:"Idioma",th:"Tema",dm:"Escuro",lm:"Claro",lo2:"Sair",mp:"Meu Plano",ap:"Ver planos",tr:"3 dias grátis",aq:"Pergunte ao Axe...",ao:"Axe · Online",nt:"Notificações",ra:"Marcar todas",fb:"Sugestões",snd:"Enviar",sg:"Enviando...",tk:"Obrigado!",fs:"Sugestão recebida.",ld:"Dados ao vivo",dd:"Demo",ll:"Carregando...",ng:"Sem jogos",ep:"Email",pp:"Senha (mín. 6)",si:"Entrar",su:"Criar conta grátis",ph:"+55 (11) 90000-0000",ss:"Enviar SMS",vf:"Verificar código",cn:"← Mudar número",cs:"SMS enviado.",gb2:"Google",eb:"Email",pb:"Telefone",gb3:"Sem conta →",tm2:"Termos · +21",eE:"Email ou senha incorretos.",eP:"Erro SMS.",eO:"Código incorreto.",eN:"Sem conexão.",eF:"Preencha tudo.",ePw:"Mín 6 caracteres.",cE:"Conta criada!",cp:"Escolha seu plano",pm:"/mês",cu:"Plano Atual",ac:"ATIVO",sf:"Começar Grátis →",cp2:"Escolher Pro →",cp3:"Escolher Premium →",fq:"FAQ",q1:"Posso mudar de plano?",a1:"Sim.",q2:"Teste grátis?",a2:"3 dias.",q3:"Renovação auto?",a3:"Sim.",W:"V",LL:"D",PC:"PCT",sk:"Série",l10:"Últ.10",pt:"Arremesso",of:"Ataque",sd:"Tabela",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Sugestão",bg:"Erro",ft:"Função",cm:"Comentário",rt:"Avaliação",ds:"Descreva sua",today:"Hoje",upcoming:"Proximos",finished:"Finalizados",allGames:"Todos",noGames2:"Sem jogos",noGamesDesc:"Sem jogos para esta selecao",months:"Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez",wdays:"Dom,Seg,Ter,Qua,Qui,Sex,Sab",saveBtn:"Salvar",savedMsg:"Salvo",unsaved:"Nao salvo",closeAcc:"Sair",cancelBtn:"Cancelar",confirmLogoutQ:"Sair?",confirmLogoutMsg:"Voce precisara entrar novamente.",jan:"Janeiro",feb:"Fevereiro",mar:"Marco",apr:"Abril",may2:"Maio",jun:"Junho",jul:"Julho",aug:"Agosto",sep:"Setembro",oct:"Outubro",nov:"Novembro",dec:"Dezembro"},
-  fr:{tag:"Analyse MLB pro",cal:"Calendrier",opp:"Opportunités",sts:"Stats",prf:"Profil",cfg:"Paramètres",lv:"En Direct",fn:"Final",hm:"Domicile",aw:"Visiteur",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confiance",eg:"Avantage",rk:"Risque",lo:"Faible",md:"Moyen",hi:"Élevé",pj:"Projection",wp:"Prob. Victoire",an:"Analyse",bk:"← Retour",mr:"Voir →",lg:"Langue",th:"Thème",dm:"Sombre",lm:"Clair",lo2:"Déconnexion",mp:"Mon Plan",ap:"Voir plans",tr:"3 jours gratuits",aq:"Demandez à Axe...",ao:"Axe · En ligne",nt:"Notifications",ra:"Tout lire",fb:"Suggestions",snd:"Envoyer",sg:"Envoi...",tk:"Merci!",fs:"Suggestion reçue.",ld:"Live",dd:"Démo",ll:"Chargement...",ng:"Pas de matchs",ep:"Email",pp:"Mot de passe (min. 6)",si:"Connexion",su:"Créer compte",ph:"+33 6 00 00 00 00",ss:"SMS",vf:"Vérifier",cn:"← Changer",cs:"SMS envoyé.",gb2:"Google",eb:"Email",pb:"Téléphone",gb3:"Invité →",tm2:"CGU · +21",eE:"Email/mdp incorrect.",eP:"Erreur SMS.",eO:"Code incorrect.",eN:"Pas de connexion.",eF:"Remplissez tout.",ePw:"Min 6 caractères.",cE:"Compte créé!",cp:"Choisissez plan",pm:"/mois",cu:"Plan Actuel",ac:"ACTIF",sf:"Gratuit →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Changer de plan?",a1:"Oui.",q2:"Essai gratuit?",a2:"3 jours.",q3:"Renouvellement?",a3:"Oui.",W:"V",LL:"D",PC:"PCT",sk:"Série",l10:"10 Dern.",pt:"Lancer",of:"Offensive",sd:"Classement",mc:"Monte Carlo",by_:"Bayésien",sg2:"Suggestion",bg:"Bug",ft:"Fonction",cm:"Commentaire",rt:"Note",ds:"Décrivez",today:"Aujourd'hui",upcoming:"Prochains",finished:"Termines",allGames:"Tous",noGames2:"Pas de matchs",noGamesDesc:"Aucun match pour cette selection",months:"Jan,Fev,Mar,Avr,Mai,Jui,Jul,Aou,Sep,Oct,Nov,Dec",wdays:"Dim,Lun,Mar,Mer,Jeu,Ven,Sam",saveBtn:"Sauvegarder",savedMsg:"Sauvegarde",unsaved:"Non sauvegarde",closeAcc:"Deconnexion",cancelBtn:"Annuler",confirmLogoutQ:"Se deconnecter?",confirmLogoutMsg:"Vous devrez vous reconnecter avec Google.",jan:"Janvier",feb:"Fevrier",mar:"Mars",apr:"Avril",may2:"Mai",jun:"Juin",jul:"Juillet",aug:"Aout",sep:"Septembre",oct:"Octobre",nov:"Novembre",dec:"Decembre"},
-  it:{tag:"Analisi MLB pro",cal:"Calendario",opp:"Opportunità",sts:"Statistiche",prf:"Profilo",cfg:"Impostazioni",lv:"In Diretta",fn:"Finale",hm:"Casa",aw:"Ospite",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confidenza",eg:"Vantaggio",rk:"Rischio",lo:"Basso",md:"Medio",hi:"Alto",pj:"Proiezione",wp:"Prob. Vittoria",an:"Analisi",bk:"← Indietro",mr:"Vedi →",lg:"Lingua",th:"Tema",dm:"Scuro",lm:"Chiaro",lo2:"Esci",mp:"Piano",ap:"Piani",tr:"3 giorni gratis",aq:"Chiedi ad Axe...",ao:"Axe · Online",nt:"Notifiche",ra:"Segna tutto",fb:"Suggerimenti",snd:"Invia",sg:"Invio...",tk:"Grazie!",fs:"Suggerimento ricevuto.",ld:"Live",dd:"Demo",ll:"Caricamento...",ng:"Nessuna partita",ep:"Email",pp:"Password (min. 6)",si:"Accedi",su:"Registrati",ph:"+39 3 000 0000",ss:"SMS",vf:"Verifica",cn:"← Cambia",cs:"SMS inviato.",gb2:"Google",eb:"Email",pb:"Telefono",gb3:"Ospite →",tm2:"Termini · +21",eE:"Email/password errati.",eP:"Errore SMS.",eO:"Codice errato.",eN:"Nessuna connessione.",eF:"Compila tutto.",ePw:"Min 6 caratteri.",cE:"Account creato!",cp:"Scegli piano",pm:"/mese",cu:"Piano Attuale",ac:"ATTIVO",sf:"Gratis →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Cambiare piano?",a1:"Sì.",q2:"Prova gratuita?",a2:"3 giorni.",q3:"Rinnovo auto?",a3:"Sì.",W:"V",LL:"S",PC:"PCT",sk:"Serie",l10:"Ult.10",pt:"Lancio",of:"Attacco",sd:"Classifica",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Suggerimento",bg:"Bug",ft:"Funzione",cm:"Commento",rt:"Voto",ds:"Descrivi",today:"Oggi",upcoming:"Prossimi",finished:"Terminati",allGames:"Tutti",noGames2:"Nessuna partita",noGamesDesc:"Nessun gioco per questa selezione",months:"Gen,Feb,Mar,Apr,Mag,Giu,Lug,Ago,Set,Ott,Nov,Dic",wdays:"Dom,Lun,Mar,Mer,Gio,Ven,Sab",saveBtn:"Salva",savedMsg:"Salvato",unsaved:"Non salvato",closeAcc:"Esci",cancelBtn:"Annulla",confirmLogoutQ:"Uscire?",confirmLogoutMsg:"Dovrai accedere di nuovo con Google.",jan:"Gennaio",feb:"Febbraio",mar:"Marzo",apr:"Aprile",may2:"Maggio",jun:"Giugno",jul:"Luglio",aug:"Agosto",sep:"Settembre",oct:"Ottobre",nov:"Novembre",dec:"Dicembre"},
-  de:{tag:"Professionelle MLB-Analyse",cal:"Spielplan",opp:"Chancen",sts:"Statistiken",prf:"Profil",cfg:"Einstellungen",lv:"Live",fn:"Beendet",hm:"Heim",aw:"Gast",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Vertrauen",eg:"Vorteil",rk:"Risiko",lo:"Niedrig",md:"Mittel",hi:"Hoch",pj:"Projektion",wp:"Siegwahrsch.",an:"Analyse",bk:"← Zurück",mr:"Analyse →",lg:"Sprache",th:"Thema",dm:"Dunkel",lm:"Hell",lo2:"Abmelden",mp:"Plan",ap:"Pläne",tr:"3 Tage gratis",aq:"Frag Axe...",ao:"Axe · Online",nt:"Nachrichten",ra:"Alle lesen",fb:"Vorschläge",snd:"Senden",sg:"Senden...",tk:"Danke!",fs:"Vorschlag empfangen.",ld:"Live",dd:"Demo",ll:"Laden...",ng:"Keine Spiele",ep:"E-Mail",pp:"Passwort (min. 6)",si:"Anmelden",su:"Konto erstellen",ph:"+49 1 00 000 0000",ss:"SMS",vf:"Überprüfen",cn:"← Ändern",cs:"SMS gesendet.",gb2:"Google",eb:"E-Mail",pb:"Telefon",gb3:"Gast →",tm2:"AGB · 21+",eE:"Falsche E-Mail/Passwort.",eP:"SMS-Fehler.",eO:"Falscher Code.",eN:"Keine Verbindung.",eF:"Alle Felder ausfüllen.",ePw:"Min 6 Zeichen.",cE:"Konto erstellt!",cp:"Plan wählen",pm:"/Monat",cu:"Aktueller Plan",ac:"AKTIV",sf:"Kostenlos →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Plan wechseln?",a1:"Ja.",q2:"Testphase?",a2:"3 Tage.",q3:"Automatisch?",a3:"Ja.",W:"S",LL:"N",PC:"PCT",sk:"Serie",l10:"Letzte 10",pt:"Pitching",of:"Offense",sd:"Tabelle",mc:"Monte Carlo",by_:"Bayes",sg2:"Vorschlag",bg:"Fehler",ft:"Funktion",cm:"Kommentar",rt:"Bewertung",ds:"Beschreibe",today:"Heute",upcoming:"Naechste",finished:"Beendet",allGames:"Alle",noGames2:"Keine Spiele",noGamesDesc:"Keine Spiele fuer diese Auswahl",months:"Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Dez",wdays:"So,Mo,Di,Mi,Do,Fr,Sa",saveBtn:"Speichern",savedMsg:"Gespeichert",unsaved:"Nicht gespeichert",closeAcc:"Abmelden",cancelBtn:"Abbrechen",confirmLogoutQ:"Abmelden?",confirmLogoutMsg:"Sie muessen sich erneut anmelden.",jan:"Januar",feb:"Februar",mar:"Maerz",apr:"April",may2:"Mai",jun:"Juni",jul:"Juli",aug:"August",sep:"September",oct:"Oktober",nov:"November",dec:"Dezember"},
-  ja:{tag:"プロMLB野球分析",cal:"カレンダー",opp:"機会",sts:"統計",prf:"プロフィール",cfg:"設定",lv:"ライブ",fn:"終了",hm:"ホーム",aw:"アウェイ",ml:"マネーライン",rl:"ランライン",ou:"大小",cf:"信頼度",eg:"優位",rk:"リスク",lo:"低",md:"中",hi:"高",pj:"予測",wp:"勝率",an:"分析",bk:"← 戻る",mr:"分析 →",lg:"言語",th:"テーマ",dm:"ダーク",lm:"ライト",lo2:"ログアウト",mp:"プラン",ap:"プラン",tr:"3日無料",aq:"Axeに質問...",ao:"Axe · オンライン",nt:"通知",ra:"全て既読",fb:"提案",snd:"送信",sg:"送信中...",tk:"ありがとう！",fs:"提案を受け取りました。",ld:"リアルタイム",dd:"デモ",ll:"読み込み中...",ng:"試合なし",ep:"メール",pp:"パスワード（6文字以上）",si:"ログイン",su:"無料登録",ph:"+81 90 0000 0000",ss:"SMS",vf:"確認",cn:"← 変更",cs:"SMS送信済み。",gb2:"Google",eb:"メール",pb:"電話",gb3:"ゲスト →",tm2:"利用規約 · 21+",eE:"メール/パスワードエラー。",eP:"SMSエラー。",eO:"コードエラー。",eN:"接続なし。",eF:"全フィールド入力。",ePw:"6文字以上。",cE:"アカウント作成！",cp:"プラン選択",pm:"/月",cu:"現プラン",ac:"有効",sf:"無料 →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"プラン変更？",a1:"はい。",q2:"無料試用？",a2:"3日。",q3:"自動更新？",a3:"はい。",W:"勝",LL:"負",PC:"勝率",sk:"連勝",l10:"直近10",pt:"投手",of:"打撃",sd:"順位",mc:"モンテカルロ",by_:"ベイズ",sg2:"提案",bg:"バグ",ft:"機能",cm:"コメント",rt:"評価",ds:"説明",today:"今日",upcoming:"予定",finished:"終了",allGames:"全て",noGames2:"試合なし",noGamesDesc:"試合がありません",months:"1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月",wdays:"日,月,火,水,木,金,土",saveBtn:"保存",savedMsg:"保存済み",unsaved:"未保存",closeAcc:"ログアウト",cancelBtn:"キャンセル",confirmLogoutQ:"ログアウト?",confirmLogoutMsg:"Google再ログインが必要です。",jan:"1月",feb:"2月",mar:"3月",apr:"4月",may2:"5月",jun:"6月",jul:"7月",aug:"8月",sep:"9月",oct:"10月",nov:"11月",dec:"12月"},
-  ko:{tag:"전문 MLB 야구 분석",cal:"일정",opp:"기회",sts:"통계",prf:"프로필",cfg:"설정",lv:"라이브",fn:"종료",hm:"홈",aw:"원정",ml:"머니라인",rl:"런라인",ou:"오버/언더",cf:"신뢰도",eg:"우위",rk:"위험",lo:"낮음",md:"중간",hi:"높음",pj:"예측",wp:"승리 확률",an:"분석",bk:"← 뒤로",mr:"분석 →",lg:"언어",th:"테마",dm:"다크",lm:"라이트",lo2:"로그아웃",mp:"플랜",ap:"플랜",tr:"3일 무료",aq:"Axe에게 질문...",ao:"Axe · 온라인",nt:"알림",ra:"모두 읽음",fb:"제안",snd:"전송",sg:"전송 중...",tk:"감사합니다！",fs:"제안이 접수되었습니다.",ld:"실시간",dd:"데모",ll:"로딩 중...",ng:"오늘 경기 없음",ep:"이메일",pp:"비밀번호 (최소 6자)",si:"로그인",su:"무료 등록",ph:"+82 10 0000 0000",ss:"SMS",vf:"확인",cn:"← 변경",cs:"SMS 전송됨.",gb2:"Google",eb:"이메일",pb:"전화",gb3:"게스트 →",tm2:"이용약관 · 21+",eE:"이메일/비밀번호 오류.",eP:"SMS 오류.",eO:"코드 오류.",eN:"연결 없음.",eF:"모든 필드 입력.",ePw:"최소 6자.",cE:"계정 생성！",cp:"플랜 선택",pm:"/월",cu:"현재 플랜",ac:"활성",sf:"무료 →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"플랜 변경?",a1:"네.",q2:"무료 체험?",a2:"3일.",q3:"자동 갱신?",a3:"네.",W:"승",LL:"패",PC:"승률",sk:"연승",l10:"최근10",pt:"투구",of:"공격",sd:"순위",mc:"몬테카를로",by_:"베이지안",sg2:"제안",bg:"버그",ft:"기능",cm:"댓글",rt:"평점",ds:"설명",today:"오늘",upcoming:"예정",finished:"종료",allGames:"전체",noGames2:"경기 없음",noGamesDesc:"경기가 없습니다",months:"1월,2월,3월,4월,5월,6월,7월,8월,9월,10월,11월,12월",wdays:"일,월,화,수,목,금,토",saveBtn:"저장",savedMsg:"저장됨",unsaved:"미저장",closeAcc:"로그아웃",cancelBtn:"취소",confirmLogoutQ:"로그아웃?",confirmLogoutMsg:"Google로 다시 로그인해야 합니다.",jan:"1월",feb:"2월",mar:"3월",apr:"4월",may2:"5월",jun:"6월",jul:"7월",aug:"8월",sep:"9월",oct:"10월",nov:"11월",dec:"12월"},
+  es:{tag:"Análisis MLB profesional",cal:"Calendario",opp:"Oportunidades",sts:"Estadísticas",prf:"Perfil",cfg:"Configuración",lv:"En Vivo",fn:"Final",hm:"Local",aw:"Visitante",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confianza",eg:"Ventaja",rk:"Riesgo",lo:"Bajo",md:"Medio",hi:"Alto",pj:"Proyección",wp:"Prob. Victoria",an:"Análisis",bk:"← Atrás",mr:"Ver Análisis →",lg:"Idioma",th:"Tema",dm:"Oscuro",lm:"Claro",lo2:"Cerrar sesión",mp:"Mi Plan",ap:"Ver planes",tr:"3 días gratis",aq:"Pregunta a Axe...",ao:"Axe · En línea",nt:"Notificaciones",ra:"Leer todas",fb:"Sugerencias",snd:"Enviar",sg:"Enviando...",tk:"¡Gracias!",fs:"Tu sugerencia fue recibida.",ld:"Datos en vivo",dd:"Demo",ll:"Cargando...",ng:"Sin partidos",ep:"Email",pp:"Contraseña (mín. 6)",si:"Iniciar sesión",su:"Crear cuenta gratis",ph:"+1 (809) 000-0000",ss:"Enviar SMS",vf:"Verificar código",cn:"← Cambiar número",cs:"SMS enviado.",gb2:"Continuar con Google",eb:"Continuar con Email",pb:"Continuar con Teléfono",gb3:"Explorar sin cuenta →",tm2:"Al registrarte aceptas nuestros Términos · Solo informativo · +21",eE:"Email o contraseña incorrectos.",eP:"Error al enviar SMS.",eO:"Código incorrecto.",eN:"Sin conexión.",eF:"Completa todos los campos.",ePw:"Mínimo 6 caracteres.",cE:"¡Cuenta creada! Revisa tu email.",cp:"Elige tu plan",pm:"/mes",cu:"Plan Actual",ac:"ACTIVO",sf:"Comenzar Gratis →",cp2:"Elegir Pro →",cp3:"Elegir Premium →",fq:"Preguntas frecuentes",q1:"¿Puedo cambiar de plan?",a1:"Sí, en cualquier momento.",q2:"¿Hay prueba gratis?",a2:"Todos los planes tienen 3 días gratis.",q3:"¿Se renueva automáticamente?",a3:"Sí, mensualmente. Cancela cuando quieras.",W:"G",LL:"P",PC:"PCG",sk:"Racha",l10:"Últ.10",pt:"Pitcheo",of:"Ofensiva",sd:"Posiciones",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Sugerencia",bg:"Error",ft:"Función",cm:"Comentario",rt:"Calificación",ds:"Describe tu",today:"Hoy",upcoming:"Proximos",finished:"Finalizados",allGames:"Todos",noGames2:"Sin partidos",noGamesDesc:"No hay juegos",months:"Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic",wdays:"D,L,M,X,J,V,S",saveBtn:"Guardar cambios",savedMsg:"Guardado",unsaved:"Cambios sin guardar",closeAcc:"Cerrar sesion",cancelBtn:"Cancelar",jan:"Enero",feb:"Febrero",mar:"Marzo",apr:"Abril",may2:"Mayo",jun:"Junio",jul:"Julio",aug:"Agosto",sep:"Septiembre",oct:"Octubre",nov:"Noviembre",dec:"Diciembre"},
+  en:{tag:"Professional MLB Analytics",cal:"Schedule",opp:"Opportunities",sts:"Stats",prf:"Profile",cfg:"Settings",lv:"Live",fn:"Final",hm:"Home",aw:"Away",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confidence",eg:"Edge",rk:"Risk",lo:"Low",md:"Medium",hi:"High",pj:"Projection",wp:"Win Probability",an:"Analysis",bk:"← Back",mr:"See Analysis →",lg:"Language",th:"Theme",dm:"Dark",lm:"Light",lo2:"Sign out",mp:"My Plan",ap:"See plans",tr:"3 days free",aq:"Ask Axe...",ao:"Axe · Online",nt:"Notifications",ra:"Mark all read",fb:"Feedback",snd:"Send",sg:"Sending...",tk:"Thank you!",fs:"Feedback received.",ld:"Live data",dd:"Demo",ll:"Loading...",ng:"No games",ep:"Email",pp:"Password (min. 6)",si:"Sign in",su:"Create free account",ph:"+1 (809) 000-0000",ss:"Send SMS",vf:"Verify code",cn:"← Change number",cs:"SMS sent.",gb2:"Continue with Google",eb:"Continue with Email",pb:"Continue with Phone",gb3:"Explore without account →",tm2:"By signing up you agree to our Terms · 21+",eE:"Incorrect email or password.",eP:"Error sending SMS.",eO:"Incorrect code.",eN:"No connection.",eF:"Fill in all fields.",ePw:"Min 6 characters.",cE:"Account created! Check your email.",cp:"Choose your plan",pm:"/month",cu:"Current Plan",ac:"ACTIVE",sf:"Get Started Free →",cp2:"Choose Pro →",cp3:"Choose Premium →",fq:"FAQ",q1:"Can I change plans?",a1:"Yes, at any time.",q2:"Free trial?",a2:"All plans have 3 days free.",q3:"Auto-renewal?",a3:"Yes, monthly. Cancel anytime.",W:"W",LL:"L",PC:"PCT",sk:"Streak",l10:"Last 10",pt:"Pitching",of:"Offense",sd:"Standings",mc:"Monte Carlo",by_:"Bayesian",sg2:"Suggestion",bg:"Bug",ft:"Feature",cm:"Comment",rt:"Rating",ds:"Describe your",today:"Today",upcoming:"Upcoming",finished:"Finished",allGames:"All",noGames2:"No games",noGamesDesc:"No games found",months:"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",wdays:"S,M,T,W,T,F,S",saveBtn:"Save changes",savedMsg:"Saved",unsaved:"Unsaved changes",closeAcc:"Sign out",cancelBtn:"Cancel",jan:"January",feb:"February",mar:"March",apr:"April",may2:"May",jun:"June",jul:"July",aug:"August",sep:"September",oct:"October",nov:"November",dec:"December"},
+  pt:{tag:"Análise profissional MLB",cal:"Calendário",opp:"Oportunidades",sts:"Estatísticas",prf:"Perfil",cfg:"Configurações",lv:"Ao Vivo",fn:"Final",hm:"Casa",aw:"Visitante",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confiança",eg:"Vantagem",rk:"Risco",lo:"Baixo",md:"Médio",hi:"Alto",pj:"Projeção",wp:"Prob. Vitória",an:"Análise",bk:"← Voltar",mr:"Ver Análise →",lg:"Idioma",th:"Tema",dm:"Escuro",lm:"Claro",lo2:"Sair",mp:"Meu Plano",ap:"Ver planos",tr:"3 dias grátis",aq:"Pergunte ao Axe...",ao:"Axe · Online",nt:"Notificações",ra:"Marcar todas",fb:"Sugestões",snd:"Enviar",sg:"Enviando...",tk:"Obrigado!",fs:"Sugestão recebida.",ld:"Dados ao vivo",dd:"Demo",ll:"Carregando...",ng:"Sem jogos",ep:"Email",pp:"Senha (mín. 6)",si:"Entrar",su:"Criar conta grátis",ph:"+55 (11) 90000-0000",ss:"Enviar SMS",vf:"Verificar código",cn:"← Mudar número",cs:"SMS enviado.",gb2:"Google",eb:"Email",pb:"Telefone",gb3:"Sem conta →",tm2:"Termos · +21",eE:"Email ou senha incorretos.",eP:"Erro SMS.",eO:"Código incorreto.",eN:"Sem conexão.",eF:"Preencha tudo.",ePw:"Mín 6 caracteres.",cE:"Conta criada!",cp:"Escolha seu plano",pm:"/mês",cu:"Plano Atual",ac:"ATIVO",sf:"Começar Grátis →",cp2:"Escolher Pro →",cp3:"Escolher Premium →",fq:"FAQ",q1:"Posso mudar de plano?",a1:"Sim.",q2:"Teste grátis?",a2:"3 dias.",q3:"Renovação auto?",a3:"Sim.",W:"V",LL:"D",PC:"PCT",sk:"Série",l10:"Últ.10",pt:"Arremesso",of:"Ataque",sd:"Tabela",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Sugestão",bg:"Erro",ft:"Função",cm:"Comentário",rt:"Avaliação",ds:"Descreva sua",today:"Hoje",upcoming:"Proximos",finished:"Finalizados",allGames:"Todos",noGames2:"Sem jogos",noGamesDesc:"Nenhum jogo",months:"Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez",wdays:"D,S,T,Q,Q,S,S",saveBtn:"Salvar",savedMsg:"Salvo",unsaved:"Nao salvo",closeAcc:"Sair",cancelBtn:"Cancelar",jan:"Janeiro",feb:"Fevereiro",mar:"Marco",apr:"Abril",may2:"Maio",jun:"Junho",jul:"Julho",aug:"Agosto",sep:"Setembro",oct:"Outubro",nov:"Novembro",dec:"Dezembro"},
+  fr:{tag:"Analyse MLB pro",cal:"Calendrier",opp:"Opportunités",sts:"Stats",prf:"Profil",cfg:"Paramètres",lv:"En Direct",fn:"Final",hm:"Domicile",aw:"Visiteur",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confiance",eg:"Avantage",rk:"Risque",lo:"Faible",md:"Moyen",hi:"Élevé",pj:"Projection",wp:"Prob. Victoire",an:"Analyse",bk:"← Retour",mr:"Voir →",lg:"Langue",th:"Thème",dm:"Sombre",lm:"Clair",lo2:"Déconnexion",mp:"Mon Plan",ap:"Voir plans",tr:"3 jours gratuits",aq:"Demandez à Axe...",ao:"Axe · En ligne",nt:"Notifications",ra:"Tout lire",fb:"Suggestions",snd:"Envoyer",sg:"Envoi...",tk:"Merci!",fs:"Suggestion reçue.",ld:"Live",dd:"Démo",ll:"Chargement...",ng:"Pas de matchs",ep:"Email",pp:"Mot de passe (min. 6)",si:"Connexion",su:"Créer compte",ph:"+33 6 00 00 00 00",ss:"SMS",vf:"Vérifier",cn:"← Changer",cs:"SMS envoyé.",gb2:"Google",eb:"Email",pb:"Téléphone",gb3:"Invité →",tm2:"CGU · +21",eE:"Email/mdp incorrect.",eP:"Erreur SMS.",eO:"Code incorrect.",eN:"Pas de connexion.",eF:"Remplissez tout.",ePw:"Min 6 caractères.",cE:"Compte créé!",cp:"Choisissez plan",pm:"/mois",cu:"Plan Actuel",ac:"ACTIF",sf:"Gratuit →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Changer de plan?",a1:"Oui.",q2:"Essai gratuit?",a2:"3 jours.",q3:"Renouvellement?",a3:"Oui.",W:"V",LL:"D",PC:"PCT",sk:"Série",l10:"10 Dern.",pt:"Lancer",of:"Offensive",sd:"Classement",mc:"Monte Carlo",by_:"Bayésien",sg2:"Suggestion",bg:"Bug",ft:"Fonction",cm:"Commentaire",rt:"Note",ds:"Décrivez",today:"Aujourd'hui",upcoming:"Prochains",finished:"Termines",allGames:"Tous",noGames2:"Pas de matchs",noGamesDesc:"Aucun match",months:"Jan,Fev,Mar,Avr,Mai,Jun,Jul,Aou,Sep,Oct,Nov,Dec",wdays:"D,L,M,M,J,V,S",saveBtn:"Sauvegarder",savedMsg:"Sauvegarde",unsaved:"Non sauvegarde",closeAcc:"Deconnexion",cancelBtn:"Annuler",jan:"Janvier",feb:"Fevrier",mar:"Mars",apr:"Avril",may2:"Mai",jun:"Juin",jul:"Juillet",aug:"Aout",sep:"Septembre",oct:"Octobre",nov:"Novembre",dec:"Decembre"},
+  it:{tag:"Analisi MLB pro",cal:"Calendario",opp:"Opportunità",sts:"Statistiche",prf:"Profilo",cfg:"Impostazioni",lv:"In Diretta",fn:"Finale",hm:"Casa",aw:"Ospite",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Confidenza",eg:"Vantaggio",rk:"Rischio",lo:"Basso",md:"Medio",hi:"Alto",pj:"Proiezione",wp:"Prob. Vittoria",an:"Analisi",bk:"← Indietro",mr:"Vedi →",lg:"Lingua",th:"Tema",dm:"Scuro",lm:"Chiaro",lo2:"Esci",mp:"Piano",ap:"Piani",tr:"3 giorni gratis",aq:"Chiedi ad Axe...",ao:"Axe · Online",nt:"Notifiche",ra:"Segna tutto",fb:"Suggerimenti",snd:"Invia",sg:"Invio...",tk:"Grazie!",fs:"Suggerimento ricevuto.",ld:"Live",dd:"Demo",ll:"Caricamento...",ng:"Nessuna partita",ep:"Email",pp:"Password (min. 6)",si:"Accedi",su:"Registrati",ph:"+39 3 000 0000",ss:"SMS",vf:"Verifica",cn:"← Cambia",cs:"SMS inviato.",gb2:"Google",eb:"Email",pb:"Telefono",gb3:"Ospite →",tm2:"Termini · +21",eE:"Email/password errati.",eP:"Errore SMS.",eO:"Codice errato.",eN:"Nessuna connessione.",eF:"Compila tutto.",ePw:"Min 6 caratteri.",cE:"Account creato!",cp:"Scegli piano",pm:"/mese",cu:"Piano Attuale",ac:"ATTIVO",sf:"Gratis →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Cambiare piano?",a1:"Sì.",q2:"Prova gratuita?",a2:"3 giorni.",q3:"Rinnovo auto?",a3:"Sì.",W:"V",LL:"S",PC:"PCT",sk:"Serie",l10:"Ult.10",pt:"Lancio",of:"Attacco",sd:"Classifica",mc:"Monte Carlo",by_:"Bayesiano",sg2:"Suggerimento",bg:"Bug",ft:"Funzione",cm:"Commento",rt:"Voto",ds:"Descrivi",today:"Oggi",upcoming:"Prossimi",finished:"Terminati",allGames:"Tutti",noGames2:"Nessun gioco",noGamesDesc:"Nessun gioco trovato",months:"Gen,Feb,Mar,Apr,Mag,Giu,Lug,Ago,Set,Ott,Nov,Dic",wdays:"D,L,M,M,G,V,S",saveBtn:"Salva",savedMsg:"Salvato",unsaved:"Non salvato",closeAcc:"Esci",cancelBtn:"Annulla",jan:"Gennaio",feb:"Febbraio",mar:"Marzo",apr:"Aprile",may2:"Maggio",jun:"Giugno",jul:"Luglio",aug:"Agosto",sep:"Settembre",oct:"Ottobre",nov:"Novembre",dec:"Dicembre"},
+  de:{tag:"Professionelle MLB-Analyse",cal:"Spielplan",opp:"Chancen",sts:"Statistiken",prf:"Profil",cfg:"Einstellungen",lv:"Live",fn:"Beendet",hm:"Heim",aw:"Gast",ml:"Moneyline",rl:"Run Line",ou:"Over/Under",cf:"Vertrauen",eg:"Vorteil",rk:"Risiko",lo:"Niedrig",md:"Mittel",hi:"Hoch",pj:"Projektion",wp:"Siegwahrsch.",an:"Analyse",bk:"← Zurück",mr:"Analyse →",lg:"Sprache",th:"Thema",dm:"Dunkel",lm:"Hell",lo2:"Abmelden",mp:"Plan",ap:"Pläne",tr:"3 Tage gratis",aq:"Frag Axe...",ao:"Axe · Online",nt:"Nachrichten",ra:"Alle lesen",fb:"Vorschläge",snd:"Senden",sg:"Senden...",tk:"Danke!",fs:"Vorschlag empfangen.",ld:"Live",dd:"Demo",ll:"Laden...",ng:"Keine Spiele",ep:"E-Mail",pp:"Passwort (min. 6)",si:"Anmelden",su:"Konto erstellen",ph:"+49 1 00 000 0000",ss:"SMS",vf:"Überprüfen",cn:"← Ändern",cs:"SMS gesendet.",gb2:"Google",eb:"E-Mail",pb:"Telefon",gb3:"Gast →",tm2:"AGB · 21+",eE:"Falsche E-Mail/Passwort.",eP:"SMS-Fehler.",eO:"Falscher Code.",eN:"Keine Verbindung.",eF:"Alle Felder ausfüllen.",ePw:"Min 6 Zeichen.",cE:"Konto erstellt!",cp:"Plan wählen",pm:"/Monat",cu:"Aktueller Plan",ac:"AKTIV",sf:"Kostenlos →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"Plan wechseln?",a1:"Ja.",q2:"Testphase?",a2:"3 Tage.",q3:"Automatisch?",a3:"Ja.",W:"S",LL:"N",PC:"PCT",sk:"Serie",l10:"Letzte 10",pt:"Pitching",of:"Offense",sd:"Tabelle",mc:"Monte Carlo",by_:"Bayes",sg2:"Vorschlag",bg:"Fehler",ft:"Funktion",cm:"Kommentar",rt:"Bewertung",ds:"Beschreibe",today:"Heute",upcoming:"Naechste",finished:"Beendet",allGames:"Alle",noGames2:"Keine Spiele",noGamesDesc:"Keine Spiele gefunden",months:"Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Dez",wdays:"S,M,D,M,D,F,S",saveBtn:"Speichern",savedMsg:"Gespeichert",unsaved:"Nicht gespeichert",closeAcc:"Abmelden",cancelBtn:"Abbrechen",jan:"Januar",feb:"Februar",mar:"Maerz",apr:"April",may2:"Mai",jun:"Juni",jul:"Juli",aug:"August",sep:"September",oct:"Oktober",nov:"November",dec:"Dezember"},
+  ja:{tag:"プロMLB野球分析",cal:"カレンダー",opp:"機会",sts:"統計",prf:"プロフィール",cfg:"設定",lv:"ライブ",fn:"終了",hm:"ホーム",aw:"アウェイ",ml:"マネーライン",rl:"ランライン",ou:"大小",cf:"信頼度",eg:"優位",rk:"リスク",lo:"低",md:"中",hi:"高",pj:"予測",wp:"勝率",an:"分析",bk:"← 戻る",mr:"分析 →",lg:"言語",th:"テーマ",dm:"ダーク",lm:"ライト",lo2:"ログアウト",mp:"プラン",ap:"プラン",tr:"3日無料",aq:"Axeに質問...",ao:"Axe · オンライン",nt:"通知",ra:"全て既読",fb:"提案",snd:"送信",sg:"送信中...",tk:"ありがとう！",fs:"提案を受け取りました。",ld:"リアルタイム",dd:"デモ",ll:"読み込み中...",ng:"試合なし",ep:"メール",pp:"パスワード（6文字以上）",si:"ログイン",su:"無料登録",ph:"+81 90 0000 0000",ss:"SMS",vf:"確認",cn:"← 変更",cs:"SMS送信済み。",gb2:"Google",eb:"メール",pb:"電話",gb3:"ゲスト →",tm2:"利用規約 · 21+",eE:"メール/パスワードエラー。",eP:"SMSエラー。",eO:"コードエラー。",eN:"接続なし。",eF:"全フィールド入力。",ePw:"6文字以上。",cE:"アカウント作成！",cp:"プラン選択",pm:"/月",cu:"現プラン",ac:"有効",sf:"無料 →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"プラン変更？",a1:"はい。",q2:"無料試用？",a2:"3日。",q3:"自動更新？",a3:"はい。",W:"勝",LL:"負",PC:"勝率",sk:"連勝",l10:"直近10",pt:"投手",of:"打撃",sd:"順位",mc:"モンテカルロ",by_:"ベイズ",sg2:"提案",bg:"バグ",ft:"機能",cm:"コメント",rt:"評価",ds:"説明",today:"今日",upcoming:"予定",finished:"終了",allGames:"全て",noGames2:"試合なし",noGamesDesc:"試合がありません",months:"1,2,3,4,5,6,7,8,9,10,11,12",wdays:"日,月,火,水,木,金,土",saveBtn:"保存",savedMsg:"保存済",unsaved:"未保存",closeAcc:"ログアウト",cancelBtn:"キャンセル",jan:"1月",feb:"2月",mar:"3月",apr:"4月",may2:"5月",jun:"6月",jul:"7月",aug:"8月",sep:"9月",oct:"10月",nov:"11月",dec:"12月"},
+  ko:{tag:"전문 MLB 야구 분석",cal:"일정",opp:"기회",sts:"통계",prf:"프로필",cfg:"설정",lv:"라이브",fn:"종료",hm:"홈",aw:"원정",ml:"머니라인",rl:"런라인",ou:"오버/언더",cf:"신뢰도",eg:"우위",rk:"위험",lo:"낮음",md:"중간",hi:"높음",pj:"예측",wp:"승리 확률",an:"분석",bk:"← 뒤로",mr:"분석 →",lg:"언어",th:"테마",dm:"다크",lm:"라이트",lo2:"로그아웃",mp:"플랜",ap:"플랜",tr:"3일 무료",aq:"Axe에게 질문...",ao:"Axe · 온라인",nt:"알림",ra:"모두 읽음",fb:"제안",snd:"전송",sg:"전송 중...",tk:"감사합니다！",fs:"제안이 접수되었습니다.",ld:"실시간",dd:"데모",ll:"로딩 중...",ng:"오늘 경기 없음",ep:"이메일",pp:"비밀번호 (최소 6자)",si:"로그인",su:"무료 등록",ph:"+82 10 0000 0000",ss:"SMS",vf:"확인",cn:"← 변경",cs:"SMS 전송됨.",gb2:"Google",eb:"이메일",pb:"전화",gb3:"게스트 →",tm2:"이용약관 · 21+",eE:"이메일/비밀번호 오류.",eP:"SMS 오류.",eO:"코드 오류.",eN:"연결 없음.",eF:"모든 필드 입력.",ePw:"최소 6자.",cE:"계정 생성！",cp:"플랜 선택",pm:"/월",cu:"현재 플랜",ac:"활성",sf:"무료 →",cp2:"Pro →",cp3:"Premium →",fq:"FAQ",q1:"플랜 변경?",a1:"네.",q2:"무료 체험?",a2:"3일.",q3:"자동 갱신?",a3:"네.",W:"승",LL:"패",PC:"승률",sk:"연승",l10:"최근10",pt:"투구",of:"공격",sd:"순위",mc:"몬테카를로",by_:"베이지안",sg2:"제안",bg:"버그",ft:"기능",cm:"댓글",rt:"평점",ds:"설명",today:"오늘",upcoming:"예정",finished:"종료",allGames:"전체",noGames2:"경기 없음",noGamesDesc:"경기가 없습니다",months:"1,2,3,4,5,6,7,8,9,10,11,12",wdays:"일,월,화,수,목,금,토",saveBtn:"저장",savedMsg:"저장됨",unsaved:"미저장",closeAcc:"로그아웃",cancelBtn:"취소",jan:"1월",feb:"2월",mar:"3월",apr:"4월",may2:"5월",jun:"6월",jul:"7월",aug:"8월",sep:"9월",oct:"10월",nov:"11월",dec:"12월"},
   zh:{tag:"专业MLB棒球分析",cal:"赛程",opp:"机会",sts:"统计",prf:"个人",cfg:"设置",lv:"直播",fn:"完赛",hm:"主场",aw:"客场",ml:"独赢",rl:"让分",ou:"大小",cf:"置信度",eg:"优势",rk:"风险",lo:"低",md:"中",hi:"高",pj:"预测",wp:"胜率",an:"分析",bk:"← 返回",mr:"查看分析 →",lg:"语言",th:"主题",dm:"深色",lm:"浅色",lo2:"退出",mp:"计划",ap:"计划",tr:"3天免费",aq:"向Axe提问...",ao:"Axe · 在线",nt:"通知",ra:"全部已读",fb:"建议",snd:"发送",sg:"发送中...",tk:"谢谢！",fs:"建议已收到。",ld:"实时",dd:"演示",ll:"加载中...",ng:"今天没有比赛",ep:"电子邮件",pp:"密码（至少6位）",si:"登录",su:"免费注册",ph:"+86 1 0000 0000",ss:"SMS",vf:"验证",cn:"← 更改",cs:"验证码已发送。",gb2:"Google",eb:"电子邮件",pb:"电话",gb3:"访客 →",tm2:"条款 · 21+",eE:"邮箱或密码错误。",eP:"短信错误。",eO:"验证码错误。",eN:"无连接。",eF:"填写所有字段。",ePw:"至少6个字符。",cE:"账户已创建！",cp:"选择计划",pm:"/月",cu:"当前计划",ac:"有效",sf:"免费 →",cp2:"Pro →",cp3:"Premium →",fq:"常见问题",q1:"可以更改计划吗？",a1:"是的。",q2:"免费试用？",a2:"3天。",q3:"自动续费？",a3:"是的。",W:"胜",LL:"负",PC:"胜率",sk:"连胜",l10:"近10场",pt:"投球",of:"进攻",sd:"积分榜",mc:"蒙特卡洛",by_:"贝叶斯",sg2:"建议",bg:"错误",ft:"功能",cm:"评论",rt:"评分",ds:"描述您的"},
 };
 const useT=lang=>TX[lang]||TX.es;
@@ -25,7 +25,7 @@ const MID={147:"NYY",111:"BOS",141:"TOR",139:"TB",110:"BAL",114:"CLE",142:"MIN",
 
 // PLANS  Starter $1.99 · Pro $4.99 · Premium $9.99
 const PLANS={
-  starter:{n:"Starter",p:"$1.99",clr:"#6366f1",axe:10,features:["Todos los partidos del día","En vivo · marcador · diamante","Predicciones básicas ML/RL/O-U","30 equipos MLB","Estadísticas generales","Asistente Axe (10/día)","Notificaciones · Calendario","9 idiomas · Modo claro/oscuro"],today:"今天",upcoming:"即将",finished:"已结束",allGames:"全部",noGames2:"没有比赛",noGamesDesc:"没有比赛",months:"1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月",wdays:"日,一,二,三,四,五,六",saveBtn:"保存",savedMsg:"已保存",unsaved:"未保存",closeAcc:"退出",cancelBtn:"取消",confirmLogoutQ:"退出?",confirmLogoutMsg:"需要重新登录Google。",jan:"1月",feb:"2月",mar:"3月",apr:"4月",may2:"5月",jun:"6月",jul:"7月",aug:"8月",sep:"9月",oct:"10月",nov:"11月",dec:"12月"},
+  starter:{n:"Starter",p:"$1.99",clr:"#6366f1",axe:10,features:["Todos los partidos del día","En vivo · marcador · diamante","Predicciones básicas ML/RL/O-U","30 equipos MLB","Estadísticas generales","Asistente Axe (10/día)","Notificaciones · Calendario","9 idiomas · Modo claro/oscuro"],today:"今天",upcoming:"即将",finished:"已结束",allGames:"全部",noGames2:"没有比赛",noGamesDesc:"没有比赛",months:"1,2,3,4,5,6,7,8,9,10,11,12",wdays:"日,一,二,三,四,五,六",saveBtn:"保存",savedMsg:"已保存",unsaved:"未保存",closeAcc:"退出",cancelBtn:"取消",jan:"1月",feb:"2月",mar:"3月",apr:"4月",may2:"5月",jun:"6月",jul:"7月",aug:"8月",sep:"9月",oct:"10月",nov:"11月",dec:"12月"},
   pro:{n:"Pro",p:"$4.99",clr:"#8b5cf6",axe:100,popular:true,features:["Todo del Starter","Monte Carlo + Bayesiano","Moneyline avanzado","Run Line con sabermetría","Over/Under con modelos climáticos","xERA · FIP · wRC+ · wOBA","Axe IA (100/día)","Alertas inteligentes","Tendencias · Comparaciones","Reportes descargables","Filtros avanzados"]},
   premium:{n:"Premium",p:"$9.99",clr:"#10b981",axe:Infinity,features:["Todo del Pro","Simulaciones ilimitadas","Axe IA ilimitado + memoria completa","Modelos predictivos de élite","Estadísticas históricas completas","Dashboard personalizable","Reportes Premium PDF","Herramientas exclusivas","Acceso anticipado a funciones","Soporte prioritario 24/7"]},
 };
@@ -35,29 +35,29 @@ function predict(away,home,pf=1,wind="",hE=null,aE=null){
   const H=TMS[home],A=TMS[away];
   if(!H||!A) return null;
   let mc=0;
-  for(let i=0;i<10000;i++) if(H.wpct*(0.85+Math.random()*.3)*pf>A.wpct*(0.85+Math.random()*.3)) mc++;
+  for(let i=0;i<10000;i++) if(H.wpct*(0.85+Math.random()*0.3)*pf>A.wpct*(0.85+Math.random()*0.3)) mc++;
   const mcp=mc/10000*100;
   const eH=hE||H.era,eA=aE||A.era,eAdj=(eA-eH)*3.5;
-  let hW=Math.round(Math.min(76,Math.max(28,mcp*.65+(mcp+eAdj)*.35)));
+  let hW=Math.round(Math.min(76,Math.max(28,mcp*0.65+(mcp+eAdj)*0.35)));
   const aW=100-hW;
   const wB=wind.includes("OUT")?1.09:wind.includes("IN")?0.92:1;
-  const proj=+((H.rpg+A.rpg)/2*pf*wB*(1+((4.5-eH)/4.5+(4.5-eA)/4.5)/2*.12)).toFixed(1);
+  const proj=+((H.rpg+A.rpg)/2*pf*wB*(1+((4.5-eH)/4.5+(4.5-eA)/4.5)/2*0.12)).toFixed(1);
   const line=Math.round(proj*2)/2;
   const hO=hW>50?-Math.round((hW/(100-hW))*100):Math.round(((100-hW)/hW)*100);
   const aO=aW>50?-Math.round((aW/(100-aW))*100):Math.round(((100-aW)/aW)*100);
   const impl=110/(hO<0?Math.abs(hO)+100:100+hO)*100;
   const edge=+(hW-impl).toFixed(1);
-  const conf=Math.round(Math.min(91,54+Math.abs(hW-50)*.6+Math.abs(eH-eA)*4));
+  const conf=Math.round(Math.min(91,54+Math.abs(hW-50)*0.6+Math.abs(eH-eA)*4));
   const risk=conf>=75?"Bajo":conf>=62?"Medio":"Alto";
   const grade=conf>=80&&edge>4?"A":conf>=68&&edge>1.5?"B":conf>=56?"C":"D";
-  return{hW,aW,hO,aO,edge,conf,proj,line,overP:proj>line?58:42,underP:proj>line?42:58,rl:Math.round(hW*.72),grade,rec:proj>line?"OVER":"UNDER",risk,mc:Math.round(mcp),eAdj:+eAdj.toFixed(1)};
+  return{hW,aW,hO,aO,edge,conf,proj,line,overP:proj>line?58:42,underP:proj>line?42:58,rl:Math.round(hW*0.72),grade,rec:proj>line?"OVER":"UNDER",risk,mc:Math.round(mcp),eAdj:+eAdj.toFixed(1)};
 }
 const fO=n=>n>=0?`+${n}`:`${n}`;
 
 // MLB API (2 CORS proxies + demo fallback)
 async function fetchLive(){
   const today=new Date().toISOString().split("T")[0];
-  const px=[u=>`https://corsproxy.io/?${encodeURIComponent(u)}`,u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`];
+  const px=[u=>`https://corsproxy.io/?${encodeURIComponent(u)}`,v=>`https://api.allorigins.win/raw?vrl=${encodeURIComponent(v)}`];
   for(const p of px){
     try{
       const r=await fetch(p(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${today}&hydrate=team,linescore,probablePitcher,venue,weather`),{signal:AbortSignal.timeout(7000)});
@@ -79,8 +79,14 @@ async function fetchLive(){
           pf:1.0,isLive:iL,isFinal:iF,
           sim:(iL||iF)?{away:aw?.score??ls?.teams?.away?.runs??0,home:hm?.score??ls?.teams?.home?.runs??0,
             inn:ls?.currentInning??1,half:ls?.isTopInning?"T":"B",outs:ls?.outs??0,
+            balls:ls?.balls??0,strikes:ls?.strikes??0,
             awayH:ls?.teams?.away?.hits??0,homeH:ls?.teams?.home?.hits??0,
-            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third]}:null,source:"live"};
+            bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third],
+            batter:ls?.offense?.batter?.fullName||null,
+            batterTeam:iL?(ls?.isTopInning?aA:hA):null,
+            pitcher:ls?.defense?.pitcher?.fullName||null,
+            pitchSpeed:ls?.currentPlay?.pitchData?.startSpeed?Math.round(ls.currentPlay.pitchData.startSpeed):null
+          }:null,source:"live"};
       }).filter(Boolean);
       return gs.length>0?gs:null;
     }catch(e){continue;}
@@ -136,57 +142,55 @@ async function askAxe(q,history,lang){
 // ATOMS
 function Ring({grade,conf,sz=40,D}){
   const c=GC[grade]||D.il,r=sz/2-3,ci=2*Math.PI*r,da=(conf/100)*ci;
-  return<div style={{position:"relative",width:sz,height:sz,flexShrink:0}}>
+  return(<div style={{position:"relative",width:sz,height:sz,flexShrink:0}}>
     <svg viewBox={`0 0 ${sz} ${sz}`} style={{position:"absolute",inset:0,width:"100%",height:"100%"}}>
       <circle cx={sz/2} cy={sz/2} r={r} fill="none" stroke={D.gb} strokeWidth="2.5"/>
       <circle cx={sz/2} cy={sz/2} r={r} fill="none" stroke={c} strokeWidth="2.5" strokeDasharray={`${da} ${ci}`} strokeLinecap="round" transform={`rotate(-90 ${sz/2} ${sz/2})`} style={{filter:`drop-shadow(0 0 4px ${c}66)`}}/>
     </svg>
-    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:sz*.32,fontWeight:900,color:c}}>{grade}</div>
-  </div>;
+    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:sz*0.32,fontWeight:900,color:c}}>{grade}</div>
+  </div>);
 }
 function Chip({label,value,color,D}){
-  return<div style={{flex:1,background:D.gl,border:`1px solid ${D.gb}`,borderRadius:9,padding:"7px 4px",textAlign:"center",minWidth:0}}>
+  return(<div style={{flex:1,background:D.gl,border:`1px solid ${D.gb}`,borderRadius:9,padding:"7px 4px",textAlign:"center",minWidth:0}}>
     <div style={{fontSize:12,fontWeight:800,color:color||D.tx,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{value}</div>
     <div style={{fontSize:7,color:D.mt,textTransform:"uppercase",letterSpacing:"0.07em",marginTop:2}}>{label}</div>
-  </div>;
+  </div>);
 }
 function SL({icon,ch,D}){
-  return<div style={{fontSize:9,fontWeight:700,color:D.il,letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:9,display:"flex",alignItems:"center",gap:7}}>
+  return(<div style={{fontSize:9,fontWeight:700,color:D.il,letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:9,display:"flex",alignItems:"center",gap:7}}>
     <div style={{height:1,width:12,background:`linear-gradient(90deg,${D.ind},transparent)`}}/>
     {icon&&<span style={{fontSize:11}}>{icon}</span>}{ch}
     <div style={{height:1,flex:1,background:`linear-gradient(90deg,${D.il}33,transparent)`}}/>
-  </div>;
+  </div>);
 }
-function Dot({c="#10b981"}){return<div style={{width:7,height:7,borderRadius:"50%",background:c,boxShadow:`0 0 7px ${c}`,animation:"vP 1.5s ease infinite",flexShrink:0}}/>;}
-function Sp(){return<span style={{animation:"vS .7s linear infinite",display:"inline-block",marginRight:6}}>◌</span>;}
+function Dot({c="#10b981"}){return(<div style={{width:7,height:7,borderRadius:"50%",background:c,boxShadow:`0 0 7px ${c}`,animation:"vP 1.5s ease infinite",flexShrink:0}}/>);}
+function Sp(){return(<span style={{animation:"vS 0.7s linear infinite",display:"inline-block",marginRight:6}}>◌</span>);}
 
 // AUTH SCREEN
 function AuthScreen({dark,onAuth,lang}){
   const D=dark?DK:LT;
   const t=useT(lang);
-  const bg={minHeight:"100vh",background:D.bg0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"};
   return(
-    <div style={bg}>
-      <div style={{position:"relative",zIndex:1,width:"100%",maxWidth:380,textAlign:"center"}}>
+    <div style={{minHeight:"100vh",background:D.bg0,display:"flex",alignItems:"center",justifyContent:"center",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"}}>
+      <div style={{width:"100%",maxWidth:380,textAlign:"center"}}>
         <div style={{fontSize:52,marginBottom:12}}>⚾</div>
         <div style={{fontSize:28,fontWeight:900,color:D.tx,marginBottom:6,letterSpacing:"-0.04em"}}>MLB<span style={{color:D.ind}}>Edge</span></div>
-        <div style={{fontSize:12,color:D.mt,marginBottom:36}}>{t.tag}</div>
-        <div style={{background:D.bg1,border:`1px solid ${D.gb}`,borderRadius:18,padding:"28px 24px",marginBottom:16,boxShadow:dark?"0 20px 60px rgba(0,0,0,0.4)":"0 4px 20px rgba(0,0,0,0.08)"}}>
-          <div style={{fontSize:13,color:D.mt,marginBottom:20,lineHeight:1.6}}>{t.gb2||"Inicia sesion con Google"}</div>
-          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,padding:"15px",borderRadius:13,border:`1px solid ${D.gb}`,background:dark?"rgba(255,255,255,0.06)":"#fff",textDecoration:"none",boxShadow:dark?"0 4px 20px rgba(0,0,0,0.3)":"0 2px 12px rgba(0,0,0,0.1)"}}>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-            <span style={{fontSize:15,fontWeight:700,color:D.tx}}>{t.gb2||"Continuar con Google"}</span>
+        <div style={{fontSize:12,color:D.mt,marginBottom:32}}>{t.tag}</div>
+        <div style={{background:D.bg1,border:`1px solid ${D.gb}`,borderRadius:18,padding:"28px 24px",marginBottom:16}}>
+          <div style={{fontSize:13,color:D.mt,marginBottom:20}}>{t.gb2||"Inicia sesion con Google"}</div>
+          <a href={AUTH.gUrl()} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,padding:"15px",borderRadius:13,border:`1px solid ${D.gb}`,background:dark?"rgba(255,255,255,0.06)":"#fff",textDecoration:"none"}}>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-0.78-0.07-1.53-0.2-2.25H12v4.26h5.92c-0.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-0.98 7.28-2.66l-3.57-2.77c-0.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-0.22-0.66-0.35-1.36-0.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-0.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            <span style={{fontSize:15,fontWeight:700,color:D.tx}}>Continuar con Google</span>
           </a>
         </div>
-        <div style={{fontSize:10,color:D.mt,lineHeight:1.7}}>{t.tm2||"Solo para analisis informativo · +21"}</div>
+        <div style={{fontSize:10,color:D.mt}}>{t.tm2||"Solo para analisis informativo"}</div>
       </div>
     </div>
   );
 }
-
-
 // GAME CARD
-// LOGOS MLB - ESPN CDN + fallback color
+
+// TEAM LOGOS
 const LOGO_BASE="https://a.espncdn.com/i/teamlogos/mlb/500/";
 const LOGO_IDS={NYY:"nyy",BOS:"bos",TOR:"tor",TB:"tb",BAL:"bal",CLE:"cle",MIN:"min",KC:"kc",CWS:"cws",DET:"det",HOU:"hou",SEA:"sea",TEX:"tex",LAA:"laa",OAK:"oak",ATL:"atl",PHI:"phi",NYM:"nym",WSH:"wsh",MIA:"mia",MIL:"mil",CHC:"chc",STL:"stl",PIT:"pit",CIN:"cin",LAD:"lad",SF:"sf",SD:"sd",ARI:"ari",COL:"col"};
 function TeamLogo({abbr,size=40}){
@@ -194,8 +198,12 @@ function TeamLogo({abbr,size=40}){
   const clr=tm?tm.clr:"#6366f1";
   const id=LOGO_IDS[abbr];
   const [err,setErr]=useState(false);
-  if(!id||err) return <div style={{width:size,height:size,borderRadius:Math.round(size*.22),background:clr+"22",border:"1.5px solid "+clr+"44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:Math.round(size*.28),fontWeight:900,color:clr,flexShrink:0}}>{abbr}</div>;
-  return <img src={LOGO_BASE+id+".png"} alt={abbr} width={size} height={size} onError={()=>setErr(true)} style={{width:size,height:size,objectFit:"contain",flexShrink:0,borderRadius:Math.round(size*.15)}}/>;
+  if(!id||err) return(
+    <div style={{width:size,height:size,borderRadius:Math.round(size*0.22),background:clr+"22",border:"1.5px solid "+clr+"44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:Math.round(size*0.28),fontWeight:900,color:clr,flexShrink:0}}>{abbr}</div>
+  );
+  return(
+    <img src={LOGO_BASE+id+".png"} alt={abbr} width={size} height={size} onError={()=>setErr(true)} style={{width:size,height:size,objectFit:"contain",flexShrink:0,borderRadius:Math.round(size*0.15)}}/>
+  );
 }
 
 const GameCard=memo(function({game,idx,onSelect,D,t}){
@@ -205,7 +213,7 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
   if(!p) return null;
   const ec=p.edge>5?D.gr:p.edge>2?D.ind:p.edge>0?D.am:D.mt;
   return(
-    <div onClick={()=>onSelect(game)} style={{borderRadius:18,overflow:"hidden",animation:`vU 0.3s ${idx*.04}s both ease`,border:`1px solid ${game.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,boxShadow:D===DK?(game.isLive?"0 0 0 1px rgba(16,185,129,0.1),0 8px 28px rgba(0,0,0,0.5)":"0 4px 16px rgba(0,0,0,0.3)"):"0 2px 10px rgba(0,0,0,0.07)",cursor:"pointer"}}>
+    <div onClick={()=>onSelect(game)} style={{borderRadius:18,overflow:"hidden",animation:`vU 0.3s ${idx*0.04}s both ease`,border:`1px solid ${game.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,boxShadow:D===DK?(game.isLive?"0 0 0 1px rgba(16,185,129,0.1),0 8px 28px rgba(0,0,0,0.5)":"0 4px 16px rgba(0,0,0,0.3)"):"0 2px 10px rgba(0,0,0,0.07)",cursor:"pointer"}}>
       <div style={{height:3,background:`linear-gradient(90deg,${A.clr},${H.clr})`}}/>
       <div style={{padding:"12px 13px"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:9}}>
@@ -224,10 +232,9 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:9,padding:"9px 14px",background:D.gl,borderRadius:12,border:`1px solid ${D.gb}`}}>
             {[{tm:A,sc:game.sim.away,h:game.sim.awayH},{tm:H,sc:game.sim.home,h:game.sim.homeH}].map((x,i)=>(
               <div key={i} style={{textAlign:"center"}}>
-                <div style={{display:"flex",justifyContent:"center",marginBottom:3}}><TeamLogo abbr={x.tm.abbr} size={32}/></div>
-                <div style={{fontSize:9,fontWeight:700,color:x.tm.clr,marginBottom:1}}>{x.tm.abbr}</div>
-                <div style={{fontSize:28,fontWeight:900,color:D.tx,lineHeight:1}}>{x.sc}</div>
-                <div style={{fontSize:7,color:D.mt,marginTop:1}}>{x.h}H</div>
+                <div style={{fontSize:10,fontWeight:700,color:x.tm.clr,marginBottom:2}}>{x.tm.abbr}</div>
+                <div style={{fontSize:30,fontWeight:900,color:D.tx,lineHeight:1}}>{x.sc}</div>
+                <div style={{fontSize:8,color:D.mt,marginTop:1}}>{x.h}H</div>
               </div>
             ))}
             {game.isLive&&game.sim.bases&&(
@@ -244,12 +251,12 @@ const GameCard=memo(function({game,idx,onSelect,D,t}){
         ):(
           <div style={{display:"flex",alignItems:"center",marginBottom:9}}>
             {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,i)=>{
-              if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
-              return<div key={i} style={{flex:1,textAlign:"center"}}>
-                <div style={{display:"flex",justifyContent:"center",marginBottom:6}}><TeamLogo abbr={x.tm.abbr} size={42}/></div>
+              if(!x) return(<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>);
+              return(<div key={i} style={{flex:1,textAlign:"center"}}>
+                <div style={{width:42,height:42,borderRadius:11,margin:"0 auto 6px",background:`linear-gradient(135deg,${x.tm.clr}22,${x.tm.clr}08)`,border:`1.5px solid ${x.tm.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:900,color:x.tm.clr}}>{x.tm.abbr}</div>
                 <div style={{fontSize:11,fontWeight:700,color:D.tx}}>{x.tm.name.split(" ").pop()}</div>
                 <div style={{fontSize:9,color:D.mt,marginTop:1}}>{x.label}</div>
-              </div>;
+              </div>);
             })}
           </div>
         )}
@@ -385,7 +392,7 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
         {opps.map((g,i)=>{
           const H=TMS[g.home],A=TMS[g.away],locked=i>=3&&!isPro;
           return(
-            <div key={g.id} style={{borderRadius:18,overflow:"hidden",position:"relative",border:`1px solid ${g.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,animation:`vU 0.3s ${i*.04}s both ease`}}>
+            <div key={g.id} style={{borderRadius:18,overflow:"hidden",position:"relative",border:`1px solid ${g.isLive?"rgba(16,185,129,0.3)":D.gb}`,background:D.bg1,animation:`vU 0.3s ${i*0.04}s both ease`}}>
               <div style={{height:3,background:`linear-gradient(90deg,${A?.clr||D.mt},${H?.clr||D.ind})`}}/>
               <div style={{padding:"12px 13px"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:9}}>
@@ -399,11 +406,11 @@ function OppsScreen({games,onSelect,D,t,userPlan}){
                 </div>
                 <div style={{display:"flex",alignItems:"center",marginBottom:9}}>
                   {[{tm:A,label:t.aw},null,{tm:H,label:t.hm}].map((x,idx)=>{
-                    if(!x) return<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>;
-                    return<div key={idx} style={{flex:1,textAlign:"center"}}>
+                    if(!x) return(<div key="at" style={{padding:"0 8px",color:D.mt,fontWeight:700}}>@</div>);
+                    return(<div key={idx} style={{flex:1,textAlign:"center"}}>
                       <div style={{width:38,height:38,borderRadius:10,margin:"0 auto 5px",background:`${x.tm?.clr||D.mt}22`,border:`1.5px solid ${x.tm?.clr||D.mt}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:900,color:x.tm?.clr||D.mt}}>{x.tm?.abbr}</div>
                       <div style={{fontSize:10,fontWeight:700,color:D.tx}}>{x.tm?.name.split(" ").pop()}</div>
-                    </div>;
+                    </div>);
                   })}
                 </div>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:9}}>
@@ -450,7 +457,7 @@ function StatsScreen({D,t}){
   const [team,setTeam]=useState(null);
   const [tab,setTab]=useState("sd");
   if(team){
-    const tm=TMS[team],wrc=Math.round(95+(tm.ops-.720)*400);
+    const tm=TMS[team],wrc=Math.round(95+(tm.ops-0.720)*400);
     return(
       <div>
         <div style={{position:"sticky",top:0,zIndex:30,background:D===DK?"rgba(10,14,26,0.97)":"rgba(240,244,248,0.97)",backdropFilter:"blur(24px)",borderBottom:`1px solid ${D.gb}`,padding:"12px 14px"}}>
@@ -522,7 +529,7 @@ function StatsScreen({D,t}){
                 </tr></thead>
                 <tbody>
                   {teams.map((tm,i)=>{
-                    const wrc=Math.round(95+(tm.ops-.720)*400);
+                    const wrc=Math.round(95+(tm.ops-0.720)*400);
                     return(
                       <tr key={tm.abbr} onClick={()=>setTeam(tm.abbr)} style={{background:i%2===0?D.gl:"transparent",borderTop:`1px solid ${D.gb}`,cursor:"pointer"}}>
                         <td style={{padding:"9px 7px"}}>
@@ -539,8 +546,8 @@ function StatsScreen({D,t}){
                         </>}
                         {tab==="pt"&&<>
                           <td style={{textAlign:"center",padding:"9px 5px"}}><span style={{fontSize:11,fontWeight:800,color:tm.era<3.7?D.gr:tm.era<4.2?D.il:D.mt}}>{tm.era}</span></td>
-                          <td style={{textAlign:"center",fontSize:11,fontWeight:600,color:D.sb,padding:"9px 5px"}}>{(tm.era+.12).toFixed(2)}</td>
-                          <td style={{textAlign:"center",fontSize:11,fontWeight:600,color:D.sb,padding:"9px 5px"}}>{(1.18+(tm.era-3.5)*.08).toFixed(2)}</td>
+                          <td style={{textAlign:"center",fontSize:11,fontWeight:600,color:D.sb,padding:"9px 5px"}}>{(tm.era+0.12).toFixed(2)}</td>
+                          <td style={{textAlign:"center",fontSize:11,fontWeight:600,color:D.sb,padding:"9px 5px"}}>{(1.18+(tm.era-3.5)*0.08).toFixed(2)}</td>
                         </>}
                         {tab==="of"&&<>
                           <td style={{textAlign:"center",padding:"9px 5px"}}><span style={{fontSize:11,fontWeight:800,color:tm.ops>=.760?D.gr:tm.ops>=.730?D.il:D.mt}}>.{(tm.ops*1000).toFixed(0)}</span></td>
@@ -563,8 +570,7 @@ function StatsScreen({D,t}){
 // AXE CHAT
 function AxeChat({dark,D,t,onClose,userPlan,lang}){
   const lim=PLANS[userPlan]?.axe||10;
-  const AXE_GREET={es:"Hola! Soy Axe, tu asistente MLB. Puedo ayudarte con estadisticas, predicciones y planes.",en:"Hi! I'm Axe, your MLB assistant. I can help with stats, predictions and plans!",pt:"Ola! Sou Axe. Posso ajudar com baseball e predicoes.",fr:"Bonjour! Je suis Axe. Comment puis-je vous aider?",it:"Ciao! Sono Axe il tuo assistente MLB.",de:"Hallo! Ich bin Axe, Ihr MLB-Assistent.",ja:"こんにちは！アシスタントAxeです。",ko:"안녕하세요! 어시스턴트 Axe입니다.",zh:"你好！我是助手Axe。"};
-  const [msgs,setMsgs]=useState([{id:1,u:false,text:AXE_GREET[lang]||AXE_GREET["en"]}]);
+  const [msgs,setMsgs]=useState([{id:1,u:false,text:lang==="en"?"Hi! I'm Axe, your MLBEdge assistant. I remember our conversation and can help with baseball, statistics, Moneyline, Run Line, Over/Under, plans, and everything about the platform. How can I help?":"¡Hola! Soy Axe, tu asistente de MLBEdge. Recuerdo el contexto de nuestra conversación y puedo ayudarte con béisbol, estadísticas, Moneyline, Run Line, Over/Under, planes y todo sobre la plataforma. ¿En qué te ayudo?"}]);
   const [input,setInput]=useState("");
   const [typing,setTyping]=useState(false);
   const [q,setQ]=useState(0);
@@ -610,7 +616,7 @@ function AxeChat({dark,D,t,onClose,userPlan,lang}){
           {typing&&<div style={{display:"flex",gap:6,alignItems:"center"}}>
             <div style={{width:26,height:26,borderRadius:7,background:`linear-gradient(135deg,${D.ind},${D.vi})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>🤖</div>
             <div style={{padding:"9px 13px",background:D.gl,border:`1px solid ${D.gb}`,borderRadius:"13px 13px 13px 4px",display:"flex",gap:3,alignItems:"center"}}>
-              {[0,1,2].map(i=><div key={i} style={{width:5,height:5,borderRadius:"50%",background:D.il,animation:`vB 0.6s ${i*.15}s ease infinite`}}/>)}
+              {[0,1,2].map(i=><div key={i} style={{width:5,height:5,borderRadius:"50%",background:D.il,animation:`vB 0.6s ${i*0.15}s ease infinite`}}/>)}
             </div>
           </div>}
           <div ref={endRef}/>
@@ -729,7 +735,7 @@ function PricingScreen({D,t,userPlan,onSelect,onBack}){
           <div style={{fontSize:10,color:D.sb}}>{t.tr} · Sin tarjeta de crédito</div>
         </div>
         {Object.entries(PLANS).map(([key,plan],i)=>(
-          <div key={key} style={{marginBottom:12,borderRadius:20,overflow:"hidden",border:`1px solid ${plan.popular?"rgba(139,92,246,0.4)":D.gb}`,background:plan.popular?D===DK?`linear-gradient(135deg,rgba(139,92,246,0.1),rgba(99,102,241,0.06))`:`linear-gradient(135deg,rgba(139,92,246,0.06),rgba(99,102,241,0.03))`:D.bg1,animation:`vU 0.3s ${i*.08}s both ease`}}>
+          <div key={key} style={{marginBottom:12,borderRadius:20,overflow:"hidden",border:`1px solid ${plan.popular?"rgba(139,92,246,0.4)":D.gb}`,background:plan.popular?D===DK?`linear-gradient(135deg,rgba(139,92,246,0.1),rgba(99,102,241,0.06))`:`linear-gradient(135deg,rgba(139,92,246,0.06),rgba(99,102,241,0.03))`:D.bg1,animation:`vU 0.3s ${i*0.08}s both ease`}}>
             {plan.popular&&<div style={{height:2,background:`linear-gradient(90deg,${plan.clr}00,${plan.clr},${plan.clr}00)`}}/>}
             <div style={{padding:"16px"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10}}>
@@ -771,71 +777,52 @@ function PricingScreen({D,t,userPlan,onSelect,onBack}){
   );
 }
 
-// SETTINGS
+// SETTINGS (idioma + tema)
 function SettingsScreen({dark,setDark,lang,setLang,D,t,onBack}){
-  const [tmpDark,setTmpDark]=useState(dark);
-  const [tmpLang,setTmpLang]=useState(lang);
-  const [saved,setSaved]=useState(false);
-  const changed=tmpDark!==dark||tmpLang!==lang;
-  const doSave=()=>{
-    setDark(tmpDark);
-    setLang(tmpLang);
-    try{localStorage.setItem("mlb_dark",String(tmpDark));}catch(e){}
-    try{localStorage.setItem("mlb_lang",tmpLang);}catch(e){}
-    setSaved(true);
-    setTimeout(()=>setSaved(false),2500);
-  };
   return(
     <div style={{minHeight:"100vh",background:D.bg0}}>
       <div style={{position:"sticky",top:0,zIndex:30,background:D===DK?"rgba(10,14,26,0.97)":"rgba(240,244,248,0.97)",backdropFilter:"blur(24px)",borderBottom:`1px solid ${D.gb}`,padding:"12px 14px"}}>
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <button onClick={onBack} style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:10,padding:"7px 12px",color:D.sb,fontSize:12,fontWeight:600,cursor:"pointer"}}>{t.bk}</button>
-          <div style={{flex:1,fontSize:16,fontWeight:800,color:D.tx}}>⚙️ {t.cfg}</div>
-          {saved&&<div style={{fontSize:10,color:D.gr,fontWeight:700,background:D.gr+"18",border:"1px solid "+D.gr+"33",borderRadius:8,padding:"4px 10px"}}>{t.savedMsg||"Guardado"}</div>}
+          <div style={{fontSize:16,fontWeight:800,color:D.tx}}>⚙️ {t.cfg}</div>
         </div>
       </div>
-      <div style={{padding:"16px 13px 24px"}}>
+      <div style={{padding:"16px 13px 90px"}}>
         <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px",marginBottom:12}}>
           <SL icon="🎨" ch={t.th} D={D}/>
           <div style={{display:"flex",gap:8}}>
             {[{v:true,l:t.dm,i:"🌙"},{v:false,l:t.lm,i:"☀️"}].map(({v,l,i})=>(
-              <button key={String(v)} onClick={()=>setTmpDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:tmpDark===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:tmpDark===v?D.il:D.mt,outline:tmpDark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:tmpDark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
+              <button key={String(v)} onClick={()=>setDark(v)} style={{flex:1,padding:"12px",borderRadius:11,border:"none",cursor:"pointer",background:dark===v?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:dark===v?D.il:D.mt,outline:dark===v?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:dark===v?700:500,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
                 <span style={{fontSize:20}}>{i}</span>{l}
               </button>
             ))}
           </div>
         </div>
-        <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px",marginBottom:14}}>
+        <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"14px"}}>
           <SL icon="🌍" ch={t.lg} D={D}/>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
-            {Object.entries(LANGS).map(([lc,{f,n}])=>(
-              <button key={lc} onClick={()=>setTmpLang(lc)} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:tmpLang===lc?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:tmpLang===lc?D.il:D.mt,outline:tmpLang===lc?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:tmpLang===lc?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
+            {Object.entries(LANGS).map(([code,{f,n}])=>(
+              <button key={code} onClick={()=>{setLang(code);try{localStorage.setItem("mlb_lang",code);}catch(e){}}} style={{padding:"10px 6px",borderRadius:10,border:"none",cursor:"pointer",background:lang===code?`linear-gradient(135deg,${D.ind}33,${D.vi}22)`:D.gl,color:lang===code?D.il:D.mt,outline:lang===code?`1px solid ${D.il}33`:`1px solid ${D.gb}`,fontWeight:lang===code?700:500,fontSize:10,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
                 <span style={{fontSize:18}}>{f}</span>
                 <span style={{fontSize:8,letterSpacing:"0.03em"}}>{n}</span>
               </button>
             ))}
           </div>
         </div>
-        <button onClick={doSave} style={{width:"100%",padding:"14px",borderRadius:13,border:"none",cursor:"pointer",background:changed?`linear-gradient(135deg,${D.ind},${D.vi})`:"rgba(255,255,255,0.08)",color:changed?"white":D.mt,fontWeight:700,fontSize:14,transition:"all 0.2s"}}>
-          {saved?(t.savedMsg||"Guardado"):(t.saveBtn||"Guardar cambios")}
-        </button>
-        {changed&&!saved&&<div style={{textAlign:"center",fontSize:10,color:D.am,marginTop:8}}>{t.unsaved||"Cambios sin guardar"}</div>}
       </div>
     </div>
   );
 }
 
-
 // PROFILE
 function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
   const plan=PLANS[userPlan];
-  const [confirm,setConfirm]=useState(false);
   return(
     <div style={{padding:"12px 13px 0"}}>
       <div style={{background:`linear-gradient(135deg,${plan.clr}18,${plan.clr}08)`,border:`1px solid ${plan.clr}28`,borderRadius:18,padding:"18px",marginBottom:12,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,transparent,${plan.clr},transparent)`}}/>
         <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:14}}>
-          <div style={{width:52,height:52,borderRadius:14,background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>⚾</div>
+          <div style={{width:52,height:52,borderRadius:14,background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>{user?.isGuest?"👤":"⚾"}</div>
           <div>
             <div style={{fontSize:14,fontWeight:800,color:D.tx,marginBottom:3}}>{user?.email||"Usuario"}</div>
             <span style={{background:`${plan.clr}22`,border:`1px solid ${plan.clr}33`,borderRadius:6,padding:"2px 9px",fontSize:8,fontWeight:800,color:plan.clr,letterSpacing:"0.1em"}}>{plan.n.toUpperCase()}</span>
@@ -850,135 +837,182 @@ function ProfileScreen({D,t,user,userPlan,onChangePlan,onLogout,onFeedback}){
           ))}
         </div>
       </div>
-      {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.ind}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap}</button>}
+      {userPlan!=="premium"&&<button onClick={onChangePlan} style={{width:"100%",padding:"13px",borderRadius:13,border:`1px solid ${D.il}33`,background:`linear-gradient(135deg,${D.ind}22,${D.vi}14)`,color:D.il,fontWeight:700,fontSize:13,cursor:"pointer",marginBottom:8}}>🚀 {t.ap} →</button>}
       <button onClick={onFeedback} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:8}}>💡 {t.fb}</button>
-      {!confirm
-        ?<button onClick={()=>setConfirm(true)} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>{t.lo2}</button>
-        :<div style={{background:D.rd+"08",border:`1px solid ${D.rd}28`,borderRadius:12,padding:"14px",marginBottom:12}}>
-          <div style={{fontSize:12,fontWeight:700,color:D.tx,textAlign:"center",marginBottom:4}}>{t.confirmLogoutQ||"Cerrar sesion?"}</div>
-          <div style={{fontSize:10,color:D.mt,textAlign:"center",marginBottom:12}}>{t.confirmLogoutMsg||"Necesitaras iniciar sesion de nuevo con Google."}</div>
-          <div style={{display:"flex",gap:8}}>
-            <button onClick={()=>setConfirm(false)} style={{flex:1,padding:"10px",borderRadius:10,border:`1px solid ${D.gb}`,background:D.gl,color:D.sb,fontWeight:600,fontSize:12,cursor:"pointer"}}>{t.cancelBtn||"Cancelar"}</button>
-            <button onClick={onLogout} style={{flex:1,padding:"10px",borderRadius:10,border:"none",background:D.rd,color:"white",fontWeight:700,fontSize:12,cursor:"pointer"}}>{t.closeAcc||"Cerrar sesion"}</button>
-          </div>
-        </div>
-      }
-      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge · +21</div>
+      <button onClick={onLogout} style={{width:"100%",padding:"11px",borderRadius:12,border:`1px solid ${D.gb}`,background:D.gl,color:D.mt,fontWeight:600,fontSize:12,cursor:"pointer",marginBottom:12}}>↩ {t.lo2}</button>
+      <div style={{textAlign:"center",fontSize:8,color:D.mt,lineHeight:2,textTransform:"uppercase"}}>MLBEdge · Analisis Profesional MLB Solo para análisis informativo · +21</div>
     </div>
   );
 }
 
-// CALENDARIO COMPLETO
+// CALENDARIO ESPN-STYLE
 function CalendarScreen({games,onSelect,D,t}){
   const today=new Date();
+  const todayStr=today.toISOString().split("T")[0];
   const [yr,setYr]=useState(today.getFullYear());
   const [mo,setMo]=useState(today.getMonth());
-  const [day,setDay]=useState(today.getDate());
-  const [showPicker,setShowPicker]=useState(false);
+  const [selDate,setSelDate]=useState(todayStr);
+  const [showCal,setShowCal]=useState(false);
+  const [dayGames,setDayGames]=useState(null);
+  const [loading,setLoading]=useState(false);
   const [view,setView]=useState("all");
 
   const MON=(t.months||"Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic").split(",");
-  const WD=(t.wdays||"Dom,Lun,Mar,Mie,Jue,Vie,Sab").split(",");
-  const MONFULL=[t.jan||MON[0],t.feb||MON[1],t.mar||MON[2],t.apr||MON[3],t.may2||MON[4],t.jun||MON[5],t.jul||MON[6],t.aug||MON[7],t.sep||MON[8],t.oct||MON[9],t.nov||MON[10],t.dec||MON[11]];
+  const WD=(t.wdays||"D,L,M,X,J,V,S").split(",");
+  const MFULL=[t.jan||MON[0],t.feb||MON[1],t.mar||MON[2],t.apr||MON[3],t.may2||MON[4],t.jun||MON[5],t.jul||MON[6],t.aug||MON[7],t.sep||MON[8],t.oct||MON[9],t.nov||MON[10],t.dec||MON[11]];
 
   const firstDay=new Date(yr,mo,1).getDay();
   const daysInMo=new Date(yr,mo+1,0).getDate();
   const cells=[];
-  for(let i=0;i<firstDay;i++) cells.push(null);
-  for(let i=1;i<=daysInMo;i++) cells.push(i);
+  for(let ci=0;ci<firstDay;ci++) cells.push(null);
+  for(let ci=1;ci<=daysInMo;ci++) cells.push(ci);
 
+  const fmt=(y,m,d)=>y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
   const prevMo=()=>{if(mo===0){setMo(11);setYr(y=>y-1);}else setMo(m=>m-1);};
   const nextMo=()=>{if(mo===11){setMo(0);setYr(y=>y+1);}else setMo(m=>m+1);};
-  const goToday=()=>{setYr(today.getFullYear());setMo(today.getMonth());setDay(today.getDate());};
+  const goToday=()=>{setYr(today.getFullYear());setMo(today.getMonth());setSelDate(todayStr);setDayGames(null);setShowCal(false);};
 
-  const isToday=(d)=>yr===today.getFullYear()&&mo===today.getMonth()&&d===today.getDate();
-  const isSel=(d)=>d===day&&yr===today.getFullYear()&&mo===today.getMonth();
+  const fetchDay=async(ds)=>{
+    if(ds===todayStr){setDayGames(null);setShowCal(false);return;}
+    setLoading(true);setShowCal(false);
+    const proxies=[
+      u=>"https://corsproxy.io/?"+encodeURIComponent(u),
+      v=>"https://api.allorigins.win/raw?url="+encodeURIComponent(v)
+    ];
+    for(const px of proxies){
+      try{
+        const r=await fetch(px("https://statsapi.mlb.com/api/v1/schedule?sportId=1&date="+ds+"&hydrate=team,linescore,probablePitcher,venue"),{signal:AbortSignal.timeout(8000)});
+        if(!r.ok) continue;
+        const data=await r.json();
+        if(!data?.dates?.[0]?.games?.length){setDayGames([]);setLoading(false);return;}
+        const gs=data.dates[0].games.map(g=>{
+          const hm=g.teams?.home,aw=g.teams?.away,ls=g.linescore;
+          const abs=g.status?.abstractGameState;
+          const gd=new Date(g.gameDate);
+          const hA=MID[hm?.team?.id]||Object.values(TMS).find(x=>x.name===hm?.team?.name)?.abbr;
+          const aA=MID[aw?.team?.id]||Object.values(TMS).find(x=>x.name===aw?.team?.name)?.abbr;
+          if(!hA||!aA||!TMS[hA]||!TMS[aA]) return null;
+          const iL=abs==="Live",iF=abs==="Final";
+          return{id:g.gamePk,home:hA,away:aA,venue:g.venue?.name||"TBD",
+            time:gd.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",timeZone:"America/New_York"})+" ET",
+            gameHour:gd.getHours(),homeP:hm?.probablePitcher?.fullName||"TBD",awayP:aw?.probablePitcher?.fullName||"TBD",
+            homePERA:null,awayPERA:null,wx:{temp:"—",wind:"—",sky:"🌤️",desc:"—"},pf:1.0,isLive:iL,isFinal:iF,
+            sim:(iL||iF)?{
+              away:aw?.score??ls?.teams?.away?.runs??0,home:hm?.score??ls?.teams?.home?.runs??0,
+              inn:ls?.currentInning??1,half:ls?.isTopInning?"T":"B",outs:ls?.outs??0,
+              balls:ls?.balls??0,strikes:ls?.strikes??0,
+              awayH:ls?.teams?.away?.hits??0,homeH:ls?.teams?.home?.hits??0,
+              bases:[!!ls?.offense?.first,!!ls?.offense?.second,!!ls?.offense?.third],
+              batter:ls?.offense?.batter?.fullName||null,
+              batterTeam:iL?(ls?.isTopInning?aA:hA):null,
+              pitcher:ls?.defense?.pitcher?.fullName||null,
+              pitchSpeed:ls?.currentPlay?.pitchData?.startSpeed?Math.round(ls.currentPlay.pitchData.startSpeed):null
+            }:null,source:"live"};
+        }).filter(Boolean);
+        setDayGames(gs);setLoading(false);return;
+      }catch(e){continue;}
+    }
+    setDayGames([]);setLoading(false);
+  };
 
-  const filtered=games.filter(g=>{
+  const selectDay=(d)=>{const ds=fmt(yr,mo,d);setSelDate(ds);fetchDay(ds);};
+  const displayGames=dayGames!==null?dayGames:games;
+  const isPast=selDate<todayStr;
+  const isFuture=selDate>todayStr;
+  const filtered=displayGames.filter(g=>{
     if(view==="live") return g.isLive;
     if(view==="upcoming") return !g.isFinal&&!g.isLive;
     if(view==="finished") return g.isFinal;
     return true;
   });
-
-  const liveN=games.filter(g=>g.isLive).length;
-  const upN=games.filter(g=>!g.isFinal&&!g.isLive).length;
-  const dnN=games.filter(g=>g.isFinal).length;
+  const liveN=displayGames.filter(g=>g.isLive).length;
+  const upN=displayGames.filter(g=>!g.isFinal&&!g.isLive).length;
+  const dnN=displayGames.filter(g=>g.isFinal).length;
+  const selObj=new Date(selDate+"T12:00:00");
+  const selLabel=selDate===todayStr?(t.today||"Hoy"):selObj.getDate()+" "+MFULL[selObj.getMonth()]+" "+selObj.getFullYear();
 
   return(
     <div style={{paddingBottom:90}}>
       <div style={{padding:"12px 13px 0"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-          <div style={{fontSize:20,fontWeight:900,color:D.tx,letterSpacing:"-0.03em"}}>{t.cal}</div>
-          <button onClick={goToday} style={{background:D.ind+"22",border:"1px solid "+D.il+"33",borderRadius:8,padding:"5px 11px",color:D.il,fontSize:10,fontWeight:700,cursor:"pointer"}}>{t.today||"Hoy"}</button>
-        </div>
-        <div style={{background:D.gl,border:`1px solid ${D.gb}`,borderRadius:14,padding:"12px",marginBottom:10}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-            <button onClick={prevMo} style={{width:32,height:32,borderRadius:8,border:`1px solid ${D.gb}`,background:D.gl,color:D.tx,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>{"<"}</button>
-            <button onClick={()=>setShowPicker(v=>!v)} style={{flex:1,margin:"0 8px",padding:"6px",borderRadius:9,border:`1px solid ${D.gb}`,background:showPicker?D.ind+"22":D.gl,cursor:"pointer",textAlign:"center"}}>
-              <div style={{fontSize:15,fontWeight:800,color:showPicker?D.il:D.tx}}>{MONFULL[mo]}</div>
-              <div style={{fontSize:11,color:D.mt}}>{yr}</div>
-            </button>
-            <button onClick={nextMo} style={{width:32,height:32,borderRadius:8,border:`1px solid ${D.gb}`,background:D.gl,color:D.tx,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>{">"}</button>
-          </div>
-          {showPicker&&(
-            <div style={{marginBottom:10}}>
-              <div style={{display:"flex",gap:4,justifyContent:"center",flexWrap:"wrap",marginBottom:8}}>
-                {[yr-2,yr-1,yr,yr+1,yr+2].map(y=>(
-                  <button key={y} onClick={()=>{setYr(y);setShowPicker(false);}} style={{padding:"5px 10px",borderRadius:7,border:"none",cursor:"pointer",background:y===yr?`linear-gradient(135deg,${D.ind},${D.vi})`:D.gl,color:y===yr?"white":D.mt,fontSize:12,fontWeight:y===yr?700:400}}>
-                    {y}
-                  </button>
-                ))}
-              </div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4}}>
-                {MON.map((m,i)=>(
-                  <button key={i} onClick={()=>{setMo(i);setShowPicker(false);}} style={{padding:"6px 4px",borderRadius:7,border:"none",cursor:"pointer",background:i===mo?`linear-gradient(135deg,${D.ind},${D.vi})`:D.gl,color:i===mo?"white":D.mt,fontSize:10,fontWeight:i===mo?700:400}}>
-                    {m}
-                  </button>
-                ))}
-              </div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+          <div>
+            <div style={{fontSize:20,fontWeight:900,color:D.tx,letterSpacing:"-0.03em"}}>{t.cal}</div>
+            <div style={{fontSize:10,marginTop:1,fontWeight:600,color:isPast?D.am:isFuture?D.il:D.gr}}>
+              {isPast?"Resultados":isFuture?"Programados":"En curso"} · {selLabel}
             </div>
-          )}
-          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",marginBottom:4}}>
-            {WD.map((d,i)=><div key={i} style={{textAlign:"center",fontSize:8,fontWeight:700,color:D.mt,padding:"2px 0"}}>{d}</div>)}
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
-            {cells.map((d,i)=>{
-              if(!d) return <div key={"e"+i}/>;
-              const tod=isToday(d);
-              const sel=isSel(d);
-              return(
-                <button key={d} onClick={()=>setDay(d)} style={{aspectRatio:"1",borderRadius:8,border:"none",cursor:"pointer",background:sel?`linear-gradient(135deg,${D.ind},${D.vi})`:tod?D.ind+"22":D.gl,color:sel?"white":tod?D.il:D.tx,fontSize:12,fontWeight:sel||tod?700:400,display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
-                  {d}
-                  {tod&&!sel&&<div style={{position:"absolute",bottom:2,left:"50%",transform:"translateX(-50%)",width:3,height:3,borderRadius:"50%",background:D.il}}/>}
-                </button>
-              );
-            })}
+          <div style={{display:"flex",gap:6,alignItems:"center"}}>
+            <button onClick={goToday} style={{background:D.ind+"22",border:"1px solid "+D.il+"33",borderRadius:8,padding:"5px 10px",color:D.il,fontSize:10,fontWeight:700,cursor:"pointer"}}>{t.today||"Hoy"}</button>
+            <button onClick={()=>setShowCal(v=>!v)} style={{width:36,height:36,borderRadius:9,border:"1px solid "+(showCal?D.il+"44":D.gb),background:showCal?D.ind+"22":D.gl,color:showCal?D.il:D.mt,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>📅</button>
           </div>
         </div>
+        {showCal&&(
+          <div style={{background:D.bg1,border:"1px solid "+D.gb,borderRadius:16,padding:"14px",marginBottom:10,boxShadow:"0 12px 40px rgba(0,0,0,0.35)"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+              <button onClick={prevMo} style={{width:32,height:32,borderRadius:8,border:"1px solid "+D.gb,background:D.gl,color:D.tx,fontSize:14,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>{"<"}</button>
+              <div style={{flex:1,textAlign:"center"}}>
+                <div style={{fontSize:14,fontWeight:800,color:D.tx}}>{MFULL[mo]}</div>
+                <div style={{display:"flex",gap:4,justifyContent:"center",marginTop:5}}>
+                  {[yr-1,yr,yr+1].map(y=>(
+                    <button key={y} onClick={()=>setYr(y)} style={{padding:"3px 9px",borderRadius:6,border:"none",cursor:"pointer",background:y===yr?"linear-gradient(135deg,"+D.ind+","+D.vi+")":D.gl,color:y===yr?"white":D.mt,fontSize:11,fontWeight:y===yr?700:400}}>
+                      {y}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <button onClick={nextMo} style={{width:32,height:32,borderRadius:8,border:"1px solid "+D.gb,background:D.gl,color:D.tx,fontSize:14,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>{">"}</button>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",marginBottom:4}}>
+              {WD.map((d,wi)=>(
+                <div key={wi} style={{textAlign:"center",fontSize:8,fontWeight:700,color:D.mt,padding:"2px 0"}}>{d}</div>
+              ))}
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
+              {cells.map((d,ci)=>{
+                if(!d) return(<div key={"e"+ci}/>);
+                const ds=fmt(yr,mo,d);
+                const isTod=ds===todayStr;
+                const isSel=ds===selDate;
+                const isPastD=ds<todayStr;
+                return(
+                  <button key={d} onClick={()=>selectDay(d)} style={{aspectRatio:"1",borderRadius:7,border:"none",cursor:"pointer",fontSize:12,fontWeight:isSel||isTod?700:400,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",opacity:isPastD&&!isSel?0.65:1,background:isSel?"linear-gradient(135deg,"+D.ind+","+D.vi+")":isTod?D.ind+"22":D.gl,color:isSel?"white":isTod?D.il:isPastD?D.mt:D.tx}}>
+                    {d}
+                    {isTod&&!isSel&&(<div style={{position:"absolute",bottom:2,left:"50%",transform:"translateX(-50%)",width:3,height:3,borderRadius:"50%",background:D.il}}/>)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:6,marginBottom:10}}>
           {[
-            {v:"all",l:t.allGames||"Todos",n:games.length,c:D.il},
-            {v:"live",l:t.lv,n:liveN,c:D.gr},
-            {v:"upcoming",l:t.upcoming||"Proximos",n:upN,c:D.am},
-            {v:"finished",l:t.finished||"Final",n:dnN,c:D.mt},
+            {v:"all",l:t.allGames||"Todos",n:displayGames.length,c:D.il},
+            {v:"live",l:t.lv||"Live",n:liveN,c:D.gr},
+            {v:"upcoming",l:t.upcoming||"Prox",n:upN,c:D.am},
+            {v:"finished",l:t.finished||"Final",n:dnN,c:D.mt}
           ].map(({v,l,n,c})=>(
-            <button key={v} onClick={()=>setView(v)} style={{padding:"8px 4px",borderRadius:10,border:"none",cursor:"pointer",background:view===v?c+"22":"transparent",outline:view===v?"1px solid "+c+"44":"1px solid "+D.gb}}>
-              <div style={{fontSize:16,fontWeight:900,color:view===v?c:D.tx}}>{n}</div>
+            <button key={v} onClick={()=>setView(v)} style={{padding:"8px 4px",borderRadius:10,border:"none",cursor:"pointer",background:view===v?c+"22":"transparent",outline:view===v?"1.5px solid "+c+"55":"1px solid "+D.gb}}>
+              <div style={{fontSize:16,fontWeight:900,color:view===v?c:D.tx}}>{loading?"…":n}</div>
               <div style={{fontSize:7,color:view===v?c:D.mt,fontWeight:600,textTransform:"uppercase",marginTop:2}}>{l}</div>
             </button>
           ))}
         </div>
       </div>
       <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:9}}>
-        {filtered.length===0&&(
-          <div style={{textAlign:"center",padding:"40px 20px",background:D.gl,borderRadius:16,border:`1px solid ${D.gb}`}}>
-            <div style={{fontSize:36,marginBottom:10}}>📅</div>
-            <div style={{fontSize:13,fontWeight:700,color:D.tx,marginBottom:4}}>{t.noGames2||"Sin partidos"}</div>
-            <div style={{fontSize:11,color:D.mt}}>{t.noGamesDesc||"No hay juegos"}</div>
+        {loading&&(
+          <div style={{textAlign:"center",padding:"40px 20px"}}>
+            <div style={{width:32,height:32,borderRadius:"50%",border:"3px solid "+D.gb,borderTop:"3px solid "+D.ind,animation:"vS 0.8s linear infinite",margin:"0 auto 12px"}}/>
+            <div style={{fontSize:12,color:D.mt}}>Cargando partidos...</div>
           </div>
         )}
-        {filtered.map((g,i)=><GameCard key={g.id} game={g} idx={i} onSelect={onSelect} D={D} t={t}/>)}
+        {!loading&&filtered.length===0&&(
+          <div style={{textAlign:"center",padding:"40px 20px",background:D.gl,borderRadius:16,border:"1px solid "+D.gb}}>
+            <div style={{fontSize:36,marginBottom:10}}>📅</div>
+            <div style={{fontSize:13,fontWeight:700,color:D.tx,marginBottom:4}}>{t.noGames2||"Sin partidos"}</div>
+            <div style={{fontSize:11,color:D.mt}}>{isPast?"No hay resultados para este dia":isFuture?"Sin partidos programados":"No hay juegos"}</div>
+          </div>
+        )}
+        {!loading&&filtered.map((g,gi)=>(<GameCard key={g.id} game={g} idx={gi} onSelect={onSelect} D={D} t={t}/>))}
       </div>
     </div>
   );
@@ -993,8 +1027,8 @@ function Nav({active,onChange,badge,D,t,onCfg}){
         <button key={tab.id} onClick={()=>onChange(tab.id)} style={{flex:1,padding:"10px 4px 7px",border:"none",background:"transparent",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,position:"relative"}}>
           {isA&&<div style={{position:"absolute",top:0,left:"50%",transform:"translateX(-50%)",width:24,height:2,borderRadius:"0 0 2px 2px",background:`linear-gradient(90deg,${D.ind},${D.vi})`,boxShadow:`0 0 8px ${D.ind}88`}}/>}
           {tab.b>0&&<div style={{position:"absolute",top:6,right:"calc(50% - 18px)",background:D.gr,color:"#000",fontSize:7,fontWeight:800,minWidth:13,height:13,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",padding:"0 2px",border:`1.5px solid ${D.bg0}`}}>{tab.b}</div>}
-          <span style={{fontSize:19,filter:isA?"none":"grayscale(1) opacity(0.4)",transition:"filter .2s,transform .2s",transform:isA?"scale(1.1)":"scale(1)"}}>{tab.icon}</span>
-          <span style={{fontSize:8,fontWeight:isA?700:500,color:isA?D.il:D.mt,transition:"color .2s"}}>{tab.l}</span>
+          <span style={{fontSize:19,filter:isA?"none":"grayscale(1) opacity(0.4)",transition:"filter 0.2s,transform 0.2s",transform:isA?"scale(1.1)":"scale(1)"}}>{tab.icon}</span>
+          <span style={{fontSize:8,fontWeight:isA?700:500,color:isA?D.il:D.mt,transition:"color 0.2s"}}>{tab.l}</span>
         </button>
       );})}
       <button onClick={onCfg} style={{flex:1,padding:"10px 4px 7px",border:"none",background:"transparent",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
@@ -1026,7 +1060,7 @@ export default function App(){
   const D=dark?DK:LT;
   const t=useT(lang);
 
-  // Restore session + language + theme preference
+  // Restore session + language preference
   useEffect(()=>{
     try{
       const sl=localStorage.getItem("mlb_lang");
@@ -1080,7 +1114,7 @@ export default function App(){
   // Auth
   if(!user) return(
     <>
-      <style>{`@keyframes vS{to{transform:rotate(360deg)}}@keyframes vP{0%,100%{opacity:1}50%{opacity:.35}}@keyframes vU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}*{box-sizing:border-box;margin:0;padding:0;}button{font-family:inherit;cursor:pointer;transition:all .15s;}button:active{transform:scale(.96);}input,textarea{outline:none;font-family:inherit;}`}</style>
+      <style>{`@keyframes vS{to{transform:rotate(360deg)}}@keyframes vP{0%,100%{opacity:1}50%{opacity:.35}}@keyframes vU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}*{box-sizing:border-box;margin:0;padding:0;}button{font-family:inherit;cursor:pointer;transition:all 0.15s;}button:active{transform:scale(0.96);}input,textarea{outline:none;font-family:inherit;}`}</style>
       <AuthScreen dark={dark} onAuth={handleAuth} lang={lang}/>
     </>
   );
@@ -1088,7 +1122,7 @@ export default function App(){
   // Pricing full screen
   if(showPricing) return(
     <div style={{background:D.bg0,minHeight:"100vh",fontFamily:"'Inter',system-ui,sans-serif",color:D.tx}}>
-      <style>{`@keyframes vS{to{transform:rotate(360deg)}}@keyframes vP{0%,100%{opacity:1}50%{opacity:.35}}@keyframes vU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes vSU{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes vB{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}*{box-sizing:border-box;margin:0;padding:0;}button{font-family:inherit;cursor:pointer;transition:all .15s;}button:active{transform:scale(.96);}input,textarea{outline:none;font-family:inherit;}`}</style>
+      <style>{`@keyframes vS{to{transform:rotate(360deg)}}@keyframes vP{0%,100%{opacity:1}50%{opacity:.35}}@keyframes vU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes vSU{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes vB{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}*{box-sizing:border-box;margin:0;padding:0;}button{font-family:inherit;cursor:pointer;transition:all 0.15s;}button:active{transform:scale(0.96);}input,textarea{outline:none;font-family:inherit;}`}</style>
       <div style={{maxWidth:480,margin:"0 auto"}}>
         <PricingScreen D={D} t={t} userPlan={userPlan} onSelect={handlePlan} onBack={()=>setPricing(false)}/>
       </div>
@@ -1116,7 +1150,7 @@ export default function App(){
         @keyframes vB  {0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
         *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
         ::-webkit-scrollbar{width:2px;height:2px}::-webkit-scrollbar-thumb{background:rgba(99,102,241,0.2);border-radius:99px}
-        button{font-family:inherit;cursor:pointer;transition:all .15s ease;}button:active{transform:scale(.96);}
+        button{font-family:inherit;cursor:pointer;transition:all 0.15s ease;}button:active{transform:scale(0.96);}
         input,textarea{outline:none;font-family:inherit;}html,body{overscroll-behavior:none;}
       `}</style>
 
@@ -1162,7 +1196,7 @@ export default function App(){
           </div>
 
           {/* CALENDAR TAB */}
-          {tab==="calendar"&&<CalendarScreen games={games} onSelect={setSelected} D={D} t={t}/>}
+          {tab==="calendar"&&(<CalendarScreen games={games} onSelect={setSelected} D={D} t={t}/>)}
           {tab==="opps"&&<OppsScreen games={games} onSelect={setSelected} D={D} t={t} userPlan={userPlan}/>}
           {tab==="stats"&&<StatsScreen D={D} t={t}/>}
           {tab==="profile"&&<ProfileScreen D={D} t={t} user={user} userPlan={userPlan} onChangePlan={handleUpgrade} onLogout={handleLogout} onFeedback={()=>setFb(true)}/>}
